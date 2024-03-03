@@ -1,0 +1,19 @@
+- category: Konnektoren mit Infinitivgruppe
+  details:
+    - konnektor: "(an)statt zu"
+      example: "Anstatt etwas zu essen, gehe ich heute hungrig schlafen."
+    - konnektor: "außer zu"
+      example: "Ich habe im Urlaub fast nichts gemacht, außer am Strand zu schlafen."
+    - konnektor: "ohne zu"
+      example: "Ich kann nicht losfahren, ohne dich nochmals zu treffen."
+    - konnektor: "um zu"
+      example: "Um den Test zu bestehen, musst du viel lernen."
+
+- category: Konnektoren mit besonderer Position
+  details:
+    - konnektor: "nämlich"
+      example: "Honolulu hat ein angenehmes Klima, es ist nämlich meist sonnig oder frühlingshaft dort."
+    - konnektor: "nicht nur, sondern auch"
+      example: "Ich habe morgen nicht nur Arbeit, sondern ich muss auch zum Deutschkurs."
+    - konnektor: "sowohl als auch"
+      example: "Ich möchte sowohl Deutsch als auch Französisch lernen."
