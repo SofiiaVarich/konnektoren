@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    color: #000;
+}
+
+.table-container {
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    color: #fff;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+    .table-container {
+        margin: 10px;
+    }
+
+    th,
+    td {
+        padding: 4px;
+    }
+}
+
+.card {
+    color: #000;
+    margin: 1rem auto;
+    width: 90%;
+    max-width: 500px;
+    min-height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+}
