@@ -10,7 +10,7 @@ pub fn App() -> Html {
     html! {
         <div>
             {include_cdn()}
-            <h1>{"Konnektoren"}</h1>
+            <h1 class="text-center">{"Konnektoren"}</h1>
             <KonnektorCarousel {konnektoren} />
             {include_cdn_js()}
         </div>

@@ -24,13 +24,15 @@ impl Component for TypeSelector {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
-            <ButtonGroup>
-                <Button onclick={ctx.link().callback(|_| KonnektorType::Subjunktionen)}>{ "Subjunktionen" }</Button>
-                <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionen)}>{ "Konjunktionen" }</Button>
-                <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionaladverbien)}>{ "Konjunktionaladverbien" }</Button>
-                <Button onclick={ctx.link().callback(|_| KonnektorType::Infinitivgruppe)}>{ "Infinitivgruppe" }</Button>
-                <Button onclick={ctx.link().callback(|_| KonnektorType::BesonderePosition)}>{ "Besondere Position" }</Button>
-            </ButtonGroup>
+            <div id="typeselector" class="d-flex justify-content-center">
+                <ButtonGroup>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Subjunktionen)}>{ "Subjunktionen" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionen)}>{ "Konjunktionen" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionaladverbien)}>{ "Konjunktionaladverbien" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Infinitivgruppe)}>{ "Infinitivgruppe" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::BesonderePosition)}>{ "Besondere Position" }</Button>
+                </ButtonGroup>
+            </div>
         }
     }
 }

@@ -68,17 +68,19 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
         .collect::<Vec<_>>();
 
     html! {
-        <>
-            <h2>{"Test Statistics"}</h2>
-            <p>{format!("Total Questions: {}", props.test.len())}</p>
-            <TestChart test={props.test.clone()} />
-            <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
-            <h3>{"Statistics by Category"}</h3>
-            <ul>
-                {for stats_by_category.iter().map(|(category, correct, total)| {
-                    html! { <li>{format!("{}: {}/{}", category, correct, total)}</li> }
-                })}
-            </ul>
-        </>
+        <div class="d-flex justify-content-center">
+            <div>
+                <h2>{"Test Statistics"}</h2>
+                <p>{format!("Total Questions: {}", props.test.len())}</p>
+                <TestChart test={props.test.clone()} />
+                <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
+                <h3>{"Statistics by Category"}</h3>
+                <ul>
+                    {for stats_by_category.iter().map(|(category, correct, total)| {
+                        html! { <li>{format!("{}: {}/{}", category, correct, total)}</li> }
+                    })}
+                </ul>
+            </div>
+        </div>
     }
 }
