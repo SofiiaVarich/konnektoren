@@ -12,7 +12,6 @@ pub enum KonnektorType {
     Infinitivgruppe,
     #[serde(rename = "Konnektoren mit besonderer Position")]
     BesonderePosition,
-    Other(String),
 }
 
 #[derive(Serialize, Deserialize, Debug)]

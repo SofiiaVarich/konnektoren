@@ -1,4 +1,6 @@
+use super::TypeSelector;
 use crate::model::KonnektorTest;
+use crate::model::KonnektorType;
 use crate::model::Konnektoren;
 use yew::prelude::*;
 use yew_bootstrap::component::{card::*, Button};
@@ -15,6 +17,7 @@ pub struct KonnektorCarousel {
 pub enum Msg {
     Next,
     Previous,
+    SelectType(KonnektorType),
 }
 
 impl Component for KonnektorCarousel {
@@ -31,11 +34,12 @@ impl Component for KonnektorCarousel {
         match msg {
             Msg::Next => self.test.next(),
             Msg::Previous => self.test.prev(),
+            Msg::SelectType(selected_type) => {}
         }
         true
     }
 
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         if let Some(detail) = self.test.current() {
             html! {
                 <div>
@@ -45,9 +49,10 @@ impl Component for KonnektorCarousel {
                             <CardText>{ &*detail.example }</CardText>
                         </CardBody>
                     </Card>
+                    <TypeSelector on_select={ctx.link().callback(Msg::SelectType)} />
                     <div class="d-flex justify-content-between mt-2">
-                        <Button onclick={_ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
-                        <Button onclick={_ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
+                        <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                        <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
                     </div>
                 </div>
             }
