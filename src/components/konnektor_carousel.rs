@@ -1,4 +1,5 @@
 use super::TypeSelector;
+use crate::components::TestProgressBar;
 use crate::model::KonnektorTest;
 use crate::model::KonnektorType;
 use crate::model::Konnektoren;
@@ -46,6 +47,7 @@ impl Component for KonnektorCarousel {
         if let Some(detail) = self.test.current() {
             html! {
                 <div>
+                <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
                     <Card>
                         <CardBody>
                             <CardTitle>{ &*detail.konnektor }</CardTitle>

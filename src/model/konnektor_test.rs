@@ -56,9 +56,17 @@ impl KonnektorTest {
         }
     }
 
+    pub fn len(&self) -> usize {
+        self.random_indices.len()
+    }
+
     pub fn current(&self) -> Option<&KonnektorDetail> {
         let index = self.random_indices.get(self.current_index)?;
         self.konnektoren.get_detail_by_index(*index)
+    }
+
+    pub fn current_index(&self) -> usize {
+        self.current_index
     }
 
     pub fn answer_current(&mut self, user_answer: KonnektorType) {
