@@ -1,17 +1,15 @@
-use super::konnektor_card::KonnektorCard;
-use crate::model::{KonnektorCategory, KonnektorDetail, KonnektorType, Konnektoren};
-use serde::{Deserialize, Serialize};
+use crate::model::KonnektorTest;
+use crate::model::Konnektoren;
 use yew::prelude::*;
 use yew_bootstrap::component::{card::*, Button};
 
 #[derive(Properties, PartialEq)]
 pub struct CarouselProps {
-    pub konnektoren: Vec<KonnektorDetail>, // Assuming you want to pass a flat list of all details
+    pub konnektoren: Konnektoren,
 }
 
 pub struct KonnektorCarousel {
-    konnektoren: Vec<KonnektorDetail>,
-    current_index: usize,
+    test: KonnektorTest,
 }
 
 pub enum Msg {
@@ -25,48 +23,36 @@ impl Component for KonnektorCarousel {
 
     fn create(ctx: &Context<Self>) -> Self {
         Self {
-            konnektoren: ctx.props().konnektoren.clone(),
-            current_index: 0,
+            test: KonnektorTest::new(&ctx.props().konnektoren),
         }
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
-            Msg::Next => {
-                if self.current_index < self.konnektoren.len() - 1 {
-                    self.current_index += 1;
-                }
-            }
-            Msg::Previous => {
-                if self.current_index > 0 {
-                    self.current_index -= 1;
-                }
-            }
+            Msg::Next => self.test.next(),
+            Msg::Previous => self.test.prev(),
         }
         true
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        let konnektoren = &ctx.props().konnektoren;
-        if konnektoren.is_empty() {
-            return html! { <p>{ "No Konnektoren found" }</p> };
-        }
-
-        let detail = &konnektoren[self.current_index];
-
-        html! {
-            <div>
-                <Card>
-                    <CardBody>
-                        <CardTitle>{ &*detail.konnektor }</CardTitle>
-                        <CardText>{ &*detail.example }</CardText>
-                    </CardBody>
-                </Card>
-                <div class="d-flex justify-content-between mt-2">
-                    <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
-                    <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+        if let Some(detail) = self.test.current() {
+            html! {
+                <div>
+                    <Card>
+                        <CardBody>
+                            <CardTitle>{ &*detail.konnektor }</CardTitle>
+                            <CardText>{ &*detail.example }</CardText>
+                        </CardBody>
+                    </Card>
+                    <div class="d-flex justify-content-between mt-2">
+                        <Button onclick={_ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                        <Button onclick={_ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
+                    </div>
                 </div>
-            </div>
+            }
+        } else {
+            html! { <p>{ "No Konnektoren found" }</p> }
         }
     }
 }
