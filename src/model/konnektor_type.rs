@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub enum KonnektorType {
@@ -12,6 +13,29 @@ pub enum KonnektorType {
     Infinitivgruppe,
     #[serde(rename = "Konnektoren mit besonderer Position")]
     BesonderePosition,
+}
+
+impl Default for KonnektorType {
+    fn default() -> Self {
+        KonnektorType::Subjunktionen
+    }
+}
+
+impl fmt::Display for KonnektorType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            KonnektorType::Subjunktionen => "Konnektoren mit Nebensatz (= Subjunktionen)",
+            KonnektorType::Konjunktionen => {
+                "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)"
+            }
+            KonnektorType::Konjunktionaladverbien => {
+                "Konnektoren mit Hauptsatz (Position 1) (= Konjunktionaladverbien)"
+            }
+            KonnektorType::Infinitivgruppe => "Konnektoren mit Infinitivgruppe",
+            KonnektorType::BesonderePosition => "Konnektoren mit besonderer Position",
+        };
+        write!(f, "{}", s)
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]

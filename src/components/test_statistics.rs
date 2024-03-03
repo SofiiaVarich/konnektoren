@@ -1,0 +1,84 @@
+use crate::model::KonnektorTest;
+use crate::model::KonnektorType;
+use yew::prelude::*;
+
+#[derive(Properties, PartialEq)]
+pub struct TestStatisticsProps {
+    pub test: KonnektorTest,
+}
+
+#[function_component(TestStatistics)]
+pub fn test_statistics(props: &TestStatisticsProps) -> Html {
+    // Calculate the number of correctly answered questions
+    let correct_answers = props
+        .test
+        .answers
+        .iter()
+        .filter(|record| {
+            record.was_answered
+                && record.correct_answer
+                    == <std::option::Option<KonnektorType> as Clone>::clone(&record.user_answer)
+                        .unwrap_or_default()
+        })
+        .count();
+
+    // Calculate the total number of questions answered
+    let total_answered = props
+        .test
+        .answers
+        .iter()
+        .filter(|record| record.was_answered)
+        .count();
+
+    // Calculate statistics by category
+    let stats_by_category = props
+        .test
+        .konnektoren
+        .categories
+        .iter()
+        .map(|category| {
+            let total_in_category = category.details.len();
+            let correct_in_category = category
+                .details
+                .iter()
+                .filter(|detail| {
+                    if let Some(record) = props.test.answers.iter().find(|record| {
+                        &props
+                            .test
+                            .konnektoren
+                            .get_detail_by_index(record.detail_index)
+                            .unwrap()
+                            == detail
+                    }) {
+                        return record.was_answered
+                            && record.correct_answer
+                                == <std::option::Option<KonnektorType> as Clone>::clone(
+                                    &record.user_answer,
+                                )
+                                .unwrap_or_default();
+                    }
+                    false
+                })
+                .count();
+
+            (
+                category.category.clone(),
+                correct_in_category,
+                total_in_category,
+            )
+        })
+        .collect::<Vec<_>>();
+
+    html! {
+        <>
+            <h2>{"Test Statistics"}</h2>
+            <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
+            <h3>{"Statistics by Category"}</h3>
+            <ul>
+                {for stats_by_category.iter().map(|(category, correct, total)| {
+                    html! { <li>{format!("{}: {}/{}", category, correct, total)}</li> }
+                })}
+            </ul>
+        </>
+    }
+}

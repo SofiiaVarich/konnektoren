@@ -1,5 +1,6 @@
 use super::TypeSelector;
 use crate::components::TestProgressBar;
+use crate::components::TestStatistics;
 use crate::model::KonnektorTest;
 use crate::model::KonnektorType;
 use crate::model::Konnektoren;
@@ -55,6 +56,7 @@ impl Component for KonnektorCarousel {
                         </CardBody>
                     </Card>
                     <TypeSelector on_select={ctx.link().callback(Msg::SelectType)} />
+                    <TestStatistics test={self.test.clone()} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>

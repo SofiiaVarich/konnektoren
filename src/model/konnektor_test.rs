@@ -4,11 +4,12 @@ use super::KonnektorType;
 use super::Konnektoren;
 use rand::seq::SliceRandom;
 
+#[derive(Debug, Clone, PartialEq)]
 pub struct KonnektorTest {
-    konnektoren: Konnektoren,
-    random_indices: Vec<usize>,
-    current_index: usize,
-    answers: Vec<AnswerRecord>,
+    pub konnektoren: Konnektoren,
+    pub random_indices: Vec<usize>,
+    pub current_index: usize,
+    pub answers: Vec<AnswerRecord>,
 }
 
 impl KonnektorTest {

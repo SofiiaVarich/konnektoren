@@ -1,6 +1,6 @@
 use super::KonnektorType;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct AnswerRecord {
     pub detail_index: usize,
     pub was_answered: bool,
