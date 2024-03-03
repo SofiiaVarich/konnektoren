@@ -56,11 +56,11 @@ impl Component for KonnektorCarousel {
                         </CardBody>
                     </Card>
                     <TypeSelector on_select={ctx.link().callback(Msg::SelectType)} />
-                    <TestStatistics test={self.test.clone()} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
                     </div>
+                    <TestStatistics test={self.test.clone()} />
                 </div>
             }
         } else {

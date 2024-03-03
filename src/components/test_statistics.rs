@@ -1,3 +1,4 @@
+use super::TestChart;
 use crate::model::KonnektorTest;
 use crate::model::KonnektorType;
 use yew::prelude::*;
@@ -9,7 +10,6 @@ pub struct TestStatisticsProps {
 
 #[function_component(TestStatistics)]
 pub fn test_statistics(props: &TestStatisticsProps) -> Html {
-    // Calculate the number of correctly answered questions
     let correct_answers = props
         .test
         .answers
@@ -22,7 +22,6 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
         })
         .count();
 
-    // Calculate the total number of questions answered
     let total_answered = props
         .test
         .answers
@@ -30,7 +29,6 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
         .filter(|record| record.was_answered)
         .count();
 
-    // Calculate statistics by category
     let stats_by_category = props
         .test
         .konnektoren
@@ -72,6 +70,8 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
     html! {
         <>
             <h2>{"Test Statistics"}</h2>
+            <p>{format!("Total Questions: {}", props.test.len())}</p>
+            <TestChart test={props.test.clone()} />
             <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
             <h3>{"Statistics by Category"}</h3>
             <ul>

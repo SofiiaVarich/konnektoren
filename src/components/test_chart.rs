@@ -1,0 +1,57 @@
+use crate::model::KonnektorTest;
+use charts_rs::PieChart;
+use serde::Serialize;
+use serde_json::json;
+use yew::prelude::*;
+
+#[derive(Serialize)]
+struct ChartData {
+    name: String,
+    value: f32,
+}
+
+fn prepare_pie_chart_data(test: &KonnektorTest) -> String {
+    let correct_count = test.answers.iter().filter(|a| a.is_correct()).count() as f32;
+    let incorrect_count = (test.answers.len() - correct_count as usize) as f32;
+
+    let chart_data = json!({
+        "legend_show": false,
+        "series_list": [
+            {
+                "name": "Correct",
+                "data": [correct_count]
+            },
+            {
+                "name": "Incorrect",
+                "data": [incorrect_count]
+            }
+        ]
+    });
+
+    let json_str = chart_data.to_string();
+    json_str
+}
+
+#[derive(Properties, PartialEq)]
+pub struct ChartProps {
+    pub test: KonnektorTest,
+}
+
+#[function_component(TestChart)]
+pub fn test_chart(props: &ChartProps) -> Html {
+    let test = &props.test;
+
+    let chart_json = prepare_pie_chart_data(test);
+
+    let chart_svg = PieChart::from_json(&chart_json).unwrap().svg().unwrap();
+
+    let parsed = Html::from_html_unchecked(AttrValue::from(chart_svg));
+
+    let key = test.current_index();
+
+    html! {
+        <div key={key} class="chart-container" >
+            {parsed}
+        </div>
+    }
+}
