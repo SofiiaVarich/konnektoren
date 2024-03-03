@@ -25,10 +25,10 @@ impl Component for KonnektorCard {
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
-            <Card>
+            <Card class="text-center">
                 <CardBody>
-                    <CardTitle>{ &*self.detail.konnektor }</CardTitle>
-                    <CardText>{  &*self.detail.example }</CardText>
+                    <CardTitle class="mb-4">{ &*self.detail.konnektor }</CardTitle>
+                    <CardText>{ &*self.detail.example }</CardText>
                 </CardBody>
             </Card>
         }

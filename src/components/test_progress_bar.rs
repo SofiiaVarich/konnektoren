@@ -18,7 +18,7 @@ pub fn test_progress_bar(props: &ProgressBarProps) -> Html {
 
     html! {
         <Progress class="mb-3">
-            <ProgressBar value={progress as i32} label={format!("Question {} of {}", props.current, props.total)} style={Color::Info} />
+            <ProgressBar value={progress as i32} label={format!("Question {} of {}", props.current + 1, props.total)} style={Color::Info} />
         </Progress>
     }
 }
