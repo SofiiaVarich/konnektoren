@@ -12,7 +12,12 @@ struct ChartData {
 
 fn prepare_pie_chart_data(test: &KonnektorTest) -> String {
     let correct_count = test.answers.iter().filter(|a| a.is_correct()).count() as f32;
-    let incorrect_count = (test.answers.len() - correct_count as usize) as f32;
+    let total_answered = test
+        .answers
+        .iter()
+        .filter(|record| record.was_answered)
+        .count();
+    let incorrect_count = (total_answered - correct_count as usize) as f32;
 
     let chart_data = json!({
         "legend_show": false,
@@ -49,9 +54,19 @@ pub fn test_chart(props: &ChartProps) -> Html {
 
     let key = test.current_index();
 
-    html! {
-        <div key={key} class="chart-container" >
-            {parsed}
-        </div>
+    let total_answered = test
+        .answers
+        .iter()
+        .filter(|record| record.was_answered)
+        .count();
+
+    if total_answered > 0 {
+        html! {
+            <div key={key} class="chart-container" >
+                {parsed}
+            </div>
+        }
+    } else {
+        html! { <></>}
     }
 }

@@ -1,5 +1,6 @@
 use super::TypeSelector;
 use crate::components::TestProgressBar;
+use crate::components::TestResults;
 use crate::components::TestStatistics;
 use crate::model::KonnektorTest;
 use crate::model::KonnektorType;
@@ -60,11 +61,23 @@ impl Component for KonnektorCarousel {
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
                     </div>
-                    <TestStatistics test={self.test.clone()} />
+                    { self.test_results() }
                 </div>
             }
         } else {
             html! { <p>{ "No Konnektoren found" }</p> }
+        }
+    }
+}
+
+impl KonnektorCarousel {
+    fn test_results(&self) -> Html {
+        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+            html! { <TestResults test={self.test.clone()} /> }
+        } else {
+            html! {
+                <TestStatistics test={self.test.clone()} />
+            }
         }
     }
 }
