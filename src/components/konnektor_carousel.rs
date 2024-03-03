@@ -34,7 +34,10 @@ impl Component for KonnektorCarousel {
         match msg {
             Msg::Next => self.test.next(),
             Msg::Previous => self.test.prev(),
-            Msg::SelectType(selected_type) => {}
+            Msg::SelectType(selected_type) => {
+                self.test.answer_current(selected_type);
+                self.test.next();
+            }
         }
         true
     }

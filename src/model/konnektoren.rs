@@ -1,5 +1,5 @@
-use super::konnektor_category::KonnektorCategory;
 use super::konnektor_detail::KonnektorDetail;
+use super::{konnektor_category::KonnektorCategory, KonnektorType};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -21,6 +21,19 @@ impl Default for Konnektoren {
 impl Konnektoren {
     pub fn len(&self) -> usize {
         self.categories.iter().map(|c| c.details.len()).sum()
+    }
+
+    pub fn determine_type(&self, index: usize) -> KonnektorType {
+        let mut cumulated_index = 0;
+
+        for category in self.categories.iter() {
+            if index < cumulated_index + category.details.len() {
+                return category.category.clone();
+            }
+            cumulated_index += category.details.len();
+        }
+
+        panic!("Index out of bounds: {}", index);
     }
 
     pub fn get_detail_by_index(&self, index: usize) -> Option<&KonnektorDetail> {
@@ -156,6 +169,20 @@ mod tests {
         assert!(
             detail.is_none(),
             "Attempting to get a detail by an out-of-bounds index should return None."
+        );
+    }
+
+    #[test]
+    fn test_determine_type() {
+        let konnektoren = Konnektoren::default();
+
+        let expected_type = KonnektorType::Infinitivgruppe;
+
+        let determined_type = konnektoren.determine_type(0);
+        assert_eq!(
+            determined_type, expected_type,
+            "The determined type for index {} should be {:?}",
+            0, expected_type
         );
     }
 }

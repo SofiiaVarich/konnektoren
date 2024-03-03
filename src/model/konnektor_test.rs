@@ -1,11 +1,14 @@
-use super::konnektor_detail::KonnektorDetail;
-use super::konnektoren::Konnektoren;
+use super::AnswerRecord;
+use super::KonnektorDetail;
+use super::KonnektorType;
+use super::Konnektoren;
 use rand::seq::SliceRandom;
 
 pub struct KonnektorTest {
     konnektoren: Konnektoren,
     random_indices: Vec<usize>,
     current_index: usize,
+    answers: Vec<AnswerRecord>,
 }
 
 impl KonnektorTest {
@@ -20,10 +23,24 @@ impl KonnektorTest {
         let mut rng = rand::thread_rng();
         indices.shuffle(&mut rng);
 
+        let answers = indices
+            .iter()
+            .map(|&index| {
+                let correct_answer = konnektoren.determine_type(index);
+                AnswerRecord {
+                    detail_index: index,
+                    was_answered: false,
+                    correct_answer,
+                    user_answer: None,
+                }
+            })
+            .collect();
+
         Self {
             konnektoren: konnektoren.clone(),
             random_indices: indices,
             current_index: 0,
+            answers,
         }
     }
 
@@ -42,6 +59,13 @@ impl KonnektorTest {
     pub fn current(&self) -> Option<&KonnektorDetail> {
         let index = self.random_indices.get(self.current_index)?;
         self.konnektoren.get_detail_by_index(*index)
+    }
+
+    pub fn answer_current(&mut self, user_answer: KonnektorType) {
+        if let Some(record) = self.answers.get_mut(self.current_index) {
+            record.was_answered = true;
+            record.user_answer = Some(user_answer);
+        }
     }
 }
 
