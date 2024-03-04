@@ -26,9 +26,9 @@ impl Component for TypeSelector {
         html! {
             <div id="typeselector" class="d-flex justify-content-center">
                 <ButtonGroup>
-                    <Button onclick={ctx.link().callback(|_| KonnektorType::Subjunktionen)}>{ "Subjunktionen" }</Button>
-                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionen)}>{ "Konjunktionen" }</Button>
-                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionaladverbien)}>{ "Konjunktionaladverbien" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Subjunktionen)}>{ "Nebensatz (Verb am Ende)" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionen)}>{ "Hauptsatz (Position 0)" }</Button>
+                    <Button onclick={ctx.link().callback(|_| KonnektorType::Konjunktionaladverbien)}>{ "Hauptsatz (Position 1)" }</Button>
                     <Button onclick={ctx.link().callback(|_| KonnektorType::Infinitivgruppe)}>{ "Infinitivgruppe" }</Button>
                     <Button onclick={ctx.link().callback(|_| KonnektorType::BesonderePosition)}>{ "Besondere Position" }</Button>
                 </ButtonGroup>
