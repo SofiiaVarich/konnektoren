@@ -23,7 +23,7 @@ jobs:
 
       - run: rustup target add wasm32-unknown-unknown
       - run: cargo install --locked trunk
-      - run: trunk build --release --public-url /konnektoren
+      - run: trunk build --release
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
