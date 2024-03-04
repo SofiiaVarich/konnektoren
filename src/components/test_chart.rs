@@ -48,7 +48,9 @@ pub fn test_chart(props: &ChartProps) -> Html {
 
     let chart_json = prepare_pie_chart_data(test);
 
-    let chart_svg = PieChart::from_json(&chart_json).unwrap().svg().unwrap();
+    let mut chart = PieChart::from_json(&chart_json).unwrap();
+    chart.series_colors = (vec!["#4CAF50".into(), "#FF5252".into()]);
+    let chart_svg = chart.svg().unwrap();
 
     let parsed = Html::from_html_unchecked(AttrValue::from(chart_svg));
 

@@ -76,7 +76,10 @@ impl KonnektorCarousel {
             html! { <TestResults test={self.test.clone()} /> }
         } else {
             html! {
+                <div>
                 <TestStatistics test={self.test.clone()} />
+                <TestResults test={self.test.clone()} />
+                </div>
             }
         }
     }
