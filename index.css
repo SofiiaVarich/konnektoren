@@ -114,3 +114,20 @@ th {
         min-width: 120px;
     }
 }
+
+.footer {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 20px 0;
+    margin-top: 40px; /* Adds space between the content and the footer */
+    border-top: 1px solid #e7e7e7; /* Adds a subtle border on top */
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.text-center {
+    text-align: center;
+}

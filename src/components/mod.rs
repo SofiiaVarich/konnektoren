@@ -1,3 +1,4 @@
+mod footer;
 mod konnektor_card;
 mod konnektor_carousel;
 mod test_chart;
@@ -6,6 +7,7 @@ mod test_results;
 mod test_statistics;
 mod type_selector;
 
+pub use footer::Footer;
 pub use konnektor_card::KonnektorCard;
 pub use konnektor_carousel::KonnektorCarousel;
 pub use test_chart::TestChart;

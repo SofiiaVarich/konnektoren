@@ -1,4 +1,4 @@
-use crate::components::KonnektorCarousel;
+use crate::components::{Footer, KonnektorCarousel};
 use crate::model::Konnektoren;
 use yew::prelude::*;
 use yew_bootstrap::util::*;
@@ -12,6 +12,7 @@ pub fn App() -> Html {
             {include_cdn()}
             <h1 class="text-center">{"Konnektoren"}</h1>
             <KonnektorCarousel {konnektoren} />
+            <Footer />
             {include_cdn_js()}
         </div>
     }
