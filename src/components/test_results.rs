@@ -26,6 +26,7 @@ pub fn test_results(props: &TestResultsProps) -> Html {
                         <th>{"Konnektor"}</th>
                         <th>{"Your Answer"}</th>
                         <th>{"Correct Answer"}</th>
+                        <th>{"Example"}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,9 +37,10 @@ pub fn test_results(props: &TestResultsProps) -> Html {
                         html! {
                             <tr>
                                 <td>{ format!("Question {}", answer.detail_index + 1) }</td>
-                                <td>{ format!("{:?}", detail.konnektor) }</td>
+                                <td>{ &detail.konnektor }</td>
                                 <td>{ format!("{:?}", answer.user_answer.clone().unwrap_or(KonnektorType::default())) }</td>
                                 <td>{ format!("{:?}", answer.correct_answer) }</td>
+                                <td>{ &detail.example }</td>
                             </tr>
                         }
                     })}
