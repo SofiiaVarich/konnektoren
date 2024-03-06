@@ -10,7 +10,7 @@ pub struct TestResultsProps {
 #[function_component(TestResults)]
 pub fn test_results(props: &TestResultsProps) -> Html {
     html! {
-        <>
+        <div class="test-results">
             <h3>{"Test Results"}</h3>
             <table>
                 <thead>
@@ -37,6 +37,6 @@ pub fn test_results(props: &TestResultsProps) -> Html {
                     })}
                 </tbody>
             </table>
-        </>
+        </div>
     }
 }

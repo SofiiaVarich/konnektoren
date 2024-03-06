@@ -150,6 +150,18 @@ th {
     text-align: center;
 }
 
+.test-results {
+    margin-top: 20px;
+    padding: 0 5%;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .test-results {
+        padding: 0 10px;
+    }
+}
+
 .correct-answer {
     background-color: #d4edda;
     color: #155724;
