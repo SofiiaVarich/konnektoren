@@ -135,12 +135,9 @@ th {
 
 .footer {
     background-color: #f8f9fa;
-    /* Light gray background */
     padding: 20px 0;
     margin-top: 40px;
-    /* Adds space between the content and the footer */
     border-top: 1px solid #e7e7e7;
-    /* Adds a subtle border on top */
 }
 
 .container {
@@ -151,4 +148,14 @@ th {
 
 .text-center {
     text-align: center;
+}
+
+.correct-answer {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.incorrect-answer {
+    background-color: #f8d7da;
+    color: #721c24;
 }
