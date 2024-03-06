@@ -25,6 +25,12 @@ jobs:
       - run: cargo install --locked trunk
       - run: trunk build --release
 
+      - name: Generate Sitemap
+        run: ./scripts/generate_sitemap.sh && cp ./sitemap.xml ./dist/sitemap.xml
+
+      - name: Copy robots.txt
+        run: cp ./robots.txt ./dist/robots.txt
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
