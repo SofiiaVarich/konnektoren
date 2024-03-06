@@ -95,6 +95,24 @@ th {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#typeselector .btn:active {
+    animation: bounce 0.5s ease forwards;
+}
+
 #typeselector .btn:hover {
     background-color: #7b61ff;
     transform: translateY(-2px);
@@ -116,10 +134,13 @@ th {
 }
 
 .footer {
-    background-color: #f8f9fa; /* Light gray background */
+    background-color: #f8f9fa;
+    /* Light gray background */
     padding: 20px 0;
-    margin-top: 40px; /* Adds space between the content and the footer */
-    border-top: 1px solid #e7e7e7; /* Adds a subtle border on top */
+    margin-top: 40px;
+    /* Adds space between the content and the footer */
+    border-top: 1px solid #e7e7e7;
+    /* Adds a subtle border on top */
 }
 
 .container {
