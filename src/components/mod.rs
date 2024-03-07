@@ -1,3 +1,4 @@
+mod congratulations;
 mod footer;
 mod konnektor_card;
 mod konnektor_carousel;
@@ -7,6 +8,7 @@ mod test_results;
 mod test_statistics;
 mod type_selector;
 
+pub use congratulations::Congratulations;
 pub use footer::Footer;
 pub use konnektor_card::KonnektorCard;
 pub use konnektor_carousel::KonnektorCarousel;

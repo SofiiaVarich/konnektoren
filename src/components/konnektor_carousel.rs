@@ -1,4 +1,5 @@
 use super::TypeSelector;
+use crate::components::Congratulations;
 use crate::components::TestProgressBar;
 use crate::components::TestResults;
 use crate::components::TestStatistics;
@@ -46,7 +47,17 @@ impl Component for KonnektorCarousel {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        if let Some(detail) = self.test.current() {
+        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+            html! {
+                    <div>
+                        <Congratulations test={self.test.clone()} />
+                        <div class="d-flex justify-content-between mt-2">
+                            <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                        </div>
+                        { self.test_results() }
+                    </div>
+            }
+        } else if let Some(detail) = self.test.current() {
             html! {
                 <div>
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
