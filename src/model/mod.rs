@@ -1,13 +1,23 @@
+mod adjective_detail;
 mod answer_record;
 mod konnektor_category;
 mod konnektor_detail;
 mod konnektor_test;
 mod konnektor_type;
 mod konnektoren;
+mod preposition_category;
+mod preposition_test;
+mod preposition_type;
+mod prepositions;
 
+pub use adjective_detail::AdjectiveDetail;
 pub use answer_record::AnswerRecord;
 pub use konnektor_category::KonnektorCategory;
 pub use konnektor_detail::KonnektorDetail;
 pub use konnektor_test::KonnektorTest;
 pub use konnektor_type::KonnektorType;
 pub use konnektoren::Konnektoren;
+pub use preposition_category::PrepositionCategory;
+pub use preposition_test::PrepositionTest;
+pub use preposition_type::PrepositionType;
+pub use prepositions::Prepositions;

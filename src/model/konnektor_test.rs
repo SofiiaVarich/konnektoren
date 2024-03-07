@@ -9,7 +9,7 @@ pub struct KonnektorTest {
     pub konnektoren: Konnektoren,
     pub random_indices: Vec<usize>,
     pub current_index: usize,
-    pub answers: Vec<AnswerRecord>,
+    pub answers: Vec<AnswerRecord<KonnektorType>>,
 }
 
 impl KonnektorTest {

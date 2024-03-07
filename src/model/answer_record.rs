@@ -1,32 +1,41 @@
-use super::KonnektorType;
-
 #[derive(Debug, Clone, PartialEq)]
-pub struct AnswerRecord {
+pub struct AnswerRecord<T>
+where
+    T: PartialEq + Clone + Default,
+{
     pub detail_index: usize,
     pub was_answered: bool,
-    pub correct_answer: KonnektorType,
-    pub user_answer: Option<KonnektorType>,
+    pub correct_answer: T,
+    pub user_answer: Option<T>,
 }
 
-impl AnswerRecord {
+impl<T> AnswerRecord<T>
+where
+    T: PartialEq + Clone + Default,
+{
     pub fn is_correct(&self) -> bool {
-        self.was_answered
-            && self.correct_answer
-                == <std::option::Option<KonnektorType> as Clone>::clone(&self.user_answer)
-                    .unwrap_or_default()
+        self.was_answered && self.user_answer.clone().unwrap_or_default() == self.correct_answer
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[derive(Debug, Clone, PartialEq, Default)]
+    enum TestType {
+        Type1,
+        Type2,
+        #[default]
+        Unknown,
+    }
+
     #[test]
     fn answer_record_correct() {
         let answer_record = AnswerRecord {
             detail_index: 0,
             was_answered: true,
-            correct_answer: KonnektorType::Subjunktionen,
-            user_answer: Some(KonnektorType::Subjunktionen),
+            correct_answer: TestType::Type1,
+            user_answer: Some(TestType::Type1),
         };
         assert!(
             answer_record.is_correct(),
@@ -39,8 +48,8 @@ mod tests {
         let answer_record = AnswerRecord {
             detail_index: 1,
             was_answered: true,
-            correct_answer: KonnektorType::Subjunktionen,
-            user_answer: Some(KonnektorType::Konjunktionen),
+            correct_answer: TestType::Type1,
+            user_answer: Some(TestType::Type2),
         };
         assert!(
             !answer_record.is_correct(),
@@ -53,8 +62,8 @@ mod tests {
         let answer_record = AnswerRecord {
             detail_index: 2,
             was_answered: false,
-            correct_answer: KonnektorType::Subjunktionen,
-            user_answer: Some(KonnektorType::Subjunktionen),
+            correct_answer: TestType::Type1,
+            user_answer: None, // Or Some(TestType::Unknown) depending on how you handle unanswered
         };
         assert!(
             !answer_record.is_correct(),

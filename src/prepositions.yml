@@ -1,0 +1,68 @@
+categories:
+  - category: "an"
+    details:
+      - adjektiv: "adressiert"
+        example: "Der Brief ist an dich adressiert."
+      - adjektiv: "arm"
+        example: "Er ist sehr arm an Geist."
+      - adjektiv: "reich"
+        example: "Das Land ist reich an Bodenschätzen."
+
+  - category: "auf"
+    details:
+      - adjektiv: "angewiesen"
+        example: "Ich bin auf deine Hilfe angewiesen."
+      - adjektiv: "fokussiert"
+        example: "Er ist voll auf seine Arbeit fokussiert."
+      - adjektiv: "gespannt"
+        example: "Ich bin gespannt auf seine Reaktion."
+
+  - category: "bei"
+    details:
+      - adjektiv: "angesehen"
+        example: "Er ist bei allen Experten sehr angesehen."
+      - adjektiv: "beliebt"
+        example: "Sie ist bei allen Kollegen sehr beliebt."
+
+  - category: "für"
+    details:
+      - adjektiv: "bekannt"
+        example: "Er ist bekannt für seinen geschmacklosen Humor."
+      - adjektiv: "geeignet"
+        example: "Er ist nicht geeignet für eine solche Position."
+      - adjektiv: "nützlich"
+        example: "Diese Information ist sehr nützlich für mich."
+
+  - category: "mit"
+    details:
+      - adjektiv: "befreundet"
+        example: "Ich bin seit Jahren mit ihm befreundet."
+      - adjektiv: "beschäftigt"
+        example: "Er ist immer noch mit seiner Arbeit beschäftigt."
+      - adjektiv: "einverstanden"
+        example: "Ich bin mit deinem Vorschlag einverstanden."
+
+  - category: "über"
+    details:
+      - adjektiv: "besorgt"
+        example: "Ich bin besorgt über die Zustände hier."
+      - adjektiv: "beunruhigt"
+        example: "Über sein Verhalten bin ich sehr beunruhigt."
+      - adjektiv: "erfreut"
+        example: "Ich bin sehr erfreut über deine guten Noten."
+
+  - category: "von"
+    details:
+      - adjektiv: "abhängig"
+        example: "Er ist abhängig von dem Geld seiner Eltern."
+      - adjektiv: "enttäuscht"
+        example: "Er ist sehr enttäuscht von dir."
+      - adjektiv: "überzeugt"
+        example: "Ich war schon immer von seinen Talenten überzeugt."
+
+  - category: "zu"
+    details:
+      - adjektiv: "fähig"
+        example: "Er ist zu allem fähig."
+      - adjektiv: "entschlossen"
+        example: "Er ist zu allem entschlossen."
