@@ -1,6 +1,6 @@
 mod adjective_detail;
 mod answer_record;
-mod konnektor_category;
+mod category;
 mod konnektor_detail;
 mod konnektor_test;
 mod konnektor_type;
@@ -12,7 +12,7 @@ mod prepositions;
 
 pub use adjective_detail::AdjectiveDetail;
 pub use answer_record::AnswerRecord;
-pub use konnektor_category::KonnektorCategory;
+pub use category::Category;
 pub use konnektor_detail::KonnektorDetail;
 pub use konnektor_test::KonnektorTest;
 pub use konnektor_type::KonnektorType;

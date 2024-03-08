@@ -1,10 +1,10 @@
 use super::konnektor_detail::KonnektorDetail;
-use super::{konnektor_category::KonnektorCategory, KonnektorType};
+use super::{category::Category, KonnektorType};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Konnektoren {
-    pub categories: Vec<KonnektorCategory>,
+    pub categories: Vec<Category<KonnektorType, KonnektorDetail>>,
 }
 
 impl Default for Konnektoren {
@@ -90,7 +90,7 @@ mod tests {
     fn test_konnektoren_length() {
         let konnektoren = Konnektoren {
             categories: vec![
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Konjunktionen,
                     details: vec![
                         KonnektorDetail {
@@ -103,7 +103,7 @@ mod tests {
                         },
                     ],
                 },
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Subjunktionen,
                     details: vec![KonnektorDetail {
                         konnektor: "Konnektor 3".to_string(),
@@ -125,7 +125,7 @@ mod tests {
     fn test_get_detail_by_index() {
         let konnektoren = Konnektoren {
             categories: vec![
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Konjunktionen,
                     details: vec![
                         KonnektorDetail {
@@ -138,7 +138,7 @@ mod tests {
                         },
                     ],
                 },
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Subjunktionen,
                     details: vec![KonnektorDetail {
                         konnektor: "Konnektor 3".to_string(),

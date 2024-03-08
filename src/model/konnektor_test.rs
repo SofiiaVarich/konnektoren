@@ -81,21 +81,21 @@ impl KonnektorTest {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::KonnektorCategory;
+    use crate::model::Category;
     use crate::model::KonnektorType;
 
     // Utility function to create a mock Konnektoren instance for testing
     fn mock_konnektoren() -> Konnektoren {
         Konnektoren {
             categories: vec![
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Konjunktionen,
                     details: vec![KonnektorDetail {
                         konnektor: "Konnektor 1".to_string(),
                         example: "Example 1".to_string(),
                     }],
                 },
-                KonnektorCategory {
+                Category {
                     category: KonnektorType::Subjunktionen,
                     details: vec![KonnektorDetail {
                         konnektor: "Konnektor 2".to_string(),
