@@ -191,3 +191,21 @@ th {
     color: #666;
     line-height: 1.6;
 }
+
+.large-font {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.small-font {
+    font-size: 16px;
+    color: grey;
+}
+
+.toggle-test-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: inherit;
+}

@@ -1,21 +1,21 @@
-use crate::model::KonnektorDetail;
+use crate::model::DetailTrait;
 use yew::prelude::*;
 use yew_bootstrap::component::card::*;
 
 #[derive(Properties, PartialEq)]
-pub struct ModelProps {
-    pub detail: KonnektorDetail,
+pub struct ModelProps<D: DetailTrait> {
+    pub detail: D,
 }
 
-pub struct KonnektorCard {
-    detail: KonnektorDetail,
+pub struct CarouselCard<D: DetailTrait> {
+    detail: D,
 }
 
 pub enum Msg {}
 
-impl Component for KonnektorCard {
+impl<D: DetailTrait + 'static> Component for CarouselCard<D> {
     type Message = Msg;
-    type Properties = ModelProps;
+    type Properties = ModelProps<D>;
 
     fn create(ctx: &Context<Self>) -> Self {
         Self {
@@ -27,8 +27,8 @@ impl Component for KonnektorCard {
         html! {
             <Card class="text-center">
                 <CardBody>
-                    <CardTitle class="mb-4">{ &*self.detail.konnektor }</CardTitle>
-                    <CardText>{ &*self.detail.example }</CardText>
+                    <CardTitle class="mb-4">{ &*self.detail.get_detail() }</CardTitle>
+                    <CardText>{ &*self.detail.get_example() }</CardText>
                 </CardBody>
             </Card>
         }
