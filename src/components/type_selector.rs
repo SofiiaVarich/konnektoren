@@ -106,9 +106,9 @@ impl Component for TypeSelector<PrepositionType> {
                     PrepositionType::An => "An",
                     PrepositionType::Auf => "Auf",
                     PrepositionType::Bei => "Bei",
-                    PrepositionType::Fuer => "Fuer",
+                    PrepositionType::Fuer => "Für",
                     PrepositionType::Mit => "Mit",
-                    PrepositionType::Ueber => "Ueber",
+                    PrepositionType::Ueber => "Über",
                     PrepositionType::Von => "Von",
                     PrepositionType::Zu => "Zu",
                 };
