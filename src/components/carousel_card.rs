@@ -5,6 +5,7 @@ use yew_bootstrap::component::card::*;
 #[derive(Properties, PartialEq)]
 pub struct ModelProps<D: DetailTrait> {
     pub detail: D,
+    pub hide_example: Option<bool>,
 }
 
 pub struct CarouselCard<D: DetailTrait> {
@@ -23,12 +24,22 @@ impl<D: DetailTrait + 'static> Component for CarouselCard<D> {
         }
     }
 
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        let example = if ctx.props().hide_example.is_some_and(|x| x == true) {
+            html! {}
+        } else {
+            html! {
+                <CardText>{ &*self.detail.get_example() }</CardText>
+            }
+        };
+
         html! {
             <Card class="text-center">
                 <CardBody>
                     <CardTitle class="mb-4">{ &*self.detail.get_detail() }</CardTitle>
-                    <CardText>{ &*self.detail.get_example() }</CardText>
+                    {
+                        example
+                    }
                 </CardBody>
             </Card>
         }

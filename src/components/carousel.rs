@@ -1,4 +1,5 @@
 use super::TypeSelector;
+use crate::components::CarouselCard;
 use crate::components::Congratulations;
 use crate::components::TestProgressBar;
 use crate::components::TestResults;
@@ -12,7 +13,7 @@ use crate::model::KonnektorType;
 use crate::model::PrepositionType;
 use crate::model::TypeTrait;
 use yew::prelude::*;
-use yew_bootstrap::component::{card::*, Button};
+use yew_bootstrap::component::Button;
 
 #[derive(Properties, PartialEq)]
 pub struct CarouselProps<T: TypeTrait, D: DetailTrait> {
@@ -21,12 +22,14 @@ pub struct CarouselProps<T: TypeTrait, D: DetailTrait> {
 
 pub struct Carousel<T: TypeTrait, D: DetailTrait> {
     test: CategorizedTest<T, D>,
+    hide_example: bool,
 }
 
 impl Default for Carousel<KonnektorType, KonnektorDetail> {
     fn default() -> Self {
         Self {
             test: CategorizedTest::default(),
+            hide_example: false,
         }
     }
 }
@@ -35,6 +38,7 @@ impl Default for Carousel<PrepositionType, AdjectiveDetail> {
     fn default() -> Self {
         Self {
             test: CategorizedTest::default(),
+            hide_example: false,
         }
     }
 }
@@ -43,6 +47,7 @@ pub enum Msg<T: TypeTrait> {
     Next,
     Previous,
     SelectType(T),
+    ToggleExampleVisibility,
 }
 
 impl<T: TypeTrait + 'static, D: DetailTrait + 'static> Carousel<T, D> {
@@ -76,6 +81,9 @@ impl Component for Carousel<KonnektorType, KonnektorDetail> {
                 self.test.answer_current(selected_type);
                 self.test.next();
             }
+            Msg::ToggleExampleVisibility => {
+                self.hide_example = !self.hide_example;
+            }
         }
         true
     }
@@ -95,15 +103,11 @@ impl Component for Carousel<KonnektorType, KonnektorDetail> {
             html! {
                 <div>
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
-                    <Card>
-                        <CardBody>
-                            <CardTitle>{ &*detail.konnektor }</CardTitle>
-                            <CardText>{ &*detail.example }</CardText>
-                        </CardBody>
-                    </Card>
+                    <CarouselCard<KonnektorDetail> detail={detail.clone()} hide_example={self.hide_example} />
                     <TypeSelector<KonnektorType> on_select={ctx.link().callback(Msg::SelectType::<KonnektorType>)} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                        <Button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
                     </div>
                     { self.test_results() }
@@ -131,6 +135,9 @@ impl Component for Carousel<PrepositionType, AdjectiveDetail> {
                 self.test.answer_current(selected_type);
                 self.test.next();
             }
+            Msg::ToggleExampleVisibility => {
+                self.hide_example = !self.hide_example;
+            }
         }
         true
     }
@@ -150,15 +157,11 @@ impl Component for Carousel<PrepositionType, AdjectiveDetail> {
             html! {
                 <div>
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
-                    <Card>
-                        <CardBody>
-                            <CardTitle>{ &*detail.get_detail() }</CardTitle>
-                            <CardText>{ &*detail.get_example() }</CardText>
-                        </CardBody>
-                    </Card>
+                <CarouselCard<AdjectiveDetail> detail={detail.clone()} hide_example={self.hide_example} />
                     <TypeSelector<PrepositionType> on_select={ctx.link().callback(Msg::SelectType::<PrepositionType>)} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                        <Button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
                     </div>
                     { self.test_results() }
