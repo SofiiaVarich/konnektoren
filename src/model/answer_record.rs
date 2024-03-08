@@ -1,7 +1,9 @@
+use super::TypeTrait;
+
 #[derive(Debug, Clone, PartialEq)]
-pub struct AnswerRecord<T>
+pub struct AnswerRecord<T: TypeTrait>
 where
-    T: PartialEq + Clone + Default,
+    T: TypeTrait,
 {
     pub detail_index: usize,
     pub was_answered: bool,
@@ -9,7 +11,7 @@ where
     pub user_answer: Option<T>,
 }
 
-impl<T> AnswerRecord<T>
+impl<T: TypeTrait> AnswerRecord<T>
 where
     T: PartialEq + Clone + Default,
 {
@@ -20,13 +22,37 @@ where
 
 #[cfg(test)]
 mod tests {
+    use serde::{Deserialize, Serialize};
+
     use super::*;
-    #[derive(Debug, Clone, PartialEq, Default)]
+    #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
     enum TestType {
         Type1,
         Type2,
-        #[default]
         Unknown,
+    }
+
+    impl std::fmt::Display for TestType {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            let s = match self {
+                TestType::Type1 => "Type1",
+                TestType::Type2 => "Type2",
+                TestType::Unknown => "Unknown",
+            };
+            write!(f, "{}", s)
+        }
+    }
+
+    impl TypeTrait for TestType {
+        fn get_type() -> String {
+            "TestType".to_string()
+        }
+    }
+
+    impl Default for TestType {
+        fn default() -> Self {
+            TestType::Unknown
+        }
     }
 
     #[test]

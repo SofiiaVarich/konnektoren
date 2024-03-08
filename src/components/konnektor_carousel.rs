@@ -3,35 +3,54 @@ use crate::components::Congratulations;
 use crate::components::TestProgressBar;
 use crate::components::TestResults;
 use crate::components::TestStatistics;
-use crate::model::KonnektorTest;
+use crate::model::AdjectiveDetail;
+use crate::model::CategorizedItems;
+use crate::model::CategorizedTest;
+use crate::model::DetailTrait;
+use crate::model::KonnektorDetail;
 use crate::model::KonnektorType;
-use crate::model::Konnektoren;
+use crate::model::PrepositionType;
+use crate::model::TypeTrait;
 use yew::prelude::*;
 use yew_bootstrap::component::{card::*, Button};
 
 #[derive(Properties, PartialEq)]
-pub struct CarouselProps {
-    pub konnektoren: Konnektoren,
+pub struct CarouselProps<T: TypeTrait, D: DetailTrait> {
+    pub konnektoren: CategorizedItems<T, D>,
 }
 
-pub struct KonnektorCarousel {
-    test: KonnektorTest,
+pub struct KonnektorCarousel<T: TypeTrait, D: DetailTrait> {
+    test: CategorizedTest<T, D>,
 }
 
-pub enum Msg {
+impl Default for KonnektorCarousel<KonnektorType, KonnektorDetail> {
+    fn default() -> Self {
+        Self {
+            test: CategorizedTest::default(),
+        }
+    }
+}
+
+impl Default for KonnektorCarousel<PrepositionType, AdjectiveDetail> {
+    fn default() -> Self {
+        Self {
+            test: CategorizedTest::default(),
+        }
+    }
+}
+
+pub enum Msg<T: TypeTrait> {
     Next,
     Previous,
-    SelectType(KonnektorType),
+    SelectType(T),
 }
 
-impl Component for KonnektorCarousel {
-    type Message = Msg;
-    type Properties = CarouselProps;
+impl Component for KonnektorCarousel<KonnektorType, KonnektorDetail> {
+    type Message = Msg<KonnektorType>;
+    type Properties = ();
 
-    fn create(ctx: &Context<Self>) -> Self {
-        Self {
-            test: KonnektorTest::new(&ctx.props().konnektoren),
-        }
+    fn create(_ctx: &Context<Self>) -> Self {
+        Self::default()
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
@@ -50,7 +69,7 @@ impl Component for KonnektorCarousel {
         if self.test.current_index() + 1 >= self.test.random_indices.len() {
             html! {
                     <div>
-                        <Congratulations test={self.test.clone()} />
+                        <Congratulations<KonnektorType, KonnektorDetail> test={self.test.clone()} />
                         <div class="d-flex justify-content-between mt-2">
                             <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         </div>
@@ -67,7 +86,7 @@ impl Component for KonnektorCarousel {
                             <CardText>{ &*detail.example }</CardText>
                         </CardBody>
                     </Card>
-                    <TypeSelector on_select={ctx.link().callback(Msg::SelectType)} />
+                    <TypeSelector on_select={ctx.link().callback(Msg::SelectType::<KonnektorType>)} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
@@ -81,15 +100,15 @@ impl Component for KonnektorCarousel {
     }
 }
 
-impl KonnektorCarousel {
+impl<T: TypeTrait + 'static, D: DetailTrait + 'static> KonnektorCarousel<T, D> {
     fn test_results(&self) -> Html {
         if self.test.current_index() + 1 >= self.test.random_indices.len() {
-            html! { <TestResults test={self.test.clone()} /> }
+            html! { <TestResults<T, D> test={self.test.clone()} /> }
         } else {
             html! {
                 <div>
-                <TestStatistics test={self.test.clone()} />
-                <TestResults test={self.test.clone()} />
+                <TestStatistics<T, D> test={self.test.clone()} />
+                <TestResults<T, D> test={self.test.clone()} />
                 </div>
             }
         }

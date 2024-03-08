@@ -1,4 +1,4 @@
-use crate::model::KonnektorTest;
+use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
 use charts_rs::PieChart;
 use serde::Serialize;
 use serde_json::json;
@@ -10,7 +10,7 @@ struct ChartData {
     value: f32,
 }
 
-fn prepare_pie_chart_data(test: &KonnektorTest) -> String {
+fn prepare_pie_chart_data<T: TypeTrait, D: DetailTrait>(test: &CategorizedTest<T, D>) -> String {
     let correct_count = test.answers.iter().filter(|a| a.is_correct()).count() as f32;
     let total_answered = test
         .answers
@@ -38,12 +38,12 @@ fn prepare_pie_chart_data(test: &KonnektorTest) -> String {
 }
 
 #[derive(Properties, PartialEq)]
-pub struct ChartProps {
-    pub test: KonnektorTest,
+pub struct ChartProps<T: TypeTrait, D: DetailTrait> {
+    pub test: CategorizedTest<T, D>,
 }
 
 #[function_component(TestChart)]
-pub fn test_chart(props: &ChartProps) -> Html {
+pub fn test_chart<T: TypeTrait, D: DetailTrait>(props: &ChartProps<T, D>) -> Html {
     let test = &props.test;
 
     let chart_json = prepare_pie_chart_data(test);

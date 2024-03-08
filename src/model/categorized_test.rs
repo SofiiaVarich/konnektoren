@@ -1,20 +1,36 @@
+use super::AdjectiveDetail;
 use super::AnswerRecord;
+use super::CategorizedItems;
+use super::DetailTrait;
 use super::KonnektorDetail;
 use super::KonnektorType;
-use super::Konnektoren;
+use super::PrepositionType;
+use super::TypeTrait;
 use rand::seq::SliceRandom;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct KonnektorTest {
-    pub konnektoren: Konnektoren,
+pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
+    pub items: CategorizedItems<T, D>,
     pub random_indices: Vec<usize>,
     pub current_index: usize,
-    pub answers: Vec<AnswerRecord<KonnektorType>>,
+    pub answers: Vec<AnswerRecord<T>>,
 }
 
-impl KonnektorTest {
-    pub fn new(konnektoren: &Konnektoren) -> Self {
-        let details: Vec<KonnektorDetail> = konnektoren
+impl Default for CategorizedTest<KonnektorType, KonnektorDetail> {
+    fn default() -> Self {
+        Self::new(&CategorizedItems::default())
+    }
+}
+
+impl Default for CategorizedTest<PrepositionType, AdjectiveDetail> {
+    fn default() -> Self {
+        Self::new(&CategorizedItems::default())
+    }
+}
+
+impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
+    pub fn new(items: &CategorizedItems<T, D>) -> Self {
+        let details: Vec<D> = items
             .categories
             .iter()
             .flat_map(|category| category.details.clone())
@@ -27,7 +43,7 @@ impl KonnektorTest {
         let answers = indices
             .iter()
             .map(|&index| {
-                let correct_answer = konnektoren.determine_type(index);
+                let correct_answer = items.determine_type(index);
                 AnswerRecord {
                     detail_index: index,
                     was_answered: false,
@@ -38,7 +54,7 @@ impl KonnektorTest {
             .collect();
 
         Self {
-            konnektoren: konnektoren.clone(),
+            items: items.clone(),
             random_indices: indices,
             current_index: 0,
             answers,
@@ -61,16 +77,16 @@ impl KonnektorTest {
         self.random_indices.len()
     }
 
-    pub fn current(&self) -> Option<&KonnektorDetail> {
+    pub fn current(&self) -> Option<&D> {
         let index = self.random_indices.get(self.current_index)?;
-        self.konnektoren.get_detail_by_index(*index)
+        self.items.get_detail_by_index(*index)
     }
 
     pub fn current_index(&self) -> usize {
         self.current_index
     }
 
-    pub fn answer_current(&mut self, user_answer: KonnektorType) {
+    pub fn answer_current(&mut self, user_answer: T) {
         if let Some(record) = self.answers.get_mut(self.current_index) {
             record.was_answered = true;
             record.user_answer = Some(user_answer);
@@ -82,11 +98,10 @@ impl KonnektorTest {
 mod tests {
     use super::*;
     use crate::model::Category;
-    use crate::model::KonnektorType;
+    use crate::model::{KonnektorDetail, KonnektorType};
 
-    // Utility function to create a mock Konnektoren instance for testing
-    fn mock_konnektoren() -> Konnektoren {
-        Konnektoren {
+    fn mock_konnektoren() -> CategorizedItems<KonnektorType, KonnektorDetail> {
+        CategorizedItems {
             categories: vec![
                 Category {
                     category: KonnektorType::Konjunktionen,
@@ -107,9 +122,15 @@ mod tests {
     }
 
     #[test]
+    fn test_default() {
+        let test = CategorizedTest::<KonnektorType, KonnektorDetail>::default();
+        assert!(test.len() > 0, "The length should be greater than 0.");
+    }
+
+    #[test]
     fn test_konnektor_test_initialization() {
         let konnektoren = mock_konnektoren();
-        let test = KonnektorTest::new(&konnektoren);
+        let test = CategorizedTest::new(&konnektoren);
 
         assert!(
             !test.random_indices.is_empty(),
@@ -124,7 +145,7 @@ mod tests {
     #[test]
     fn test_konnektor_test_navigation() {
         let konnektoren = mock_konnektoren();
-        let mut test = KonnektorTest::new(&konnektoren);
+        let mut test = CategorizedTest::new(&konnektoren);
 
         test.next();
         assert!(
@@ -142,7 +163,7 @@ mod tests {
     #[test]
     fn test_konnektor_test_current_detail() {
         let konnektoren = mock_konnektoren();
-        let test = KonnektorTest::new(&konnektoren);
+        let test = CategorizedTest::new(&konnektoren);
 
         if let Some(detail) = test.current() {
             assert!(

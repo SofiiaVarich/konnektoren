@@ -1,13 +1,14 @@
-use crate::model::KonnektorTest;
 use yew::prelude::*;
 
+use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
+
 #[derive(Properties, PartialEq)]
-pub struct CongratulationsProps {
-    pub test: KonnektorTest,
+pub struct CongratulationsProps<T: TypeTrait, D: DetailTrait> {
+    pub test: CategorizedTest<T, D>,
 }
 
 #[function_component(Congratulations)]
-pub fn congratulations(props: &CongratulationsProps) -> Html {
+pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProps<T, D>) -> Html {
     let correct_answers = props
         .test
         .answers

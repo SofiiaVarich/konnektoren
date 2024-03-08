@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
+use super::TypeTrait;
+
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub enum KonnektorType {
     #[serde(rename = "Konnektoren mit Nebensatz (= Subjunktionen)")]
@@ -35,6 +37,12 @@ impl fmt::Display for KonnektorType {
             KonnektorType::BesonderePosition => "Konnektoren mit besonderer Position",
         };
         write!(f, "{}", s)
+    }
+}
+
+impl TypeTrait for KonnektorType {
+    fn get_type() -> String {
+        "Konnektor".to_string()
     }
 }
 

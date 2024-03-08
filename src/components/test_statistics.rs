@@ -1,24 +1,23 @@
 use super::TestChart;
-use crate::model::KonnektorTest;
-use crate::model::KonnektorType;
+use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
-pub struct TestStatisticsProps {
-    pub test: KonnektorTest,
+pub struct TestStatisticsProps<T: TypeTrait, D: DetailTrait> {
+    pub test: CategorizedTest<T, D>,
 }
 
 #[function_component(TestStatistics)]
-pub fn test_statistics(props: &TestStatisticsProps) -> Html {
+pub fn test_statistics<T: TypeTrait + 'static, D: DetailTrait + 'static>(
+    props: &TestStatisticsProps<T, D>,
+) -> Html {
     let correct_answers = props
         .test
         .answers
         .iter()
         .filter(|record| {
             record.was_answered
-                && record.correct_answer
-                    == <std::option::Option<KonnektorType> as Clone>::clone(&record.user_answer)
-                        .unwrap_or_default()
+                && record.correct_answer == record.user_answer.clone().unwrap_or_default()
         })
         .count();
 
@@ -31,7 +30,7 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
 
     let stats_by_category = props
         .test
-        .konnektoren
+        .items
         .categories
         .iter()
         .map(|category| {
@@ -43,17 +42,14 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
                     if let Some(record) = props.test.answers.iter().find(|record| {
                         &props
                             .test
-                            .konnektoren
+                            .items
                             .get_detail_by_index(record.detail_index)
                             .unwrap()
                             == detail
                     }) {
                         return record.was_answered
                             && record.correct_answer
-                                == <std::option::Option<KonnektorType> as Clone>::clone(
-                                    &record.user_answer,
-                                )
-                                .unwrap_or_default();
+                                == record.user_answer.clone().unwrap_or_default();
                     }
                     false
                 })
@@ -72,7 +68,7 @@ pub fn test_statistics(props: &TestStatisticsProps) -> Html {
             <div>
                 <h2>{"Test Statistics"}</h2>
                 <p>{format!("Total Questions: {}", props.test.len())}</p>
-                <TestChart test={props.test.clone()} />
+                <TestChart<T, D> test={props.test.clone()} />
                 <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
                 <h3>{"Statistics by Category"}</h3>
                 <ul>

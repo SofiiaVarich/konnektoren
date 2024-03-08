@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
+use super::TypeTrait;
+
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 pub enum PrepositionType {
     #[serde(rename = "an")]
@@ -40,6 +42,12 @@ impl fmt::Display for PrepositionType {
             PrepositionType::Zu => "zu",
         };
         write!(f, "{}", s)
+    }
+}
+
+impl TypeTrait for PrepositionType {
+    fn get_type() -> String {
+        "Präposition".to_string()
     }
 }
 

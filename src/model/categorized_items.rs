@@ -1,29 +1,22 @@
+use super::category::Category;
 use super::konnektor_detail::KonnektorDetail;
-use super::{category::Category, KonnektorType};
+use super::konnektor_type::KonnektorType;
+use super::preposition_type::PrepositionType;
+use super::DetailTrait;
+use super::{adjective_detail::AdjectiveDetail, TypeTrait};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct Konnektoren {
-    pub categories: Vec<Category<KonnektorType, KonnektorDetail>>,
+pub struct CategorizedItems<T: TypeTrait, D: DetailTrait> {
+    pub categories: Vec<Category<T, D>>,
 }
 
-impl Default for Konnektoren {
-    fn default() -> Self {
-        let yaml_content = include_str!("../konnektoren.yml");
-
-        let konnektoren: Konnektoren = serde_yaml::from_str(&yaml_content)
-            .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
-
-        konnektoren
-    }
-}
-
-impl Konnektoren {
+impl<T: TypeTrait, D: DetailTrait> CategorizedItems<T, D> {
     pub fn len(&self) -> usize {
         self.categories.iter().map(|c| c.details.len()).sum()
     }
 
-    pub fn determine_type(&self, index: usize) -> KonnektorType {
+    pub fn determine_type(&self, index: usize) -> T {
         let mut cumulated_index = 0;
 
         for category in self.categories.iter() {
@@ -36,7 +29,7 @@ impl Konnektoren {
         panic!("Index out of bounds: {}", index);
     }
 
-    pub fn get_detail_by_index(&self, index: usize) -> Option<&KonnektorDetail> {
+    pub fn get_detail_by_index(&self, index: usize) -> Option<&D> {
         let mut cumulated_index = 0;
 
         for category in &self.categories {
@@ -51,16 +44,56 @@ impl Konnektoren {
     }
 }
 
+impl Default for CategorizedItems<PrepositionType, AdjectiveDetail> {
+    fn default() -> Self {
+        let yaml_content = include_str!("../prepositions.yml");
+
+        let prepositions: CategorizedItems<PrepositionType, AdjectiveDetail> =
+            serde_yaml::from_str(&yaml_content)
+                .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
+
+        prepositions
+    }
+}
+
+impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
+    fn default() -> Self {
+        let yaml_content = include_str!("../konnektoren.yml");
+
+        let konnektoren: CategorizedItems<KonnektorType, KonnektorDetail> =
+            serde_yaml::from_str(&yaml_content)
+                .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
+
+        konnektoren
+    }
+}
+
 #[cfg(test)]
 mod tests {
+
+    use super::super::adjective_detail::AdjectiveDetail;
+    use super::super::category::Category;
+    use super::super::konnektor_detail::KonnektorDetail;
     use super::super::konnektor_type::KonnektorType;
+    use super::super::preposition_type::PrepositionType;
     use super::*;
 
     #[test]
     fn default_contains_all_enum_values_with_details() {
-        let konnektoren = Konnektoren::default();
+        let prepositions = CategorizedItems::<PrepositionType, AdjectiveDetail>::default();
+        let konnektoren = CategorizedItems::<KonnektorType, KonnektorDetail>::default();
 
-        let expected_types = vec![
+        let expected_prepositions = vec![
+            PrepositionType::An,
+            PrepositionType::Auf,
+            PrepositionType::Bei,
+            PrepositionType::Fuer,
+            PrepositionType::Mit,
+            PrepositionType::Ueber,
+            PrepositionType::Von,
+            PrepositionType::Zu,
+        ];
+        let expected_konnektoren = vec![
             KonnektorType::Konjunktionen,
             KonnektorType::Subjunktionen,
             KonnektorType::Konjunktionaladverbien,
@@ -68,7 +101,10 @@ mod tests {
             KonnektorType::BesonderePosition,
         ];
 
-        for expected_type in expected_types {
+        assert_eq!(prepositions.categories.len(), expected_prepositions.len());
+        assert_eq!(konnektoren.categories.len(), expected_konnektoren.len());
+
+        for expected_type in expected_konnektoren {
             let category = konnektoren
                 .categories
                 .iter()
@@ -88,7 +124,7 @@ mod tests {
 
     #[test]
     fn test_konnektoren_length() {
-        let konnektoren = Konnektoren {
+        let konnektoren = CategorizedItems {
             categories: vec![
                 Category {
                     category: KonnektorType::Konjunktionen,
@@ -123,7 +159,7 @@ mod tests {
 
     #[test]
     fn test_get_detail_by_index() {
-        let konnektoren = Konnektoren {
+        let konnektoren = CategorizedItems {
             categories: vec![
                 Category {
                     category: KonnektorType::Konjunktionen,
@@ -162,7 +198,7 @@ mod tests {
 
     #[test]
     fn test_get_detail_by_index_out_of_bounds() {
-        let konnektoren = Konnektoren::default();
+        let konnektoren = CategorizedItems::<KonnektorType, KonnektorDetail>::default();
 
         let detail = konnektoren.get_detail_by_index(999); // Use an index that's clearly out of bounds
 
@@ -174,7 +210,7 @@ mod tests {
 
     #[test]
     fn test_determine_type() {
-        let konnektoren = Konnektoren::default();
+        let konnektoren = CategorizedItems::<KonnektorType, KonnektorDetail>::default();
 
         let expected_type = KonnektorType::Infinitivgruppe;
 
