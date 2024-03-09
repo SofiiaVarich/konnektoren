@@ -47,7 +47,7 @@ impl fmt::Display for AdjectiveType {
 
 impl TypeTrait for AdjectiveType {
     fn get_type() -> String {
-        "Adjective".to_string()
+        "Adjektive".to_string()
     }
 }
 

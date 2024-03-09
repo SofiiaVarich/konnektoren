@@ -6,6 +6,8 @@ use super::DetailTrait;
 use super::KonnektorDetail;
 use super::KonnektorType;
 use super::TypeTrait;
+use super::VerbDetail;
+use super::VerbType;
 use rand::seq::SliceRandom;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -23,6 +25,12 @@ impl Default for CategorizedTest<KonnektorType, KonnektorDetail> {
 }
 
 impl Default for CategorizedTest<AdjectiveType, AdjectiveDetail> {
+    fn default() -> Self {
+        Self::new(&CategorizedItems::default())
+    }
+}
+
+impl Default for CategorizedTest<VerbType, VerbDetail> {
     fn default() -> Self {
         Self::new(&CategorizedItems::default())
     }

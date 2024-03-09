@@ -2,8 +2,8 @@ use super::adjective_type::AdjectiveType;
 use super::category::Category;
 use super::konnektor_detail::KonnektorDetail;
 use super::konnektor_type::KonnektorType;
-use super::DetailTrait;
 use super::{adjective_detail::AdjectiveDetail, TypeTrait};
+use super::{DetailTrait, VerbDetail, VerbType};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -65,6 +65,17 @@ impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
                 .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
 
         konnektoren
+    }
+}
+
+impl Default for CategorizedItems<VerbType, VerbDetail> {
+    fn default() -> Self {
+        let yaml_content = include_str!("../verbs.yml");
+
+        let verbs: CategorizedItems<VerbType, VerbDetail> = serde_yaml::from_str(&yaml_content)
+            .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
+
+        verbs
     }
 }
 

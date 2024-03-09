@@ -42,7 +42,7 @@ impl fmt::Display for KonnektorType {
 
 impl TypeTrait for KonnektorType {
     fn get_type() -> String {
-        "Konnektor".to_string()
+        "Konnektoren".to_string()
     }
 }
 

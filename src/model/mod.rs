@@ -8,7 +8,10 @@ mod category;
 mod detail_trait;
 mod konnektor_detail;
 mod konnektor_type;
+mod test_type;
 mod type_trait;
+mod verb_detail;
+mod verb_type;
 
 pub use adjective_detail::AdjectiveDetail;
 pub use adjective_type::AdjectiveType;
@@ -20,4 +23,7 @@ pub use category::Category;
 pub use detail_trait::DetailTrait;
 pub use konnektor_detail::KonnektorDetail;
 pub use konnektor_type::KonnektorType;
+pub use test_type::TestType;
 pub use type_trait::TypeTrait;
+pub use verb_detail::VerbDetail;
+pub use verb_type::VerbType;

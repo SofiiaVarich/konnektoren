@@ -1,4 +1,4 @@
-use crate::model::{AdjectiveType, KonnektorType, TypeTrait};
+use crate::model::{AdjectiveType, KonnektorType, TypeTrait, VerbType};
 use rand::seq::SliceRandom;
 use yew::prelude::*;
 use yew_bootstrap::component::{Button, ButtonGroup};
@@ -115,6 +115,72 @@ impl Component for TypeSelector<AdjectiveType> {
                 let preposition_type_clone = preposition_type.clone();
                 html! {
                     <Button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(preposition_type_clone.clone()))}>
+                        {button_text}
+                    </Button>
+                }
+            })}
+        </ButtonGroup>
+            </div>
+        }
+    }
+}
+
+impl Component for TypeSelector<VerbType> {
+    type Message = Msg<VerbType>;
+    type Properties = TypeSelectorProps<VerbType>;
+
+    fn create(_ctx: &Context<Self>) -> Self {
+        Self {
+            button_order: vec![
+                VerbType::An,
+                VerbType::Auf,
+                VerbType::Fuer,
+                VerbType::In,
+                VerbType::Mit,
+                VerbType::Nach,
+                VerbType::Ueber,
+                VerbType::Um,
+                VerbType::Unter,
+                VerbType::Von,
+                VerbType::Vor,
+                VerbType::Zu,
+            ],
+        }
+    }
+
+    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+        match msg {
+            Msg::ButtonClicked(verb_type) => {
+                let mut rng = rand::thread_rng();
+                self.button_order.shuffle(&mut rng);
+                ctx.props().on_select.emit(verb_type);
+            }
+        }
+        true
+    }
+
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        html! {
+            <div id="typeselector" class="d-flex justify-content-center">
+            <ButtonGroup>
+            {for self.button_order.iter().map(|verb_type| {
+                let button_text = match verb_type {
+                    VerbType::An => "An",
+                    VerbType::Auf => "Auf",
+                    VerbType::Fuer => "Für",
+                    VerbType::In => "In",
+                    VerbType::Mit => "Mit",
+                    VerbType::Nach => "Nach",
+                    VerbType::Ueber => "Über",
+                    VerbType::Um => "Um",
+                    VerbType::Unter => "Unter",
+                    VerbType::Von => "Von",
+                    VerbType::Vor => "Vor",
+                    VerbType::Zu => "Zu",
+                };
+                let verb_type_clone = verb_type.clone();
+                html! {
+                    <Button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(verb_type_clone.clone()))}>
                         {button_text}
                     </Button>
                 }
