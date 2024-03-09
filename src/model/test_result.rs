@@ -56,12 +56,10 @@ impl TestResult {
         }
     }
 
-    pub fn create_signature(&mut self) {
-        self.signature = Some("signature".to_string());
-    }
+    pub fn create_signature(&mut self) {}
 
-    pub fn has_correct_signature(&self) -> bool {
-        self.signature == Some("signature".to_string())
+    pub fn verify(&self) -> bool {
+        false
     }
 }
 

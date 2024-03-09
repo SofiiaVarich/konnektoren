@@ -1,89 +1,158 @@
 .results-page {
     max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 10px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .results-page h1 {
     color: #333;
-    text-align: center;
+    margin-bottom: 24px;
 }
 
-.results-page p {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 1rem 0;
+.results-page p,
+.results-page .verified,
+.results-page .share-url-input,
+.results-page button {
+    margin-bottom: 16px;
 }
 
-.error-message {
-    color: #d9534f;
-    font-weight: bold;
-    text-align: center;
+.verified {
+    font-size: 18px;
+    color: #4CAF50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.share-url-input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.results-page button {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.results-page button:hover {
+    background-color: #7b61ff;
+}
+
+.results-page button:active {
+    background-color: #5642a6;
+}
+
+.congratulations-container button {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.congratulations-container button:hover {
+    background-color: #7b61ff;
+}
+
+.congratulations-container button:active {
+    background-color: #5642a6;
 }
 
 .fun-message {
-    text-align: center;
     font-style: italic;
-    margin-top: 2rem;
+    color: #888;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px) {
     .results-page {
-        margin: 1rem;
-        padding: 1rem;
+        padding: 10px;
+        margin: 20px;
+    }
+
+    .share-url-input,
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
+/* Player input container styling */
 .player-input-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 500px;
+    gap: 16px;
+    margin-top: 20px;
 }
 
-.player-input-container input {
+.player-input-container input[type="text"] {
     width: 100%;
-    padding: 15px;
+    padding: 12px 20px;
     border: 2px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-    color: #333;
-    background-color: #fff;
-    outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s ease-in-out;
 }
 
-.player-input-container input:focus {
+.player-input-container input[type="text"]:focus {
+    outline: none;
     border-color: #6200ea;
 }
 
-.player-input-container button {
-    padding: 10px 25px;
-    background-color: #6200ea;
-    color: #ffffff;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Adjust the verified icon and text */
+.verified-icon {
+    color: #4CAF50; /* Adjust this value as needed */
 }
 
-.player-input-container button:hover {
+/* Styling for the share results button */
+.share-results-btn {
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.share-results-btn:hover {
     background-color: #7b61ff;
 }
 
-.player-input-container button:active {
-    background-color: #5642a6;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+.try-again {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.try-again a {
+    display: inline-block;
+    background-color: #6200ea;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.try-again a:hover {
+    background-color: #7b61ff;
 }
