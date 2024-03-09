@@ -29,8 +29,8 @@ pub fn test_results<T: TypeTrait, D: DetailTrait>(props: &TestResultsProps<T, D>
                         html! {
                             <tr class={row_class}>
                                 <td>{ &detail.get_detail() }</td>
-                                <td>{ format!("{:?}", answer.user_answer.clone().unwrap_or(T::default())) }</td>
-                                <td>{ format!("{:?}", answer.correct_answer) }</td>
+                                <td>{ format!("{}", answer.user_answer.clone().unwrap_or(T::default())) }</td>
+                                <td>{ format!("{}", answer.correct_answer) }</td>
                                 <td>{ &detail.get_example() }</td>
                             </tr>
                         }

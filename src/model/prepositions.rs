@@ -1,10 +1,10 @@
-use super::{PrepositionCategory, PrepositionType};
+use super::{AdjectiveDetail, Category, PrepositionType};
 
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Prepositions {
-    pub categories: Vec<PrepositionCategory>,
+    pub categories: Vec<Category<PrepositionType, AdjectiveDetail>>,
 }
 
 impl Default for Prepositions {
@@ -33,7 +33,10 @@ impl Prepositions {
         panic!("Index out of bounds: {}", index);
     }
 
-    pub fn get_detail_by_index(&self, index: usize) -> Option<&PrepositionCategory> {
+    pub fn get_detail_by_index(
+        &self,
+        index: usize,
+    ) -> Option<&Category<PrepositionType, AdjectiveDetail>> {
         let mut cumulated_index = 0;
 
         for category in &self.categories {

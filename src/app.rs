@@ -1,4 +1,4 @@
-use crate::components::{Carousel, Footer, TestSelector, Header};
+use crate::components::{Carousel, Footer, Header, TestSelector};
 use crate::model::{AdjectiveDetail, KonnektorDetail, KonnektorType, PrepositionType};
 use yew::prelude::*;
 use yew_bootstrap::util::*;
