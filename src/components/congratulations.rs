@@ -31,13 +31,29 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
         <div class="congratulations-container">
             <h2>{"Congratulations!"}</h2>
             <p>{format!("You have completed the test with a score of {:.1}% ({}/{})", performance, correct_answers, total_answers)}</p>
-            <p>{if performance >= 80.0 {
-                "Fantastic job! You have a strong understanding of Konnektoren."
-            } else if performance >= 50.0 {
-                "Good effort! With a bit more practice, you'll master Konnektoren."
-            } else {
-                "Keep practicing! Konnektoren can be challenging, but you're making progress."
-            }}</p>
+            {message::<T, D>(performance)}
         </div>
+    }
+}
+
+fn message<T: TypeTrait, D: DetailTrait>(performance: f64) -> Html {
+    let message = if performance >= 90.0 {
+        "Outstanding! You've mastered this topic with excellent results."
+    } else if performance >= 75.0 {
+        "Excellent job! You're well on your way to becoming an expert."
+    } else if performance >= 60.0 {
+        "Very good! Your hard work is paying off."
+    } else if performance >= 45.0 {
+        "Good job! Keep studying, and you'll see even more improvement."
+    } else if performance >= 30.0 {
+        "A solid attempt! Review the materials and try again for a better score."
+    } else {
+        "It looks like this topic is still a bit tough for you. Don't worry, with more practice, you'll get there!"
+    };
+
+    html! {
+        <>
+            <p>{format!("Based on your performance in the {} test: {}", T::get_type(), message)}</p>
+        </>
     }
 }
