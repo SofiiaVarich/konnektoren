@@ -1,0 +1,39 @@
+.results-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.results-page h1 {
+    color: #333;
+    text-align: center;
+}
+
+.results-page p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+.error-message {
+    color: #d9534f;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fun-message {
+    text-align: center;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .results-page {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}

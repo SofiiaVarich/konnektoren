@@ -5,13 +5,13 @@ use std::str;
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct TestResult {
-    test_type: TestType,
-    total_questions: usize,
-    correct_answers: usize,
-    incorrect_answers: usize,
-    performance_percentage: f64,
-    player_name: String,
-    signature: Option<String>,
+    pub test_type: TestType,
+    pub total_questions: usize,
+    pub correct_answers: usize,
+    pub incorrect_answers: usize,
+    pub performance_percentage: f64,
+    pub player_name: String,
+    pub signature: Option<String>,
 }
 
 impl TestResult {
@@ -40,14 +40,20 @@ impl TestResult {
         general_purpose::STANDARD.encode(&serialized).to_string()
     }
 
-    pub fn from_base64(encoded: &str) -> Self {
-        let decoded = general_purpose::STANDARD
-            .decode(encoded)
-            .expect("Failed to decode test result");
-        let decoded_str =
-            str::from_utf8(&decoded).expect("Failed to convert decoded bytes to string");
+    pub fn from_base64(encoded: &str) -> Result<Self, &'static str> {
+        let decoded = match general_purpose::STANDARD.decode(encoded) {
+            Ok(decoded) => decoded,
+            Err(_) => return Err("Failed to decode the test result."),
+        };
+        let decoded_str = match str::from_utf8(&decoded) {
+            Ok(decoded_str) => decoded_str,
+            Err(_) => return Err("Failed to convert decoded bytes to string."),
+        };
 
-        serde_json::from_str(decoded_str).expect("Failed to deserialize test result")
+        match serde_json::from_str(decoded_str) {
+            Ok(test_result) => Ok(test_result),
+            Err(_) => Err("Failed to deserialize test result."),
+        }
     }
 
     pub fn create_signature(&mut self) {
@@ -69,7 +75,7 @@ mod tests {
         let base64_encoded = test_result.to_base64();
         let decoded_test_result = TestResult::from_base64(&base64_encoded);
 
-        assert_eq!(test_result, decoded_test_result);
+        assert_eq!(Ok(test_result), decoded_test_result);
     }
 
     #[test]
