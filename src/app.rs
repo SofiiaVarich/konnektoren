@@ -1,4 +1,4 @@
-use crate::components::{Carousel, Footer, TestSelector};
+use crate::components::{Carousel, Footer, TestSelector, Header};
 use crate::model::{AdjectiveDetail, KonnektorDetail, KonnektorType, PrepositionType};
 use yew::prelude::*;
 use yew_bootstrap::util::*;
@@ -10,20 +10,23 @@ pub fn App() -> Html {
     let carousel = {
         if *show_konnektor_test {
             html! {
-                <>
-                <Carousel<KonnektorType, KonnektorDetail> />
-            </>}
+                    <>
+                    <Carousel<KonnektorType, KonnektorDetail> />
+                </>
+            }
         } else {
             html! {
-                <>
-            <Carousel<PrepositionType, AdjectiveDetail> /></> }
+                    <>
+                    <Carousel<PrepositionType, AdjectiveDetail> />
+                </>
+            }
         }
     };
 
     html! {
         <div>
             {include_cdn()}
-            <h1 class="text-center">{"Konnektoren"}</h1>
+            <Header title={"Konnektoren".to_string()} img_src={"favicon.png".to_string()} />
            <TestSelector {show_konnektor_test} />
             {carousel}
             <Footer />

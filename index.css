@@ -209,3 +209,19 @@ th {
     padding: 10px;
     font-size: inherit;
 }
+
+.text-center {
+    text-align: center;
+}
+
+.title-with-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title-with-icon img {
+    max-height: 3.5rem;
+}
