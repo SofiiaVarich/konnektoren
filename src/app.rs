@@ -1,5 +1,5 @@
 use crate::components::{Carousel, Footer, Header, TestSelector};
-use crate::model::{AdjectiveDetail, KonnektorDetail, KonnektorType, PrepositionType};
+use crate::model::{AdjectiveDetail, AdjectiveType, KonnektorDetail, KonnektorType};
 use yew::prelude::*;
 use yew_bootstrap::util::*;
 
@@ -17,7 +17,7 @@ pub fn App() -> Html {
         } else {
             html! {
                     <>
-                    <Carousel<PrepositionType, AdjectiveDetail> />
+                    <Carousel<AdjectiveType, AdjectiveDetail> />
                 </>
             }
         }

@@ -4,7 +4,7 @@ use std::fmt;
 use super::TypeTrait;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
-pub enum PrepositionType {
+pub enum AdjectiveType {
     #[serde(rename = "an")]
     An,
     #[serde(rename = "auf")]
@@ -23,37 +23,37 @@ pub enum PrepositionType {
     Zu,
 }
 
-impl Default for PrepositionType {
+impl Default for AdjectiveType {
     fn default() -> Self {
-        PrepositionType::An
+        AdjectiveType::An
     }
 }
 
-impl fmt::Display for PrepositionType {
+impl fmt::Display for AdjectiveType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
-            PrepositionType::An => "an",
-            PrepositionType::Auf => "auf",
-            PrepositionType::Bei => "bei",
-            PrepositionType::Fuer => "für",
-            PrepositionType::Mit => "mit",
-            PrepositionType::Ueber => "über",
-            PrepositionType::Von => "von",
-            PrepositionType::Zu => "zu",
+            AdjectiveType::An => "an",
+            AdjectiveType::Auf => "auf",
+            AdjectiveType::Bei => "bei",
+            AdjectiveType::Fuer => "für",
+            AdjectiveType::Mit => "mit",
+            AdjectiveType::Ueber => "über",
+            AdjectiveType::Von => "von",
+            AdjectiveType::Zu => "zu",
         };
         write!(f, "{}", s)
     }
 }
 
-impl TypeTrait for PrepositionType {
+impl TypeTrait for AdjectiveType {
     fn get_type() -> String {
-        "Präposition".to_string()
+        "Adjective".to_string()
     }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 struct CategoryWrapper {
-    category: PrepositionType,
+    category: AdjectiveType,
 }
 
 #[cfg(test)]
@@ -64,6 +64,6 @@ mod tests {
     fn test_an() {
         let json = r#"{"category": "an"}"#;
         let wrapper: CategoryWrapper = serde_json::from_str(json).unwrap();
-        assert_eq!(wrapper.category, PrepositionType::An);
+        assert_eq!(wrapper.category, AdjectiveType::An);
     }
 }

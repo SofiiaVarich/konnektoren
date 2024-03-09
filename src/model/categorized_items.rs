@@ -1,7 +1,7 @@
+use super::adjective_type::AdjectiveType;
 use super::category::Category;
 use super::konnektor_detail::KonnektorDetail;
 use super::konnektor_type::KonnektorType;
-use super::preposition_type::PrepositionType;
 use super::DetailTrait;
 use super::{adjective_detail::AdjectiveDetail, TypeTrait};
 use serde::{Deserialize, Serialize};
@@ -44,11 +44,11 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedItems<T, D> {
     }
 }
 
-impl Default for CategorizedItems<PrepositionType, AdjectiveDetail> {
+impl Default for CategorizedItems<AdjectiveType, AdjectiveDetail> {
     fn default() -> Self {
-        let yaml_content = include_str!("../prepositions.yml");
+        let yaml_content = include_str!("../adjectives.yml");
 
-        let prepositions: CategorizedItems<PrepositionType, AdjectiveDetail> =
+        let prepositions: CategorizedItems<AdjectiveType, AdjectiveDetail> =
             serde_yaml::from_str(&yaml_content)
                 .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
 
@@ -72,26 +72,26 @@ impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
 mod tests {
 
     use super::super::adjective_detail::AdjectiveDetail;
+    use super::super::adjective_type::AdjectiveType;
     use super::super::category::Category;
     use super::super::konnektor_detail::KonnektorDetail;
     use super::super::konnektor_type::KonnektorType;
-    use super::super::preposition_type::PrepositionType;
     use super::*;
 
     #[test]
     fn default_contains_all_enum_values_with_details() {
-        let prepositions = CategorizedItems::<PrepositionType, AdjectiveDetail>::default();
+        let prepositions = CategorizedItems::<AdjectiveType, AdjectiveDetail>::default();
         let konnektoren = CategorizedItems::<KonnektorType, KonnektorDetail>::default();
 
         let expected_prepositions = vec![
-            PrepositionType::An,
-            PrepositionType::Auf,
-            PrepositionType::Bei,
-            PrepositionType::Fuer,
-            PrepositionType::Mit,
-            PrepositionType::Ueber,
-            PrepositionType::Von,
-            PrepositionType::Zu,
+            AdjectiveType::An,
+            AdjectiveType::Auf,
+            AdjectiveType::Bei,
+            AdjectiveType::Fuer,
+            AdjectiveType::Mit,
+            AdjectiveType::Ueber,
+            AdjectiveType::Von,
+            AdjectiveType::Zu,
         ];
         let expected_konnektoren = vec![
             KonnektorType::Konjunktionen,

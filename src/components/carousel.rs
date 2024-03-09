@@ -5,12 +5,12 @@ use crate::components::TestProgressBar;
 use crate::components::TestResults;
 use crate::components::TestStatistics;
 use crate::model::AdjectiveDetail;
+use crate::model::AdjectiveType;
 use crate::model::CategorizedItems;
 use crate::model::CategorizedTest;
 use crate::model::DetailTrait;
 use crate::model::KonnektorDetail;
 use crate::model::KonnektorType;
-use crate::model::PrepositionType;
 use crate::model::TypeTrait;
 use yew::prelude::*;
 use yew_bootstrap::component::Button;
@@ -34,7 +34,7 @@ impl Default for Carousel<KonnektorType, KonnektorDetail> {
     }
 }
 
-impl Default for Carousel<PrepositionType, AdjectiveDetail> {
+impl Default for Carousel<AdjectiveType, AdjectiveDetail> {
     fn default() -> Self {
         Self {
             test: CategorizedTest::default(),
@@ -119,8 +119,8 @@ impl Component for Carousel<KonnektorType, KonnektorDetail> {
     }
 }
 
-impl Component for Carousel<PrepositionType, AdjectiveDetail> {
-    type Message = Msg<PrepositionType>;
+impl Component for Carousel<AdjectiveType, AdjectiveDetail> {
+    type Message = Msg<AdjectiveType>;
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
@@ -146,7 +146,7 @@ impl Component for Carousel<PrepositionType, AdjectiveDetail> {
         if self.test.current_index() + 1 >= self.test.random_indices.len() {
             html! {
                     <div>
-                        <Congratulations<PrepositionType, AdjectiveDetail> test={self.test.clone()} />
+                        <Congratulations<AdjectiveType, AdjectiveDetail> test={self.test.clone()} />
                         <div class="d-flex justify-content-between mt-2">
                             <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         </div>
@@ -158,7 +158,7 @@ impl Component for Carousel<PrepositionType, AdjectiveDetail> {
                 <div>
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
                 <CarouselCard<AdjectiveDetail> detail={detail.clone()} hide_example={self.hide_example} />
-                    <TypeSelector<PrepositionType> on_select={ctx.link().callback(Msg::SelectType::<PrepositionType>)} />
+                    <TypeSelector<AdjectiveType> on_select={ctx.link().callback(Msg::SelectType::<AdjectiveType>)} />
                     <div class="d-flex justify-content-between mt-2">
                         <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
                         <Button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</Button>

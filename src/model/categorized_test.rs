@@ -1,10 +1,10 @@
 use super::AdjectiveDetail;
+use super::AdjectiveType;
 use super::AnswerRecord;
 use super::CategorizedItems;
 use super::DetailTrait;
 use super::KonnektorDetail;
 use super::KonnektorType;
-use super::PrepositionType;
 use super::TypeTrait;
 use rand::seq::SliceRandom;
 
@@ -22,7 +22,7 @@ impl Default for CategorizedTest<KonnektorType, KonnektorDetail> {
     }
 }
 
-impl Default for CategorizedTest<PrepositionType, AdjectiveDetail> {
+impl Default for CategorizedTest<AdjectiveType, AdjectiveDetail> {
     fn default() -> Self {
         Self::new(&CategorizedItems::default())
     }

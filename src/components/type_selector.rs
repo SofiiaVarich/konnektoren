@@ -1,4 +1,4 @@
-use crate::model::{KonnektorType, PrepositionType, TypeTrait};
+use crate::model::{AdjectiveType, KonnektorType, TypeTrait};
 use rand::seq::SliceRandom;
 use yew::prelude::*;
 use yew_bootstrap::component::{Button, ButtonGroup};
@@ -67,21 +67,21 @@ impl Component for TypeSelector<KonnektorType> {
     }
 }
 
-impl Component for TypeSelector<PrepositionType> {
-    type Message = Msg<PrepositionType>;
-    type Properties = TypeSelectorProps<PrepositionType>;
+impl Component for TypeSelector<AdjectiveType> {
+    type Message = Msg<AdjectiveType>;
+    type Properties = TypeSelectorProps<AdjectiveType>;
 
     fn create(_ctx: &Context<Self>) -> Self {
         Self {
             button_order: vec![
-                PrepositionType::An,
-                PrepositionType::Auf,
-                PrepositionType::Bei,
-                PrepositionType::Fuer,
-                PrepositionType::Mit,
-                PrepositionType::Ueber,
-                PrepositionType::Von,
-                PrepositionType::Zu,
+                AdjectiveType::An,
+                AdjectiveType::Auf,
+                AdjectiveType::Bei,
+                AdjectiveType::Fuer,
+                AdjectiveType::Mit,
+                AdjectiveType::Ueber,
+                AdjectiveType::Von,
+                AdjectiveType::Zu,
             ],
         }
     }
@@ -103,14 +103,14 @@ impl Component for TypeSelector<PrepositionType> {
             <ButtonGroup>
             {for self.button_order.iter().map(|preposition_type| {
                 let button_text = match preposition_type {
-                    PrepositionType::An => "An",
-                    PrepositionType::Auf => "Auf",
-                    PrepositionType::Bei => "Bei",
-                    PrepositionType::Fuer => "Für",
-                    PrepositionType::Mit => "Mit",
-                    PrepositionType::Ueber => "Über",
-                    PrepositionType::Von => "Von",
-                    PrepositionType::Zu => "Zu",
+                    AdjectiveType::An => "An",
+                    AdjectiveType::Auf => "Auf",
+                    AdjectiveType::Bei => "Bei",
+                    AdjectiveType::Fuer => "Für",
+                    AdjectiveType::Mit => "Mit",
+                    AdjectiveType::Ueber => "Über",
+                    AdjectiveType::Von => "Von",
+                    AdjectiveType::Zu => "Zu",
                 };
                 let preposition_type_clone = preposition_type.clone();
                 html! {

@@ -1,4 +1,6 @@
 mod adjective_detail;
+mod adjective_type;
+mod adjectives;
 mod answer_record;
 mod categorized_items;
 mod categorized_test;
@@ -6,11 +8,11 @@ mod category;
 mod detail_trait;
 mod konnektor_detail;
 mod konnektor_type;
-mod preposition_type;
-mod prepositions;
 mod type_trait;
 
 pub use adjective_detail::AdjectiveDetail;
+pub use adjective_type::AdjectiveType;
+pub use adjectives::Adjectives;
 pub use answer_record::AnswerRecord;
 pub use categorized_items::CategorizedItems;
 pub use categorized_test::CategorizedTest;
@@ -18,6 +20,4 @@ pub use category::Category;
 pub use detail_trait::DetailTrait;
 pub use konnektor_detail::KonnektorDetail;
 pub use konnektor_type::KonnektorType;
-pub use preposition_type::PrepositionType;
-pub use prepositions::Prepositions;
 pub use type_trait::TypeTrait;

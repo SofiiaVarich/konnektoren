@@ -1,26 +1,26 @@
-use super::{AdjectiveDetail, Category, PrepositionType};
+use super::{AdjectiveDetail, AdjectiveType, Category};
 
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct Prepositions {
-    pub categories: Vec<Category<PrepositionType, AdjectiveDetail>>,
+pub struct Adjectives {
+    pub categories: Vec<Category<AdjectiveType, AdjectiveDetail>>,
 }
 
-impl Default for Prepositions {
+impl Default for Adjectives {
     fn default() -> Self {
-        let yaml_content = include_str!("../prepositions.yml");
+        let yaml_content = include_str!("../adjectives.yml");
         serde_yaml::from_str(&yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err))
     }
 }
 
-impl Prepositions {
+impl Adjectives {
     pub fn len(&self) -> usize {
         self.categories.iter().map(|c| c.details.len()).sum()
     }
 
-    pub fn determine_type(&self, index: usize) -> PrepositionType {
+    pub fn determine_type(&self, index: usize) -> AdjectiveType {
         let mut cumulated_index = 0;
 
         for category in self.categories.iter() {
@@ -36,7 +36,7 @@ impl Prepositions {
     pub fn get_detail_by_index(
         &self,
         index: usize,
-    ) -> Option<&Category<PrepositionType, AdjectiveDetail>> {
+    ) -> Option<&Category<AdjectiveType, AdjectiveDetail>> {
         let mut cumulated_index = 0;
 
         for category in &self.categories {
@@ -57,17 +57,17 @@ mod tests {
 
     #[test]
     fn default_contains_all_enum_values_with_details() {
-        let prepositions = Prepositions::default();
+        let prepositions = Adjectives::default();
 
         let expected_types = vec![
-            PrepositionType::An,
-            PrepositionType::Auf,
-            PrepositionType::Bei,
-            PrepositionType::Fuer,
-            PrepositionType::Mit,
-            PrepositionType::Ueber,
-            PrepositionType::Von,
-            PrepositionType::Zu,
+            AdjectiveType::An,
+            AdjectiveType::Auf,
+            AdjectiveType::Bei,
+            AdjectiveType::Fuer,
+            AdjectiveType::Mit,
+            AdjectiveType::Ueber,
+            AdjectiveType::Von,
+            AdjectiveType::Zu,
         ];
 
         for expected_type in expected_types {
