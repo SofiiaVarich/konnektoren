@@ -25,7 +25,6 @@ pub fn Navigation() -> Html {
         <>
         <nav>
         <Link<Route> to={Route::Home}>{ "Home" }</Link<Route>>
-        <Link<Route> to={Route::Results {code: "no".to_string() }}>{ "Results" }</Link<Route>>
         <Link<Route> to={Route::About}>{ "About" }</Link<Route>>
         </nav>
         </>

@@ -37,3 +37,53 @@
         padding: 1rem;
     }
 }
+
+.player-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+.player-input-container input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.player-input-container input:focus {
+    border-color: #6200ea;
+}
+
+.player-input-container button {
+    padding: 10px 25px;
+    background-color: #6200ea;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.player-input-container button:hover {
+    background-color: #7b61ff;
+}
+
+.player-input-container button:active {
+    background-color: #5642a6;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}

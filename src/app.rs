@@ -43,7 +43,7 @@ fn redirect_if_needed() {
     let query = location
         .search()
         .expect("couldn't retrieve the query string");
-    
+
     if query.contains("page=about") {
         let history = window.history().expect("couldn't get history");
         history
