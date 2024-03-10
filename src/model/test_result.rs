@@ -35,7 +35,8 @@ impl TestResult {
     }
 
     pub fn to_base64(&self) -> String {
-        let serialized = serde_json::to_string(&self).expect("Failed to serialize test result");
+        let serialized =
+            serde_cbor::to_vec(&self).expect("Failed to serialize test result with CBOR");
 
         general_purpose::STANDARD.encode(&serialized).to_string()
     }
@@ -45,14 +46,10 @@ impl TestResult {
             Ok(decoded) => decoded,
             Err(_) => return Err("Failed to decode the test result."),
         };
-        let decoded_str = match str::from_utf8(&decoded) {
-            Ok(decoded_str) => decoded_str,
-            Err(_) => return Err("Failed to convert decoded bytes to string."),
-        };
 
-        match serde_json::from_str(decoded_str) {
+        match serde_cbor::from_slice(&decoded) {
             Ok(test_result) => Ok(test_result),
-            Err(_) => Err("Failed to deserialize test result."),
+            Err(_) => Err("Failed to deserialize test result with CBOR."),
         }
     }
 

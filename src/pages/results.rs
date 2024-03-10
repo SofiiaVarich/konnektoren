@@ -1,11 +1,11 @@
 use crate::model::TestResult;
 use crate::pages::Route;
+use gloo_timers::callback::Timeout;
 use urlencoding::encode;
 use web_sys::window;
 use yew::prelude::*;
 use yew_hooks::{use_clipboard, UseClipboardHandle};
 use yew_router::prelude::*;
-use gloo_timers::callback::Timeout;
 
 #[derive(Properties, PartialEq)]
 pub struct ResultsProps {
@@ -38,7 +38,8 @@ pub fn results(props: &ResultsProps) -> Html {
                     let show_copied_message = show_copied_message.clone();
                     Timeout::new(3000, move || {
                         show_copied_message.set(false);
-                    }).forget();
+                    })
+                    .forget();
                 })
             };
 
