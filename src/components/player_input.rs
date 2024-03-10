@@ -26,13 +26,14 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
         let incorrect_answers = props.incorrect_answers;
 
         Callback::from(move |_| {
-            let test_result = TestResult::new(
+            let mut test_result = TestResult::new(
                 test_type.clone(),
                 total_questions,
                 correct_answers,
                 incorrect_answers,
                 (*player_name).clone(),
             );
+            test_result.create_signature();
 
             let encoded = test_result.to_base64();
             navigator.push(&Route::Results { code: encoded });
