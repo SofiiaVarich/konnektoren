@@ -1,6 +1,7 @@
 use crate::model::TestResult;
 use base64::engine::general_purpose;
 use base64::Engine as _;
+use image::io::Reader as ImageReader;
 use image::{imageops, DynamicImage, ImageBuffer, ImageOutputFormat, Luma, Rgba, RgbaImage};
 use imageproc::drawing::draw_text_mut;
 use imageproc::rect::Rect;
@@ -68,6 +69,20 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
 
     let mut cert_image = RgbaImage::new(cert_width, cert_height);
 
+    let background_bytes = include_bytes!("../assets/favicon.png");
+    let background_image = ImageReader::new(Cursor::new(background_bytes))
+        .with_guessed_format()
+        .expect("Failed to guess image format")
+        .decode()
+        .expect("Failed to decode image");
+    
+    let scaled_background_image = imageops::resize(
+        &background_image,
+        75,
+        75,
+        imageops::FilterType::Nearest,
+    );
+
     imageproc::drawing::draw_filled_rect_mut(
         &mut cert_image,
         imageproc::rect::Rect::at(0, 0).of_size(cert_width, cert_height),
@@ -85,6 +100,8 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
 
     let font_data: &[u8] = include_bytes!("../assets/Lora-Regular.ttf");
     let font = Font::try_from_bytes(font_data).unwrap();
+
+    image::imageops::overlay(&mut cert_image, &scaled_background_image, 80, 80);
 
     let title = "Certificate of Completion";
     let scale_title = Scale::uniform(40.0);
