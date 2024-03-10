@@ -117,9 +117,8 @@
     border-color: #6200ea;
 }
 
-/* Adjust the verified icon and text */
 .verified-icon {
-    color: #4CAF50; /* Adjust this value as needed */
+    color: #4CAF50;
 }
 
 /* Styling for the share results button */
@@ -155,4 +154,10 @@
 
 .try-again a:hover {
     background-color: #7b61ff;
+}
+
+.copied-message {
+    margin-top: 10px;
+    color: #4CAF50;
+    font-size: 14px;
 }
