@@ -9,6 +9,7 @@ use qrcode::{EcLevel, QrCode};
 use rusttype::{Font, Scale};
 use std::cmp;
 use std::io::Cursor;
+use urlencoding::encode;
 use web_sys::window;
 use yew::prelude::*;
 
@@ -22,7 +23,8 @@ pub fn certificate(props: &CertificateProps) -> Html {
     let hostname = window().unwrap().location().host().unwrap_or_default();
     let protocol = window().unwrap().location().protocol().unwrap_or_default();
 
-    let encoded_code: String = props.test_result.to_base64();
+    let encoded_code: String = encode(&props.test_result.to_base64()).into_owned();
+
     let share_url = format!(
         "{}//{}/?page=results&code={}",
         protocol, hostname, encoded_code
@@ -75,13 +77,9 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
         .expect("Failed to guess image format")
         .decode()
         .expect("Failed to decode image");
-    
-    let scaled_background_image = imageops::resize(
-        &background_image,
-        75,
-        75,
-        imageops::FilterType::Nearest,
-    );
+
+    let scaled_background_image =
+        imageops::resize(&background_image, 75, 75, imageops::FilterType::Nearest);
 
     imageproc::drawing::draw_filled_rect_mut(
         &mut cert_image,
