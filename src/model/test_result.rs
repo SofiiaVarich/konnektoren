@@ -1,11 +1,13 @@
 use crate::model::TestType;
 use base64::{engine::general_purpose, Engine as _};
-use ed25519_dalek::{Keypair, SecretKey, Signature, Signer, Verifier};
+use ed25519_dalek::{
+    ed25519::SignatureBytes, Signature, Signer, SigningKey, Verifier, VerifyingKey,
+};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::str;
 
-fn keypair_from_static_str() -> Keypair {
+fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
     let mut hasher = Sha256::new();
     hasher.update(env!("SIGNATURE_PRIVATE_KEY"));
     let result = hasher.finalize();
@@ -14,13 +16,10 @@ fn keypair_from_static_str() -> Keypair {
         .try_into()
         .expect("Hash output size does not match ed25519 seed size");
 
-    let secret_key = SecretKey::from_bytes(&seed).expect("Failed to create secret key from seed");
-    let public_key = (&secret_key).into();
+    let signing_key = SigningKey::from_bytes(&seed);
+    let verify_key = signing_key.verifying_key();
 
-    Keypair {
-        secret: secret_key,
-        public: public_key,
-    }
+    (signing_key, verify_key)
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -74,7 +73,7 @@ impl TestResult {
     }
 
     pub fn create_signature(&mut self) {
-        let keypair = keypair_from_static_str();
+        let (signing_key, _) = keypair_from_static_str();
         let test_result_copy = TestResult {
             test_type: self.test_type.clone(),
             total_questions: self.total_questions,
@@ -87,13 +86,13 @@ impl TestResult {
 
         let serialized =
             serde_cbor::to_vec(&test_result_copy).expect("Failed to serialize test result");
-        let signature: Signature = keypair.sign(&serialized);
+        let signature: Signature = signing_key.sign(&serialized);
 
         self.signature = Some(signature.to_bytes().to_vec());
     }
 
     pub fn verify(&self) -> bool {
-        let public_key = keypair_from_static_str().public;
+        let (_, verifying_key) = keypair_from_static_str();
 
         let test_result_copy = TestResult {
             test_type: self.test_type.clone(),
@@ -110,11 +109,11 @@ impl TestResult {
 
         match &self.signature {
             Some(signature) => {
-                let signature_bytes = signature.as_slice();
-                let signature = Signature::from_bytes(&signature_bytes)
-                    .expect("Failed to create signature from bytes");
+                let signature_bytes = SignatureBytes::try_from(signature.as_slice())
+                    .expect("Failed to convert signature bytes");
+                let signature = Signature::from_bytes(&signature_bytes);
 
-                public_key.verify(&serialized, &signature).is_ok()
+                verifying_key.verify(&serialized, &signature).is_ok()
             }
             None => false,
         }

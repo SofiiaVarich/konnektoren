@@ -13,9 +13,9 @@ path = "src/main.rs"
 
 [dependencies]
 base64 = "0.22.0"
-charts-rs = "0.3.3"
-ed25519-dalek = "1.0.1"
-gloo-timers = "0.2.1"
+charts-rs = "0.3.4"
+ed25519-dalek = "2.1"
+gloo-timers = "0.3"
 image = "0.24"
 imageproc = "0.23"
 rand = "0.8"
