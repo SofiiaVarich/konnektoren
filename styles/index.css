@@ -246,3 +246,35 @@ nav a {
 nav a:hover {
     color: #B2DFDB;
 }
+
+.chart-container {
+    max-width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.test-chart svg {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        padding: 0 10px;
+    }
+
+    .test-chart svg {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-statistics-container {
+        padding: 0 5px;
+    }
+
+    .test-chart svg {
+        max-width: 100%;
+    }
+}

@@ -64,11 +64,13 @@ pub fn test_statistics<T: TypeTrait + 'static, D: DetailTrait + 'static>(
         .collect::<Vec<_>>();
 
     html! {
-        <div class="d-flex justify-content-center">
+        <div class="test-statistics-container d-flex justify-content-center">
             <div>
                 <h2>{"Test Statistics"}</h2>
                 <p>{format!("Total Questions: {}", props.test.len())}</p>
-                <TestChart<T, D> test={props.test.clone()} />
+                <div class="chart-container">
+                    <TestChart<T, D> test={props.test.clone()} />
+                </div>
                 <p>{format!("Correct Answers: {}/{}", correct_answers, total_answered)}</p>
                 <h3>{"Statistics by Category"}</h3>
                 <ul>

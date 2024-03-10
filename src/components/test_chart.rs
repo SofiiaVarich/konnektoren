@@ -64,7 +64,7 @@ pub fn test_chart<T: TypeTrait, D: DetailTrait>(props: &ChartProps<T, D>) -> Htm
 
     if total_answered > 0 {
         html! {
-            <div key={key} class="chart-container" >
+            <div key={key} class="test-chart" >
                 {parsed}
             </div>
         }
