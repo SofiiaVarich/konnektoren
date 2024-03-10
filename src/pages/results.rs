@@ -1,4 +1,4 @@
-use crate::model::TestResult;
+use crate::{components::Certificate, model::TestResult};
 use crate::pages::Route;
 use gloo_timers::callback::Timeout;
 use urlencoding::encode;
@@ -62,6 +62,9 @@ pub fn results(props: &ResultsProps) -> Html {
                     if *show_copied_message {
                         <p class="copied-message">{"Link copied to clipboard!"}</p>
                     }
+
+                    <Certificate test_result={test_result.clone()} />
+
                     <div class="try-again">
                     <Link<Route> to={Route::Home}>{ "Try the test yourself again!" }</Link<Route>>
                 </div>

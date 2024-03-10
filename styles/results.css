@@ -161,3 +161,43 @@
     color: #4CAF50;
     font-size: 14px;
 }
+
+.certificate {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.certificate h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.certificate p {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+.certificate p:last-child {
+    font-style: italic;
+    margin-top: 2rem;
+    color: #666;
+}
+
+.certificate a {
+    color: #0654ba;
+    text-decoration: none;
+}
+
+.certificate a:hover {
+    text-decoration: underline;
+}

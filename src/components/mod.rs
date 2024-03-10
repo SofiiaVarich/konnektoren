@@ -10,6 +10,7 @@ mod test_results;
 mod test_selector;
 mod test_statistics;
 mod type_selector;
+mod certificate;
 
 pub use carousel::Carousel;
 pub use carousel_card::CarouselCard;
@@ -23,3 +24,4 @@ pub use test_results::TestResults;
 pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use type_selector::TypeSelector;
+pub use certificate::Certificate;
