@@ -20,11 +20,14 @@ pub fn results(props: &ResultsProps) -> Html {
     let host = window().unwrap().location().host().unwrap_or_default();
     let protocol = window().unwrap().location().protocol().unwrap_or_default();
 
-
     match test_result {
         Ok(test_result) => {
-
-            let share_url = format!("{}//{}/?page=results&code={}", protocol, host, test_result.to_base64());
+            let share_url = format!(
+                "{}//{}/?page=results&code={}",
+                protocol,
+                host,
+                test_result.to_base64()
+            );
 
             let on_share_click = {
                 let clipboard_handle = clipboard_handle.clone();

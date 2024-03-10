@@ -16,11 +16,10 @@ pub struct PlayerInputProps {
 #[function_component(PlayerInput)]
 pub fn player_input(props: &PlayerInputProps) -> Html {
     let player_name = use_state(|| "".to_string());
-    let code = use_state(|| "".to_string());
+    let navigator = use_navigator().expect("No navigator");
 
     let on_generate_click = {
         let player_name = player_name.clone();
-        let code = code.clone();
         let test_type = props.test_type.clone();
         let total_questions = props.total_questions;
         let correct_answers = props.correct_answers;
@@ -36,7 +35,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
             );
 
             let encoded = test_result.to_base64();
-            code.set(encoded.clone());
+            navigator.push(&Route::Results { code: encoded });
         })
     };
 
@@ -47,9 +46,6 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
                 player_name.set(input.value());
             })} />
             <button onclick={on_generate_click}>{ "Generate Results Page" }</button>
-            if !(*code).is_empty() {
-                <Link<Route> to={Route::Results { code: (*code).clone() }}>{ "Go to Results Page" }</Link<Route>>
-            }
         </div>
     }
 }
