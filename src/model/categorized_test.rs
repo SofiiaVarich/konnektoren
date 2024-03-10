@@ -70,9 +70,13 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
     }
 
     pub fn next(&mut self) {
-        if self.current_index < self.random_indices.len() - 1 {
+        if self.current_index < self.random_indices.len() {
             self.current_index += 1;
         }
+    }
+
+    pub fn is_finished(&self) -> bool {
+        self.current_index >= self.random_indices.len()
     }
 
     pub fn prev(&mut self) {
@@ -185,5 +189,25 @@ mod tests {
         } else {
             panic!("Current detail should not be None.");
         }
+    }
+
+    #[test]
+    fn test_is_finished() {
+        let konnektoren = mock_konnektoren();
+        let mut test = CategorizedTest::new(&konnektoren);
+
+        assert!(
+            !test.is_finished(),
+            "The test should not be finished after initialization."
+        );
+
+        while !test.is_finished() {
+            test.next();
+        }
+
+        assert!(
+            test.is_finished(),
+            "The test should be finished after iterating through all details."
+        );
     }
 }

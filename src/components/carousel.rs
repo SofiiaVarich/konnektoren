@@ -63,7 +63,7 @@ pub enum Msg<T: TypeTrait> {
 
 impl<T: TypeTrait + 'static, D: DetailTrait + 'static> Carousel<T, D> {
     fn test_results(&self) -> Html {
-        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+        if self.test.is_finished() {
             html! { <TestResults<T, D> test={self.test.clone()} /> }
         } else {
             html! {
@@ -100,7 +100,7 @@ impl Component for Carousel<KonnektorType, KonnektorDetail> {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+        if self.test.is_finished() {
             html! {
                     <div>
                         <Congratulations<KonnektorType, KonnektorDetail> test={self.test.clone()} />
@@ -154,7 +154,7 @@ impl Component for Carousel<AdjectiveType, AdjectiveDetail> {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+        if self.test.is_finished() {
             html! {
                     <div>
                         <Congratulations<AdjectiveType, AdjectiveDetail> test={self.test.clone()} />
@@ -208,7 +208,7 @@ impl Component for Carousel<VerbType, VerbDetail> {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        if self.test.current_index() + 1 >= self.test.random_indices.len() {
+        if self.test.is_finished() {
             html! {
                     <div>
                         <Congratulations<VerbType, VerbDetail> test={self.test.clone()} />

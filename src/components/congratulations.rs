@@ -16,12 +16,7 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
         .iter()
         .filter(|answer| answer.is_correct())
         .count();
-    let total_answers = props
-        .test
-        .answers
-        .iter()
-        .filter(|answer| answer.was_answered)
-        .count();
+    let total_answers = props.test.len();
     let performance = if total_answers > 0 {
         100.0 * correct_answers as f64 / total_answers as f64
     } else {
