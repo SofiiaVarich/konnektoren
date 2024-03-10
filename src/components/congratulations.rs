@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::components::PlayerInput;
+use crate::components::{PlayerInput, SoundPlayer};
 use crate::model::{CategorizedTest, DetailTrait, TestType, TypeTrait};
 
 #[derive(Properties, PartialEq)]
@@ -26,6 +26,7 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
     html! {
         <div class="congratulations-container">
             <h2>{"Congratulations!"}</h2>
+            <SoundPlayer sound_url="/fanfare-3-rpg.ogg" />
             <p>{format!("You have completed the test with a score of {:.1}% ({}/{})", performance, correct_answers, total_answers)}</p>
             {message::<T, D>(performance)}
             {player_input::<T>(total_answers, correct_answers, total_answers - correct_answers)}
