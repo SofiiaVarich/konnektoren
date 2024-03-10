@@ -1,5 +1,5 @@
-use crate::{components::Certificate, model::TestResult};
 use crate::pages::Route;
+use crate::{components::Certificate, model::TestResult};
 use gloo_timers::callback::Timeout;
 use urlencoding::encode;
 use web_sys::window;
