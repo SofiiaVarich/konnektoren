@@ -201,3 +201,18 @@
 .certificate a:hover {
     text-decoration: underline;
 }
+
+.certificate-image {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.certificate-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
