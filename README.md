@@ -22,6 +22,12 @@ cargo build
 trunk serve
 ```
 
+### Run TUI on terminal
+
+```bash
+cargo run --bin konnektoren-tui --features=tui
+```
+
 ## Source of Konnektoren examples
 
 The examples are taken from the German Course DTB C1.

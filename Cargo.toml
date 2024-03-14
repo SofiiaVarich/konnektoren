@@ -16,9 +16,15 @@ name = "konnektoren-openapi"
 path = "src/bin/openapi.rs"
 required-features = ["openapi"]
 
+[[bin]]
+name = "konnektoren-tui"
+path = "src/bin/tui.rs"
+required-features = ["tui"]
+
 [features]
 default = []
 openapi = ["utoipa"]
+tui = ["crossterm", "ratatui"]
 
 [dependencies]
 base64 = "0.22.0"
@@ -47,4 +53,6 @@ yew = { version = "0.21.0", features = ["csr"] }
 yew-bootstrap = "0.10.0"
 yew-router = "0.18.0"
 yew-hooks = "0.3.1"
+crossterm = { version = "0.27.0", optional = true }
+ratatui = { version = "0.26.0", optional = true, features = ["all-widgets"] }
 utoipa = { version = "4.2.0", optional = true }
