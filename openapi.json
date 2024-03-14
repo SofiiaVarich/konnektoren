@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "konnektoren",
+    "description": "",
+    "license": {
+      "name": ""
+    },
+    "version": "0.1.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "AdjectiveDetail": {
+        "type": "object",
+        "required": [
+          "adjektiv",
+          "example"
+        ],
+        "properties": {
+          "adjektiv": {
+            "type": "string"
+          },
+          "example": {
+            "type": "string"
+          }
+        }
+      },
+      "AdjectiveType": {
+        "type": "string",
+        "enum": [
+          "an",
+          "auf",
+          "bei",
+          "für",
+          "mit",
+          "über",
+          "von",
+          "zu"
+        ]
+      },
+      "Adjectives": {
+        "type": "object",
+        "required": [
+          "categories"
+        ],
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          }
+        }
+      },
+      "KonnektorDetail": {
+        "type": "object",
+        "required": [
+          "konnektor",
+          "example"
+        ],
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "konnektor": {
+            "type": "string"
+          }
+        }
+      },
+      "KonnektorType": {
+        "type": "string",
+        "enum": [
+          "Konnektoren mit Nebensatz (= Subjunktionen)",
+          "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)",
+          "Konnektoren mit Hauptsatz (Position 1) (= Konjunktionaladverbien)",
+          "Konnektoren mit Infinitivgruppe",
+          "Konnektoren mit besonderer Position"
+        ]
+      },
+      "VerbDetail": {
+        "type": "object",
+        "required": [
+          "verb",
+          "example"
+        ],
+        "properties": {
+          "example": {
+            "type": "string"
+          },
+          "verb": {
+            "type": "string"
+          }
+        }
+      },
+      "VerbType": {
+        "type": "string",
+        "enum": [
+          "an",
+          "auf",
+          "für",
+          "in",
+          "mit",
+          "nach",
+          "über",
+          "um",
+          "unter",
+          "von",
+          "vor",
+          "zu"
+        ]
+      }
+    }
+  }
+}
