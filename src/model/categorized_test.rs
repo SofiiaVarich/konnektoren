@@ -9,8 +9,11 @@ use super::TypeTrait;
 use super::VerbDetail;
 use super::VerbType;
 use rand::seq::SliceRandom;
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
     pub items: CategorizedItems<T, D>,
     pub random_indices: Vec<usize>,

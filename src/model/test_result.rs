@@ -6,6 +6,8 @@ use ed25519_dalek::{
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::str;
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
     let mut hasher = Sha256::new();
@@ -23,6 +25,7 @@ fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct TestResult {
     pub test_type: TestType,
     pub total_questions: usize,

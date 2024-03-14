@@ -1,8 +1,16 @@
-use crate::model::AdjectiveDetail;
+use crate::model::*;
 use utoipa::OpenApi;
 
 #[derive(OpenApi)]
-#[openapi(components(schemas(AdjectiveDetail)))]
+#[openapi(components(schemas(
+    AdjectiveDetail,
+    AdjectiveType,
+    Adjectives,
+    KonnektorDetail,
+    KonnektorType,
+    VerbDetail,
+    VerbType
+)))]
 pub struct OpenApiSpec;
 
 #[cfg(test)]

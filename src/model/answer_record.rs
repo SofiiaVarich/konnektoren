@@ -1,6 +1,9 @@
 use super::TypeTrait;
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct AnswerRecord<T: TypeTrait>
 where
     T: TypeTrait,

@@ -2,8 +2,11 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 
 use super::TypeTrait;
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum VerbType {
     #[serde(rename = "an")]
     An,

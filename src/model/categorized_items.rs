@@ -5,8 +5,11 @@ use super::konnektor_type::KonnektorType;
 use super::{adjective_detail::AdjectiveDetail, TypeTrait};
 use super::{DetailTrait, VerbDetail, VerbType};
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct CategorizedItems<T: TypeTrait, D: DetailTrait> {
     pub categories: Vec<Category<T, D>>,
 }

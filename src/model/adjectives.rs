@@ -1,8 +1,10 @@
 use super::{AdjectiveDetail, AdjectiveType, Category};
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct Adjectives {
     pub categories: Vec<Category<AdjectiveType, AdjectiveDetail>>,
 }

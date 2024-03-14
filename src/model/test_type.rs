@@ -1,8 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 use super::{AdjectiveType, KonnektorType, TypeTrait, VerbType};
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum TestType {
     Konnektoren,
     Adjectives,

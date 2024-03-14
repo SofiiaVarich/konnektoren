@@ -1,8 +1,10 @@
 use super::DetailTrait;
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct AdjectiveDetail {
     pub adjektiv: String,
     pub example: String,

@@ -1,8 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 use super::DetailTrait;
+#[cfg(feature = "openapi")]
+use utoipa::ToSchema;
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default)]
+#[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct VerbDetail {
     pub verb: String,
     pub example: String,
