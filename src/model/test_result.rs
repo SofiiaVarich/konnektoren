@@ -57,10 +57,12 @@ impl TestResult {
     }
 
     pub fn to_base64(&self) -> String {
-        let serialized =
-            serde_cbor::to_vec(&self).expect("Failed to serialize test result with CBOR");
+        let mut buf = Vec::new();
 
-        general_purpose::STANDARD.encode(&serialized).to_string()
+        self.serialize(&mut rmp_serde::Serializer::new(&mut buf))
+            .expect("Failed to serialize test result to msgpack.");
+
+        general_purpose::STANDARD.encode(buf).to_string()
     }
 
     pub fn from_base64(encoded: &str) -> Result<Self, &'static str> {
@@ -69,9 +71,9 @@ impl TestResult {
             Err(_) => return Err("Failed to decode the test result."),
         };
 
-        match serde_cbor::from_slice(&decoded) {
+        match rmp_serde::from_slice(&decoded) {
             Ok(test_result) => Ok(test_result),
-            Err(_) => Err("Failed to deserialize test result with CBOR."),
+            Err(_) => Err("Failed to deserialize test result from msgpack."),
         }
     }
 
