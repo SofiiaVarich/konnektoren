@@ -5,7 +5,7 @@ use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Debug, Clone, PartialEq, Serialize, EnumIter, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, EnumIter, Deserialize)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum TestType {
     Konnektoren,

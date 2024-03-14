@@ -4,13 +4,13 @@ use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::{
     prelude::*,
     style::palette::tailwind,
-    symbols::border,
     widgets::{block::*, Borders, *},
 };
 use strum::IntoEnumIterator;
 
 use crate::model::TestType;
 use crate::tui;
+use crate::tui::AboutPage;
 
 impl Widget for TestType {
     fn render(self, area: Rect, buf: &mut Buffer) {
@@ -58,19 +58,19 @@ impl TestType {
 enum AppState {
     #[default]
     Running,
+    About,
     Quitting,
 }
 
 #[derive(Default)]
 pub struct App {
     test_type: TestType,
-    counter: u32,
     state: AppState,
 }
 
 impl App {
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
-        while self.state == AppState::Running {
+        while self.state != AppState::Quitting {
             terminal.draw(|frame| self.render_frame(frame))?;
             self.handle_events()?;
         }
@@ -95,8 +95,6 @@ impl App {
 
     fn handle_events(&mut self) -> io::Result<()> {
         match event::read()? {
-            // it's important to check that the event is a key press event as
-            // crossterm also emits key release and repeat events on Windows.
             Event::Key(key_event) if key_event.kind == KeyEventKind::Press => {
                 self.handle_key_event(key_event)
             }
@@ -108,9 +106,20 @@ impl App {
     fn handle_key_event(&mut self, key_event: KeyEvent) {
         match key_event.code {
             KeyCode::Char('q') => self.exit(),
+            KeyCode::Char('a') => self.about(),
+            KeyCode::Char('t') => self.running(),
+            KeyCode::Esc => self.running(),
             KeyCode::Tab => self.next_tab(),
             _ => {}
         }
+    }
+
+    fn about(&mut self) {
+        self.state = AppState::About;
+    }
+
+    fn running(&mut self) {
+        self.state = AppState::Running;
     }
 
     fn exit(&mut self) {
@@ -133,12 +142,27 @@ impl Widget for &App {
         let horizontal = Layout::horizontal([Min(0), Length(20)]);
         let [tabs_area, title_area] = horizontal.areas(header_area);
 
-        self.render_tabs(tabs_area, buf);
-        self.test_type.render(inner_area, buf);
+        match self.state {
+            AppState::About => {
+                AboutPage::default().render(inner_area, buf);
+            }
+            AppState::Running => {
+                self.render_tabs(tabs_area, buf);
+                self.test_type.render(inner_area, buf);
+            }
+            AppState::Quitting => {
+                let message = Text::from("Goodbye!".bold());
+                Paragraph::new(message).centered().render(inner_area, buf);
+            }
+        }
 
         let instructions = Text::from(vec![Line::from(vec![
             " Quit ".into(),
             "<Q> ".blue().bold(),
+            " About ".into(),
+            "<A> ".blue().bold(),
+            " Test ".into(),
+            "<T> ".blue().bold(),
             " Next Test ".into(),
             "<Tab>".blue().bold(),
         ])]);

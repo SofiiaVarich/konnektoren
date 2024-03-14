@@ -1,6 +1,8 @@
 mod app;
+mod pages;
 
 pub use app::App;
+pub use pages::*;
 
 use std::io::{self, stdout, Stdout};
 
