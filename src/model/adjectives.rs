@@ -1,8 +1,8 @@
 use super::{AdjectiveDetail, AdjectiveType, Category};
-
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, ToSchema)]
 pub struct Adjectives {
     pub categories: Vec<Category<AdjectiveType, AdjectiveDetail>>,
 }

@@ -1,8 +1,8 @@
-use serde::{Deserialize, Serialize};
-
 use super::DetailTrait;
+use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default, ToSchema)]
 pub struct AdjectiveDetail {
     pub adjektiv: String,
     pub example: String,

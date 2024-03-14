@@ -9,7 +9,16 @@ path = "src/lib.rs"
 
 [[bin]]
 name = "konnektoren-pwa"
-path = "src/main.rs"
+path = "src/bin/main.rs"
+
+[[bin]]
+name = "konnektoren-openapi"
+path = "src/bin/openapi.rs"
+required-features = ["openapi"]
+
+[features]
+default = []
+openapi = ["utoipa"]
 
 [dependencies]
 base64 = "0.22.0"
@@ -38,3 +47,4 @@ yew = { version = "0.21.0", features = ["csr"] }
 yew-bootstrap = "0.10.0"
 yew-router = "0.18.0"
 yew-hooks = "0.3.1"
+utoipa = { version = "4.2.0", optional = true }

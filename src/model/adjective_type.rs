@@ -1,9 +1,9 @@
+use super::TypeTrait;
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use utoipa::ToSchema;
 
-use super::TypeTrait;
-
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, ToSchema)]
 pub enum AdjectiveType {
     #[serde(rename = "an")]
     An,
