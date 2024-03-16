@@ -1,1 +1,77 @@
-<!doctype html><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course. Enhance your German writing and speaking skills today." name=description><meta content="index, follow" name=robots><meta content=Sofi name=author><meta content="Konnektoren, German, Connectives, DTB C1, German Connectives Guide, German Connectives" name=keywords><meta content="Konnektoren Guide - Mastering German Connectives" property=og:title><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course." property=og:description><meta content=https://konnektoren.help/ property=og:url><meta content=https://konnektoren.help/favicon.png property=og:image><meta content="Konnektoren Guide - Mastering German Connectives" name=twitter:title><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course." name=twitter:description><meta content=https://konnektoren.help/favicon.png name=twitter:image><title>Konnektoren</title><link href=/index-b0bf16ba427a89c.css integrity=sha384-AUHQrY-xIGO04TZOGLwOQVKiBOz39b4jnc2SJSZNx4uXv67xOqhsDq3IWn2KBZWm rel=stylesheet><link href=/about-e3a5db314f83c482.css integrity=sha384-eEGRxRuBsLUoDrvVSl4R8VQyF_q-b9HISg2StMmotdvEQw4eU7yiL96DjIzO7_pD rel=stylesheet><link href=/results-c8c5020bbfb9cd47.css integrity=sha384-T0ixZXgmU0d1UXd_BgleSuMMni8oVlZyCflzxJzWg7lK7gMZAx1gdS6sFSiiMRkX rel=stylesheet><script type=module>import a,*as b from"/konnektoren-pwa-7a78cc0b8b723776.js";a(`/konnektoren-pwa-7a78cc0b8b723776_bg.wasm`);window.wasmBindings=b</script><link href=/favicon-9faa54d07de02a9b.ico integrity=sha384-hw9gVd43_wHFXElbUzxyk3YK9cGvcm1nEpwghILypzkYwaE3ZCnn8MgY5F133FBA rel=icon><link as=fetch crossorigin href=/konnektoren-pwa-7a78cc0b8b723776_bg.wasm integrity=sha384-hB2bV9RFInbleeFY6oq5z7V5OyKsdEQ-i1pvp8VovoeQ8lkrrvnnDnS6LTDoeKVS rel=preload type=application/wasm><link crossorigin href=/konnektoren-pwa-7a78cc0b8b723776.js integrity=sha384-UalgLuMfquPlyVrRiDEUhmfjkXzhiX2BV0gmYujXw0JM3h9i9HnpmgN9v6ARp4RU rel=modulepreload></head><body></body></html>
+<!doctype html><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course. Enhance your German writing and speaking skills today." name=description><meta content="index, follow" name=robots><meta content=Sofi name=author><meta content="Konnektoren, German, Connectives, DTB C1, German Connectives Guide, German Connectives" name=keywords><meta content="Konnektoren Guide - Mastering German Connectives" property=og:title><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course." property=og:description><meta content=https://konnektoren.help/ property=og:url><meta content=https://konnektoren.help/favicon.png property=og:image><meta content="Konnektoren Guide - Mastering German Connectives" name=twitter:title><meta content="Explore our comprehensive guide to mastering German Konnektoren (connectives) with examples from the DTB C1 course." name=twitter:description><meta content=https://konnektoren.help/favicon.png name=twitter:image><title>Konnektoren</title><link href=/index-6d5f5e7141924954.css integrity=sha384-jSQnhWZu8SZnb24a1TCV87VSPzi-IXvtyjjuhxWb_vaU_VzXd33q3xhEkpak4J3B rel=stylesheet><link href=/about-e3a5db314f83c482.css integrity=sha384-eEGRxRuBsLUoDrvVSl4R8VQyF_q-b9HISg2StMmotdvEQw4eU7yiL96DjIzO7_pD rel=stylesheet><link href=/results-c8c5020bbfb9cd47.css integrity=sha384-T0ixZXgmU0d1UXd_BgleSuMMni8oVlZyCflzxJzWg7lK7gMZAx1gdS6sFSiiMRkX rel=stylesheet><script type=module>async function __trunkInitializer(source, initializer) {
+  if (initializer === undefined) {
+    return await init(source);
+  }
+
+  return await __trunkInitWithProgress(source, initializer);
+}
+
+async function __trunkInitWithProgress(source, initializer) {
+
+  const {
+    onStart, onProgress, onComplete, onSuccess, onFailure
+  } = initializer;
+
+  onStart?.();
+
+  const response = fetch(source)
+      .then((response) => {
+        const reader = response.body.getReader();
+        const headers = response.headers;
+        const status = response.status;
+        const statusText = response.statusText;
+
+        const total = +response.headers.get("Content-Length");
+        let current = 0;
+
+        const stream = new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then(({done, value}) => {
+                if (done) {
+                  onProgress?.({current: total, total});
+                  controller.close();
+                  return;
+                }
+
+                current += value.byteLength;
+                onProgress?.({current, total});
+                controller.enqueue(value);
+                push();
+              });
+            }
+
+            push();
+          },
+        });
+
+        return {
+          stream, init: {
+            headers, status, statusText
+          }
+        };
+      })
+      .then(({stream, init}) =>
+          new Response(stream, init),
+      );
+
+  return init(response)
+      .then((value) => {
+        onComplete?.();
+        onSuccess?.(value);
+        return value;
+      }, (reason) => {
+        onComplete?.();
+        onFailure?.(reason);
+        return reason;
+      });
+}
+
+
+import init, * as bindings from '/konnektoren-pwa-7a78cc0b8b723776.js';
+import initializer from '/ed5c8007582d57-initializer.mjs';
+
+await __trunkInitializer('/konnektoren-pwa-7a78cc0b8b723776_bg.wasm', initializer());
+
+
+window.wasmBindings = bindings;</script><link href=/favicon-9faa54d07de02a9b.ico integrity=sha384-hw9gVd43_wHFXElbUzxyk3YK9cGvcm1nEpwghILypzkYwaE3ZCnn8MgY5F133FBA rel=icon><link as=fetch crossorigin href=/konnektoren-pwa-7a78cc0b8b723776_bg.wasm integrity=sha384-Zxml2yfifqPYB69T3umyPbTqFPTlhrN20DWbQfSeIKt6JkIru7oK8fVmzFuo8SdB rel=preload type=application/wasm><link crossorigin href=/ed5c8007582d57-initializer.mjs integrity=sha384-bROyvk6D3leuCQBGp9tY-a3tFXkWXu5eGvMDCduM9P62oJn6Aa-F3zXqTTs9EY2H rel=modulepreload><link crossorigin href=/konnektoren-pwa-7a78cc0b8b723776.js integrity=sha384--xnBlzAOJBC5eruVNOneqo8gPjfltGUfYuzX-6kaYdxemxzagXX5l0me2iMWOzXe rel=modulepreload></head><body><div id=loading-container style=display:none><div id=loading-progress></div><div id=loading-message></div></div></body></html>
