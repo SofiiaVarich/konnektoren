@@ -3,8 +3,8 @@ categories:
     details:
       - adjektiv: "adressiert"
         example: "Die Einladung war direkt an sie adressiert."
-      - adjektiv: "angewiesen"
-        example: "Wir sind komplett auf deine Expertise angewiesen."
+      #- adjektiv: "angewiesen"
+      #  example: "Wir sind komplett auf deine Expertise angewiesen."
       - adjektiv: "arm"
         example: "Diese Region ist arm an natürlichen Ressourcen."
       - adjektiv: "reich"
@@ -17,6 +17,8 @@ categories:
         example: "Er fühlte sich schuld an dem Missverständnis."
       - adjektiv: "gewöhnt"
         example: "Das Team hatte sich schnell an die neue Strategie gewöhnt."
+      - adjektiv: "gelehnt"
+        example: "Sie lehnte sich an die Wand und schloss die Augen."
 
   - category: "auf"
     details:
