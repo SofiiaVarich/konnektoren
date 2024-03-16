@@ -10,6 +10,7 @@ pub struct ExplanationProps {
 pub fn explanation(props: &ExplanationProps) -> Html {
     match props.test_type {
         TestType::Konnektoren => konnektoren_explanation(),
+        TestType::Verbs => verbs_explanation(),
         _ => html! {<></>},
     }
 }
@@ -64,6 +65,49 @@ fn konnektoren_explanation_test_mode() -> Html {
                 <li>{"It's a fundamental aspect of the language that every learner should master."}</li>
             </ul>
             <p>{"Mastering Konnektoren is key to success in any German language examination. By learning them thoroughly, you will be able to speak and write in German confidently, clearly, and without mistakes. Prepare to impress with your flawless grammar and articulate expression!"}</p>
+            <p class="encouragement">{"Embrace the challenge, elevate your German, and speak with pride. Your journey to German fluency starts now!"}</p>
+        </div>
+    }
+}
+
+fn verbs_explanation() -> Html {
+    html! {
+        <div class="explanation">
+            <p>{"Verbs are the most important part of any sentence. They are the action words that express what the subject is doing. In German, verbs are conjugated to match the subject of the sentence, and they can be used in different tenses and moods."}</p>
+            <p>{"There are three types of verbs in German:"}</p>
+            <ul>
+                <li>{"Regular verbs"}</li>
+                <li>{"Irregular verbs"}</li>
+                <li>{"Modal verbs"}</li>
+            </ul>
+            <p>{"Each type of verb has its own set of rules and usage, and mastering them will help you express yourself more clearly and effectively in German."}</p>
+            <hr />
+            <p>{"By practicing the identification and correct classification of verbs, you will enhance your ability to construct and understand complex German sentences."}</p>
+
+            {verbs_explanation_test_mode()}
+        </div>
+    }
+}
+
+fn verbs_explanation_test_mode() -> Html {
+    html! {
+        <div class="explanation">
+            <h2>{"Verben: Test Your Knowledge"}</h2>
+            <p>{"The Verben test mode is designed for learners who want to challenge their understanding of German verbs without the need for examples."}</p>
+            <p>{"Who needs it?"}</p>
+            <ul>
+                <li>{"Individuals looking to assess their knowledge of German verbs."}</li>
+                <li>{"Those preparing for a German language exam and wishing to test themselves in advance."}</li>
+                <li>{"Learners seeking a quick and efficient way to master all German verbs."}</li>
+            </ul>
+            <p>{"Why do you need it?"}</p>
+            <ul>
+                <li>{"Verbs are crucial for passing German exams."}</li>
+                <li>{"Enhances understanding of the German language."}</li>
+                <li>{"Common errors in using verbs can cause misunderstandings and mistakes."}</li>
+                <li>{"It's a fundamental aspect of the language that every learner should master."}</li>
+            </ul>
+            <p>{"Mastering verbs is key to success in any German language examination. By learning them thoroughly, you will be able to speak and write in German confidently, clearly, and without mistakes. Prepare to impress with your flawless grammar and articulate expression!"}</p>
             <p class="encouragement">{"Embrace the challenge, elevate your German, and speak with pride. Your journey to German fluency starts now!"}</p>
         </div>
     }

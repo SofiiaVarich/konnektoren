@@ -29,7 +29,9 @@ impl Default for KonnektorType {
 impl fmt::Display for KonnektorType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
-            KonnektorType::Subjunktionen => "Konnektoren mit Nebensatz (= Subjunktionen)",
+            KonnektorType::Subjunktionen => {
+                "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)"
+            }
             KonnektorType::Konjunktionen => {
                 "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)"
             }
@@ -60,7 +62,7 @@ mod tests {
 
     #[test]
     fn test_subjunktionen() {
-        let json = r#"{"category": "Konnektoren mit Nebensatz (= Subjunktionen)"}"#;
+        let json = r#"{"category": "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)"}"#;
         let wrapper: CategoryWrapper = serde_json::from_str(json).unwrap();
         assert_eq!(wrapper.category, KonnektorType::Subjunktionen);
     }

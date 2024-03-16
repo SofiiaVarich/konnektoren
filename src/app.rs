@@ -1,4 +1,4 @@
-use crate::pages::{About, Home, KonnektorenPage, Navigation, Results, Route};
+use crate::pages::{About, Home, KonnektorenPage, Navigation, Results, Route, VerbsPage};
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
 use yew_bootstrap::util::*;
@@ -9,6 +9,7 @@ fn switch_main(route: Route) -> Html {
         Route::About => html! {<About />},
         Route::Home => html! {<Home />},
         Route::Konnektoren => html! {<KonnektorenPage />},
+        Route::Verbs => html! {<VerbsPage />},
         Route::Results { code } => html! {<Results { code } />},
     }
 }
@@ -56,6 +57,13 @@ fn redirect_if_needed() {
         let history = window.history().expect("couldn't get history");
         history
             .push_state_with_url(&JsValue::NULL, "", Some("/konnektoren"))
+            .expect("could not push state");
+    }
+
+    if query.contains("page=verbs") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/verbs"))
             .expect("could not push state");
     }
 
