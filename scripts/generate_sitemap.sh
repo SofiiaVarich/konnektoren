@@ -4,7 +4,7 @@ DOMAIN="https://konnektoren.help"
 
 CURRENT_DATE=$(date +%Y-%m-%d)
 
-PAGES=("/" "/about")
+PAGES=("/" "/about" "/konnektoren")
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml

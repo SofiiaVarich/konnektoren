@@ -52,6 +52,13 @@ fn redirect_if_needed() {
             .expect("could not push state");
     }
 
+    if query.contains("page=konnektoren") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/konnektoren"))
+            .expect("could not push state");
+    }
+
     if query.contains("page=results") {
         let code = query
             .split('&')
