@@ -27,13 +27,6 @@ fn konnektoren_explanation() -> Html {
                 <li>{"Konnektoren mit besonderer Position"}</li>
             </ul>
             <p>{"Each type of Konnektor has its own set of rules and usage, and mastering them will help you express yourself more clearly and effectively in German."}</p>
-            // write your task based on the showed konnektor, to select the right group
-            // generate: the user should 1. first find a shown konnektor in the sentence
-            // all showed sentences have two parts. Mainly two sentences are seperated by the coma.
-            // 2. the user should identify to which part of the sentance konnektor belongs to.
-            // 3. nest step is to find a verb and analyse where is it based in the sentence.
-            // 4. according to the position of the verb, the user should select the right group of the konnektor.
-            // 5. words in the parenthesis, behind the gound name help the user to memorize the rules of the konnektor and group, where it belongs too.
             <hr />
             <h3>{"Your Task"}</h3>
             <p>{"You will be shown a Konnektor and you will have to select the correct group it belongs to. This exercise aims to help you understand the usage and position of different Konnektoren within a sentence."}</p>
@@ -46,6 +39,32 @@ fn konnektoren_explanation() -> Html {
                 <li>{"Words in the parentheses, behind the group name, are meant to help you memorize the rules of the Konnektor and the group to which it belongs."}</li>
             </ol>
             <p>{"By practicing the identification and correct classification of Konnektoren, you will enhance your ability to construct and understand complex German sentences."}</p>
+
+            {konnektoren_explanation_test_mode()}
+        </div>
+    }
+}
+
+fn konnektoren_explanation_test_mode() -> Html {
+    html! {
+        <div class="explanation">
+            <h2>{"Konnektoren: Test Your Knowledge"}</h2>
+            <p>{"The Konnektoren test mode is designed for learners who want to challenge their understanding of German conjunctions without the need for examples."}</p>
+            <p>{"Who needs it?"}</p>
+            <ul>
+                <li>{"Individuals looking to assess their knowledge of Konnektoren."}</li>
+                <li>{"Those preparing for a German language exam and wishing to test themselves in advance."}</li>
+                <li>{"Learners seeking a quick and efficient way to master all Konnektoren."}</li>
+            </ul>
+            <p>{"Why do you need it?"}</p>
+            <ul>
+                <li>{"Konnektoren are crucial for passing German exams."}</li>
+                <li>{"Enhances understanding of the German language."}</li>
+                <li>{"Common errors in using Konnektoren can cause misunderstandings and mistakes."}</li>
+                <li>{"It's a fundamental aspect of the language that every learner should master."}</li>
+            </ul>
+            <p>{"Mastering Konnektoren is key to success in any German language examination. By learning them thoroughly, you will be able to speak and write in German confidently, clearly, and without mistakes. Prepare to impress with your flawless grammar and articulate expression!"}</p>
+            <p class="encouragement">{"Embrace the challenge, elevate your German, and speak with pride. Your journey to German fluency starts now!"}</p>
         </div>
     }
 }
