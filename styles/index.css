@@ -227,7 +227,7 @@ th {
 }
 
 nav {
-    background-color: #004D40;
+    background-color: #004d40;
     padding: 1rem 2rem;
     display: flex;
     justify-content: center;
@@ -244,7 +244,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #B2DFDB;
+    color: #b2dfdb;
 }
 
 .chart-container {
@@ -276,5 +276,49 @@ nav a:hover {
 
     .test-chart svg {
         max-width: 100%;
+    }
+}
+
+.explanation {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.explanation h2,
+h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.explanation p,
+li {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.explanation ul {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.explanation ol {
+    margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .explanation {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .explanation p,
+    li {
+        font-size: 14px;
     }
 }
