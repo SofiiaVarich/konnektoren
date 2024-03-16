@@ -8,7 +8,7 @@ use utoipa::ToSchema;
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum KonnektorType {
-    #[serde(rename = "Konnektoren mit Nebensatz (= Subjunktionen)")]
+    #[serde(rename = "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)")]
     Subjunktionen,
     #[serde(rename = "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)")]
     Konjunktionen,
