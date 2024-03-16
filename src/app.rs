@@ -1,4 +1,4 @@
-use crate::pages::{About, Home, Navigation, Results, Route};
+use crate::pages::{About, Home, KonnektorenPage, Navigation, Results, Route};
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
 use yew_bootstrap::util::*;
@@ -8,6 +8,7 @@ fn switch_main(route: Route) -> Html {
     match route {
         Route::About => html! {<About />},
         Route::Home => html! {<Home />},
+        Route::Konnektoren => html! {<KonnektorenPage />},
         Route::Results { code } => html! {<Results { code } />},
     }
 }
