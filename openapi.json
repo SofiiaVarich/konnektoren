@@ -71,7 +71,7 @@
       "KonnektorType": {
         "type": "string",
         "enum": [
-          "Konnektoren mit Nebensatz (= Subjunktionen)",
+          "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)",
           "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)",
           "Konnektoren mit Hauptsatz (Position 1) (= Konjunktionaladverbien)",
           "Konnektoren mit Infinitivgruppe",
