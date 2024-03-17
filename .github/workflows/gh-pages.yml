@@ -36,6 +36,9 @@ jobs:
       - name: Generate OpenApi
         run: cargo run --bin konnektoren-openapi --features=openapi && cp ./openapi.json ./dist/openapi.json
 
+      - name: Generate DID Document
+        run: mkdir -p ./dist/.well-known && cargo run --bin did_json -- konnektoren.help && cp ./did.json ./dist/.well-known/did.json
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
