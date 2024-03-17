@@ -2,12 +2,14 @@ use yew::prelude::*;
 use yew_router::prelude::*;
 
 mod about;
+mod adjectives;
 mod home;
 mod konnektoren;
 mod results;
 mod verbs;
 
 pub use about::About;
+pub use adjectives::AdjectivesPage;
 pub use home::Home;
 pub use konnektoren::KonnektorenPage;
 pub use results::Results;
@@ -19,6 +21,8 @@ pub enum Route {
     Home,
     #[at("/konnektoren")]
     Konnektoren,
+    #[at("/adjectives")]
+    Adjectives,
     #[at("/verbs")]
     Verbs,
     #[at("/about")]
@@ -34,7 +38,8 @@ pub fn Navigation() -> Html {
         <nav>
         <Link<Route> to={Route::Home}>{ "Home" }</Link<Route>>
         <Link<Route> to={Route::Konnektoren}>{ "Konnektoren" }</Link<Route>>
-        <Link<Route> to={Route::Verbs}>{ "Verbs" }</Link<Route>>
+        <Link<Route> to={Route::Adjectives}>{ "Adjektive" }</Link<Route>>
+        <Link<Route> to={Route::Verbs}>{ "Verben" }</Link<Route>>
         <Link<Route> to={Route::About}>{ "About" }</Link<Route>>
         </nav>
         </>
