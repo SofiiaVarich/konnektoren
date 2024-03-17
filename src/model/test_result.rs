@@ -1,28 +1,11 @@
 use crate::model::TestType;
+use crate::utils::keypair_from_static_str;
 use base64::{engine::general_purpose, Engine as _};
-use ed25519_dalek::{
-    ed25519::SignatureBytes, Signature, Signer, SigningKey, Verifier, VerifyingKey,
-};
+use ed25519_dalek::{ed25519::SignatureBytes, Signature, Signer, Verifier};
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
 use std::str;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
-
-fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
-    let mut hasher = Sha256::new();
-    hasher.update(env!("SIGNATURE_PRIVATE_KEY"));
-    let result = hasher.finalize();
-
-    let seed: [u8; 32] = result[..]
-        .try_into()
-        .expect("Hash output size does not match ed25519 seed size");
-
-    let signing_key = SigningKey::from_bytes(&seed);
-    let verify_key = signing_key.verifying_key();
-
-    (signing_key, verify_key)
-}
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
