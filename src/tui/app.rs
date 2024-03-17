@@ -1,5 +1,6 @@
 use std::io;
 
+use crate::tui::components::Tab;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
 use ratatui::{
     prelude::*,
@@ -11,48 +12,6 @@ use strum::IntoEnumIterator;
 use crate::model::TestType;
 use crate::tui;
 use crate::tui::AboutPage;
-
-impl Widget for TestType {
-    fn render(self, area: Rect, buf: &mut Buffer) {
-        self.render_tab(area, buf)
-    }
-}
-
-impl TestType {
-    fn next(&self) -> Self {
-        match self {
-            TestType::Konnektoren => TestType::Adjectives,
-            TestType::Adjectives => TestType::Verbs,
-            TestType::Verbs => TestType::Konnektoren,
-        }
-    }
-
-    fn title(self) -> Line<'static> {
-        format!("  {self}  ").fg(tailwind::SLATE.c200).into()
-    }
-
-    fn render_tab(self, area: Rect, buf: &mut Buffer) {
-        Paragraph::new(self.title())
-            .block(self.block())
-            .render(area, buf);
-    }
-
-    fn block(self) -> Block<'static> {
-        Block::default()
-            .borders(Borders::ALL)
-            .border_set(symbols::border::PROPORTIONAL_TALL)
-            .padding(Padding::horizontal(1))
-            .border_style(self.palette().c700)
-    }
-
-    const fn palette(self) -> tailwind::Palette {
-        match self {
-            Self::Konnektoren => tailwind::BLUE,
-            Self::Adjectives => tailwind::EMERALD,
-            Self::Verbs => tailwind::INDIGO,
-        }
-    }
-}
 
 #[derive(Default, Clone, Copy, PartialEq, Eq)]
 enum AppState {
@@ -78,8 +37,9 @@ impl App {
     }
 
     fn render_tabs(&self, area: Rect, buf: &mut Buffer) {
-        let titles = TestType::iter().map(TestType::title);
-        let highlight_style = (Color::default(), self.test_type.palette().c700);
+        let titles = TestType::iter().map(|t| Tab::new(t).title());
+        let tab = Tab::new(self.test_type);
+        let highlight_style = (Color::default(), tab.palette().c700);
         let selected_tab_index = self.test_type as usize;
         Tabs::new(titles)
             .highlight_style(highlight_style)
@@ -127,7 +87,11 @@ impl App {
     }
 
     pub fn next_tab(&mut self) {
-        self.test_type = self.test_type.next();
+        self.test_type = match self.test_type {
+            TestType::Konnektoren => TestType::Adjectives,
+            TestType::Adjectives => TestType::Verbs,
+            TestType::Verbs => TestType::Konnektoren,
+        };
     }
 }
 
@@ -148,7 +112,8 @@ impl Widget for &App {
             }
             AppState::Running => {
                 self.render_tabs(tabs_area, buf);
-                self.test_type.render(inner_area, buf);
+                let tab = Tab::new(self.test_type);
+                tab.render(inner_area, buf);
             }
             AppState::Quitting => {
                 let message = Text::from("Goodbye!".bold());
