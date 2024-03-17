@@ -3,7 +3,6 @@ export default function myInitializer() {
 
   return {
     onStart: () => {
-      console.debug("Loading...");
       startTime = performance.now();
       document.getElementById("loading-container").style.display = "block";
       document.getElementById("loading-message").textContent = "Loading...";
@@ -30,9 +29,7 @@ export default function myInitializer() {
         document.getElementById("loading-container").style.display = "none";
       }, remainingTime);
     },
-    onSuccess: (wasm) => {
-      console.debug("Loading... successful!");
-    },
+    onSuccess: (wasm) => {},
     onFailure: (error) => {
       console.warn("Loading... failed!", error);
     },
