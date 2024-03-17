@@ -23,7 +23,7 @@ export default function myInitializer() {
     onComplete: () => {
       const currentTime = performance.now();
       const elapsedTime = currentTime - startTime;
-      const remainingTime = Math.max(100 - elapsedTime, 0);
+      const remainingTime = Math.max(200 - elapsedTime, 0);
 
       setTimeout(() => {
         console.debug("Loading... done!");
