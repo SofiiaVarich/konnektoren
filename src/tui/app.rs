@@ -2,11 +2,7 @@ use std::io;
 
 use crate::tui::components::Tab;
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
-use ratatui::{
-    prelude::*,
-    style::palette::tailwind,
-    widgets::{block::*, Borders, *},
-};
+use ratatui::{prelude::*, widgets::*};
 use strum::IntoEnumIterator;
 
 use crate::model::TestType;

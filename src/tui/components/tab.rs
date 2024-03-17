@@ -1,4 +1,5 @@
 use crate::model::TestType;
+use crate::tui::components::TypeButtons;
 use ratatui::{
     prelude::*,
     style::palette::tailwind,
@@ -42,5 +43,9 @@ impl Widget for Tab {
         Paragraph::new(self.title())
             .block(self.block())
             .render(area, buf);
+        let block = Block::default().borders(Borders::ALL);
+        let inner_area = block.inner(area);
+
+        TypeButtons::new(self.test_type).render(inner_area, buf);
     }
 }

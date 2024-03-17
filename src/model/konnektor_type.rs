@@ -1,11 +1,12 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use strum::EnumIter;
 
 use super::TypeTrait;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum KonnektorType {
     #[serde(rename = "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)")]

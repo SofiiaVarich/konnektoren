@@ -1,10 +1,11 @@
 use super::TypeTrait;
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum AdjectiveType {
     #[serde(rename = "an")]
