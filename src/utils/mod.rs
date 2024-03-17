@@ -1,6 +1,11 @@
 use ed25519_dalek::{SigningKey, VerifyingKey};
 use sha2::{Digest, Sha256};
 
+#[cfg(feature = "verifiable-credentials")]
+mod verifiable_credential;
+#[cfg(feature = "verifiable-credentials")]
+pub use verifiable_credential::*;
+
 pub fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
     let mut hasher = Sha256::new();
     hasher.update(env!("SIGNATURE_PRIVATE_KEY"));

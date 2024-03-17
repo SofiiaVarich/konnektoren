@@ -1,5 +1,7 @@
-use crate::pages::Route;
-use crate::{components::Certificate, model::TestResult};
+use crate::{components::Certificate, model::TestResult, pages::Route};
+
+#[cfg(feature = "verifiable-credentials")]
+use crate::components::VerifiableCredential;
 use gloo_timers::callback::Timeout;
 use urlencoding::encode;
 use web_sys::window;
@@ -49,6 +51,13 @@ pub fn results(props: &ResultsProps) -> Html {
                 "Verification pending. ⏳"
             };
 
+            #[cfg(feature = "verifiable-credentials")]
+            let verifiable_credential = html! {
+                <VerifiableCredential test_result={test_result.clone()} />
+            };
+            #[cfg(not(feature = "verifiable-credentials"))]
+            let verifiable_credential = html! {};
+
             html! {
                 <div class="results-page">
                     <h1>{ "Test Results" }</h1>
@@ -64,6 +73,7 @@ pub fn results(props: &ResultsProps) -> Html {
                     }
 
                     <Certificate test_result={test_result.clone()} />
+                    {verifiable_credential}
 
                     <div class="try-again">
                     <Link<Route> to={Route::Home}>{ "Try the test yourself again!" }</Link<Route>>
