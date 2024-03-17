@@ -16,4 +16,8 @@
     <loc>https://konnektoren.help/verbs</loc>
     <lastmod>2024-03-17</lastmod>
   </url>
+  <url>
+    <loc>https://konnektoren.help.well-known/did.json</loc>
+    <lastmod>2024-03-17</lastmod>
+  </url>
 </urlset>

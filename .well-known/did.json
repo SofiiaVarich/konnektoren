@@ -1,0 +1,19 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:konnektoren.help",
+  "publicKey": [
+    {
+      "id": "did:web:konnektoren.help#owner",
+      "type": "Ed25519VerificationKey2018",
+      "controller": "did:web:konnektoren.help",
+      "publicKeyHex": "be907b4bac84fee5ce8811db2defc9bf0b2a2a2bbc3d54d8a2257ecd70441962"
+    }
+  ],
+  "service": [
+    {
+      "id": "did:web:konnektoren.help#vcs",
+      "type": "VerifiableCredentialService",
+      "serviceEndpoint": "https://konnektoren.help/vc/"
+    }
+  ]
+}
