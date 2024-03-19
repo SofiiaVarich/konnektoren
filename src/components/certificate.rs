@@ -1,6 +1,8 @@
 use crate::model::TestResult;
+use anyhow::Result;
 use base64::engine::general_purpose;
 use base64::Engine as _;
+use identicon_rs::Identicon;
 use image::io::Reader as ImageReader;
 use image::{imageops, DynamicImage, ImageBuffer, ImageOutputFormat, Luma, Rgba, RgbaImage};
 use imageproc::drawing::draw_text_mut;
@@ -39,7 +41,7 @@ pub fn certificate(props: &CertificateProps) -> Html {
     }
 }
 
-fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> DynamicImage {
+fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Result<DynamicImage> {
     let cert_width = 800;
     let cert_height = 800;
     let border_color = Rgba([0, 123, 255, 255]);
@@ -71,15 +73,18 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
 
     let mut cert_image = RgbaImage::new(cert_width, cert_height);
 
-    let background_bytes = include_bytes!("../assets/favicon.png");
-    let background_image = ImageReader::new(Cursor::new(background_bytes))
+    let logo_bytes = include_bytes!("../assets/favicon.png");
+    let logo_image = ImageReader::new(Cursor::new(logo_bytes))
         .with_guessed_format()
         .expect("Failed to guess image format")
         .decode()
         .expect("Failed to decode image");
 
-    let scaled_background_image =
-        imageops::resize(&background_image, 75, 75, imageops::FilterType::Nearest);
+    let mut identicon = Identicon::new(&test_result.to_base64());
+    let _ = identicon.set_size(32)?.set_scale(75)?.set_border(0);
+    let identicon_image = identicon.generate_image()?;
+
+    let scaled_logo_image = imageops::resize(&logo_image, 75, 75, imageops::FilterType::Nearest);
 
     imageproc::drawing::draw_filled_rect_mut(
         &mut cert_image,
@@ -99,7 +104,14 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
     let font_data: &[u8] = include_bytes!("../assets/Lora-Regular.ttf");
     let font = Font::try_from_bytes(font_data).unwrap();
 
-    image::imageops::overlay(&mut cert_image, &scaled_background_image, 80, 80);
+    image::imageops::overlay(&mut cert_image, &scaled_logo_image, 80, 80);
+    let cert_width = cert_image.width();
+    image::imageops::overlay(
+        &mut cert_image,
+        &identicon_image,
+        cert_width as i64 - 80 - 75,
+        80,
+    );
 
     let title = "Certificate of Completion";
     let scale_title = Scale::uniform(40.0);
@@ -176,8 +188,7 @@ fn create_certificate(test_result: &TestResult, url: &str, issuer: &str) -> Dyna
         cmp::max(0, (cert_width as i32 - qr_code_size as i32) / 2) as i64,
         (cert_height - qr_code_size - 50) as i64,
     );
-
-    DynamicImage::ImageRgba8(cert_image)
+    Ok(DynamicImage::ImageRgba8(cert_image))
 }
 
 trait FontExt {
@@ -198,7 +209,7 @@ impl FontExt for Font<'_> {
 }
 
 fn create_certificate_data_url(test_result: &TestResult, url: &str, issuer: &str) -> String {
-    let image = create_certificate(test_result, url, issuer);
+    let image = create_certificate(test_result, url, issuer).unwrap();
 
     let mut image_data: Vec<u8> = Vec::new();
     image
