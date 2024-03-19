@@ -243,6 +243,12 @@ nav a {
     transition: color 0.3s;
 }
 
+@media (max-width: 768px) {
+    nav a {
+        margin: 0 5px;
+    }
+}
+
 nav a:hover {
     color: #b2dfdb;
 }
