@@ -23,19 +23,19 @@ pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
 
 impl Default for CategorizedTest<KonnektorType, KonnektorDetail> {
     fn default() -> Self {
-        Self::new(&CategorizedItems::default())
+        Self::new_of_size(&CategorizedItems::default(), 50)
     }
 }
 
 impl Default for CategorizedTest<AdjectiveType, AdjectiveDetail> {
     fn default() -> Self {
-        Self::new(&CategorizedItems::default())
+        Self::new_of_size(&CategorizedItems::default(), 50)
     }
 }
 
 impl Default for CategorizedTest<VerbType, VerbDetail> {
     fn default() -> Self {
-        Self::new(&CategorizedItems::default())
+        Self::new_of_size(&CategorizedItems::default(), 50)
     }
 }
 
@@ -70,6 +70,12 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
             current_index: 0,
             answers,
         }
+    }
+
+    pub fn new_of_size(items: &CategorizedItems<T, D>, size: usize) -> Self {
+        let mut test = Self::new(&items);
+        test.random_indices = test.random_indices.into_iter().take(size).collect();
+        test
     }
 
     pub fn next(&mut self) {
@@ -212,5 +218,13 @@ mod tests {
             test.is_finished(),
             "The test should be finished after iterating through all details."
         );
+    }
+
+    #[test]
+    fn test_new_of_size() {
+        let konnektoren = mock_konnektoren();
+        let test = CategorizedTest::new_of_size(&konnektoren, 1);
+
+        assert_eq!(test.len(), 1, "The length of the test should be 1.");
     }
 }
