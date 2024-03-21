@@ -22,7 +22,8 @@ path = "src/bin/tui.rs"
 required-features = ["tui"]
 
 [features]
-default = []
+default = ["web"]
+web = ["yew", "yew-router", "yew-bootstrap", "yew-hooks"]
 openapi = ["utoipa"]
 tui = ["crossterm", "ratatui"]
 verifiable-credentials = ["chrono", "uuid"]
@@ -54,10 +55,10 @@ web-sys = { version = "0.3.*", features = [
     "HtmlSelectElement",
     "Window",
 ] }
-yew = { version = "0.21.0", features = ["csr"] }
-yew-bootstrap = "0.10.0"
-yew-router = "0.18.0"
-yew-hooks = "0.3.1"
+yew = { version = "0.21.0", features = ["csr"], optional = true }
+yew-bootstrap = { version = "0.10.0", optional = true }
+yew-router = { version = "0.18.0", optional = true }
+yew-hooks = { version = "0.3.1", optional = true }
 crossterm = { version = "0.27.0", optional = true }
 ratatui = { version = "0.26.0", optional = true, features = ["all-widgets"] }
 rmp-serde = "1.1.2"

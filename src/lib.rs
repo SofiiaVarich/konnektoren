@@ -1,8 +1,12 @@
+#[cfg(feature = "web")]
 pub mod app;
+#[cfg(feature = "web")]
 pub mod components;
 pub mod model;
 #[cfg(feature = "openapi")]
 pub mod openapi_spec;
+
+#[cfg(feature = "web")]
 pub mod pages;
 pub mod utils;
 
