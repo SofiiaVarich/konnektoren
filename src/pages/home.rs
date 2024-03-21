@@ -1,4 +1,4 @@
-use crate::components::{Carousel, Footer, Header, TestSelector};
+use crate::components::{Carousel, Header, TestSelector};
 use crate::model::{
     AdjectiveDetail, AdjectiveType, KonnektorDetail, KonnektorType, TestType, VerbDetail, VerbType,
 };
@@ -25,7 +25,6 @@ pub fn Home() -> Html {
             <Header title={"Konnektoren".to_string()} img_src={"favicon.png".to_string()} />
            <TestSelector {test_type} />
             {carousel}
-            <Footer />
         </div>
     }
 }

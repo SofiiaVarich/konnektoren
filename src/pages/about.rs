@@ -1,3 +1,4 @@
+use crate::components::Footer;
 use yew::prelude::*;
 
 #[function_component(About)]
@@ -16,6 +17,8 @@ pub fn about() -> Html {
             <p>
                 { "Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities." }
             </p>
+
+            <Footer />
         </div>
     }
 }

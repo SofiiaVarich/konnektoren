@@ -1,3 +1,4 @@
+use crate::components::Logo;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -10,7 +11,7 @@ pub struct HeaderProps {
 pub fn header(props: &HeaderProps) -> Html {
     html! {
         <div class="text-center title-with-icon">
-            <img src={props.img_src.clone()} alt="Icon" />
+                <Logo img_src={props.img_src.clone()}/>
             <h1>{ &props.title }</h1>
         </div>
     }

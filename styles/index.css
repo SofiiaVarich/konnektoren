@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: "Arial", sans-serif;
     color: #000;
+    padding-bottom: 70px;
 }
 
 .table-container {
@@ -222,8 +223,12 @@ th {
     gap: 10px;
 }
 
-.title-with-icon img {
+.logo img {
     max-height: 3.5rem;
+}
+
+.logo img {
+    max-height: 2.5rem;
 }
 
 nav {
@@ -233,6 +238,11 @@ nav {
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 nav a {
