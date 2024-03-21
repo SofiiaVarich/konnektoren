@@ -7,10 +7,13 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-worker = "0.0.18"
+worker = "0.0.21"
+konnektoren = { git="https://github.com/SofiiaVarich/konnektoren.git", default-features = false }
+image = "0.24"
+getrandom = {version = "0.2", features = ["js"] }
 
 [profile.release]
-opt-level = "s" # optimize for size in release builds
+opt-level = "s"
 lto = true
 strip = true
 codegen-units = 1
