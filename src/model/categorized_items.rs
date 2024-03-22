@@ -3,7 +3,7 @@ use super::category::Category;
 use super::konnektor_detail::KonnektorDetail;
 use super::konnektor_type::KonnektorType;
 use super::{adjective_detail::AdjectiveDetail, TypeTrait};
-use super::{DetailTrait, VerbDetail, VerbType};
+use super::{DetailTrait, NomenDetail, NomenType, VerbDetail, VerbType};
 use serde::{Deserialize, Serialize};
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
@@ -77,8 +77,17 @@ impl Default for CategorizedItems<VerbType, VerbDetail> {
 
         let verbs: CategorizedItems<VerbType, VerbDetail> = serde_yaml::from_str(&yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
-
         verbs
+    }
+}
+
+impl Default for CategorizedItems<NomenType, NomenDetail> {
+    fn default() -> Self {
+        let yaml_content = include_str!("../nomen.yml");
+
+        let nomen: CategorizedItems<NomenType, NomenDetail> = serde_yaml::from_str(&yaml_content)
+            .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
+        nomen
     }
 }
 

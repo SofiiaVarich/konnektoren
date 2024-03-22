@@ -1,4 +1,4 @@
-use crate::model::{AdjectiveType, KonnektorType, TypeTrait, VerbType};
+use crate::model::{AdjectiveType, KonnektorType, NomenType, TypeTrait, VerbType};
 use rand::seq::SliceRandom;
 use yew::prelude::*;
 use yew_bootstrap::component::{Button, ButtonGroup};
@@ -181,6 +181,66 @@ impl Component for TypeSelector<VerbType> {
                 let verb_type_clone = verb_type.clone();
                 html! {
                     <Button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(verb_type_clone.clone()))}>
+                        {button_text}
+                    </Button>
+                }
+            })}
+        </ButtonGroup>
+            </div>
+        }
+    }
+}
+
+impl Component for TypeSelector<NomenType> {
+    type Message = Msg<NomenType>;
+    type Properties = TypeSelectorProps<NomenType>;
+
+    fn create(_ctx: &Context<Self>) -> Self {
+        Self {
+            button_order: vec![
+                NomenType::Bringen,
+                NomenType::Geraten,
+                NomenType::Kommen,
+                NomenType::Nehmen,
+                NomenType::Setzen,
+                NomenType::Stehen,
+                NomenType::Stellen,
+                NomenType::Stossen,
+                NomenType::Ziehen,
+            ],
+        }
+    }
+
+    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+        match msg {
+            Msg::ButtonClicked(nomen_type) => {
+                let mut rng = rand::thread_rng();
+                self.button_order.shuffle(&mut rng);
+                ctx.props().on_select.emit(nomen_type);
+            }
+        }
+        true
+    }
+
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        html! {
+            <div id="typeselector" class="d-flex justify-content-center">
+            <ButtonGroup>
+            {for self.button_order.iter().map(|nomen_type| {
+                let button_text = match nomen_type {
+                    NomenType::Bringen => "bringen",
+                    NomenType::Geraten => "geraten",
+                    NomenType::Kommen => "kommen",
+                    NomenType::Nehmen => "nehmen",
+                    NomenType::Setzen => "setzen",
+                    NomenType::Stehen => "stehen",
+                    NomenType::Stellen => "stellen",
+                    NomenType::Stossen => "stoßen",
+                    NomenType::Ziehen => "ziehen",
+                };
+                let nomen_type_clone = nomen_type.clone();
+                html! {
+                    <Button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(nomen_type_clone.clone()))}>
                         {button_text}
                     </Button>
                 }

@@ -1,0 +1,67 @@
+categories:
+  - category: "bringen"
+    details:
+      - nomen: "etwas in Erfahrung"
+        example: "Sie brachte etwas in Erfahrung, das niemand wusste."
+      - nomen: "etwas in Ordnung"
+        example: "Er brachte alles in Ordnung."
+
+  - category: "geraten"
+    details:
+      - nomen: "in Abhängigkeit von"
+        example: "Er geriet in Abhängigkeit von seiner Spielsucht."
+      - nomen: "in Konflikt mit"
+        example: "Sie geriet in Konflikt mit ihrem Chef."
+
+  - category: "kommen"
+    details:
+      - nomen: "in Frage"
+        example: "Das kommt für mich nicht in Frage."
+      - nomen: "zur Anwendung"
+        example: "Das kommt zur Anwendung, wenn es nötig ist."
+
+  - category: "nehmen"
+    details:
+      - nomen: "etwas in Betrieb"
+        example: "Er nahm das neue Gerät in Betrieb."
+      - nomen: "etwas in Angriff"
+        example: "Sie nahm das Projekt in Angriff."
+
+  - category: "setzen"
+    details:
+      - nomen: "etwas aufs Spiel"
+        example: "Er setzte alles aufs Spiel."
+      - nomen: "sich in Verbindung mit"
+        example: "Sie setzte sich in Verbindung mit dem Kundenservice."
+
+  - category: "stehen"
+    details:
+      - nomen: "zur Debatte"
+        example: "Das steht für mich nicht zur Debatte."
+      - nomen: "in Widerspruch"
+        example: "Das steht in Widerspruch zu den Fakten."
+
+  - category: "stellen"
+    details:
+      - nomen: "etwas zur Verfügung"
+        example: "Er stellte sein Auto zur Verfügung."
+      - nomen: "etwas in Aussicht"
+        example: "Sie stellte eine Beförderung in Aussicht."
+
+  - category: "stoßen"
+    details:
+      - nomen: "auf Ablehnung"
+        example: "Sein Vorschlag stieß auf Ablehnung."
+      - nomen: "auf Interesse"
+        example: "Sein Vorschlag stieß auf großes Interesse."
+      - nomen: "auf Zustimmung"
+        example: "Sein Vorschlag stieß auf Zustimmung."
+
+  - category: "ziehen"
+    details:
+      - nomen: "etwas in Betracht"
+        example: "Sie zog das Angebot in Betracht."
+      - nomen: "etwas in Erwägung"
+        example: "Er zog die Konsequenzen in Erwägung."
+      - nomen: "etwas in Zweifel"
+        example: "Sie zog seine Aussagen in Zweifel."

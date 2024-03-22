@@ -1,3 +1,5 @@
+use crate::model::NomenType;
+
 use super::{AdjectiveType, KonnektorType, TypeTrait, VerbType};
 use serde::{Deserialize, Serialize};
 use strum::EnumIter;
@@ -11,6 +13,7 @@ pub enum TestType {
     Konnektoren,
     Adjectives,
     Verbs,
+    Nomen,
 }
 
 impl std::default::Default for TestType {
@@ -25,6 +28,7 @@ impl std::fmt::Display for TestType {
             TestType::Konnektoren => KonnektorType::get_type(),
             TestType::Adjectives => AdjectiveType::get_type(),
             TestType::Verbs => VerbType::get_type(),
+            TestType::Nomen => NomenType::get_type(),
         };
         write!(f, "{}", s)
     }

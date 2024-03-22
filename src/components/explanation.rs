@@ -12,6 +12,7 @@ pub fn explanation(props: &ExplanationProps) -> Html {
         TestType::Konnektoren => konnektoren_explanation(),
         TestType::Adjectives => adjectives_explanation(),
         TestType::Verbs => verbs_explanation(),
+        TestType::Nomen => nomen_explanation(),
     }
 }
 
@@ -155,5 +156,11 @@ fn verbs_explanation_test_mode() -> Html {
             <p>{"Mastering verbs is key to success in any German language examination. By learning them thoroughly, you will be able to speak and write in German confidently, clearly, and without mistakes. Prepare to impress with your flawless grammar and articulate expression!"}</p>
             <p class="encouragement">{"Embrace the challenge, elevate your German, and speak with pride. Your journey to German fluency starts now!"}</p>
         </div>
+    }
+}
+
+fn nomen_explanation() -> Html {
+    html! {
+        <div class="explanation"></div>
     }
 }

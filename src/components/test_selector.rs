@@ -14,7 +14,8 @@ pub fn test_selector(props: &TestSelectorProps) -> Html {
             let next_type = match *test_type {
                 TestType::Konnektoren => TestType::Adjectives,
                 TestType::Adjectives => TestType::Verbs,
-                TestType::Verbs => TestType::Konnektoren,
+                TestType::Verbs => TestType::Nomen,
+                TestType::Nomen => TestType::Konnektoren,
             };
             test_type.set(next_type);
         })
@@ -33,6 +34,10 @@ pub fn test_selector(props: &TestSelectorProps) -> Html {
                 {" / "}
                 <span class={(*props.test_type == TestType::Verbs).then(|| "large-font").unwrap_or("small-font")}>
                     {TestType::Verbs.to_string()}
+                </span>
+                {" / "}
+                <span class={(*props.test_type == TestType::Nomen).then(|| "large-font").unwrap_or("small-font")}>
+                    {TestType::Nomen.to_string()}
                 </span>
             </button>
         </div>

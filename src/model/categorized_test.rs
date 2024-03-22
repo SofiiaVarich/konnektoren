@@ -5,6 +5,8 @@ use super::CategorizedItems;
 use super::DetailTrait;
 use super::KonnektorDetail;
 use super::KonnektorType;
+use super::NomenDetail;
+use super::NomenType;
 use super::TypeTrait;
 use super::VerbDetail;
 use super::VerbType;
@@ -34,6 +36,12 @@ impl Default for CategorizedTest<AdjectiveType, AdjectiveDetail> {
 }
 
 impl Default for CategorizedTest<VerbType, VerbDetail> {
+    fn default() -> Self {
+        Self::new_of_size(&CategorizedItems::default(), 50)
+    }
+}
+
+impl Default for CategorizedTest<NomenType, NomenDetail> {
     fn default() -> Self {
         Self::new_of_size(&CategorizedItems::default(), 50)
     }
