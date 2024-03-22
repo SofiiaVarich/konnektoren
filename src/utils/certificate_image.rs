@@ -1,7 +1,10 @@
 use crate::model::TestResult;
 use anyhow::Result;
+use base64::engine::general_purpose;
+use base64::Engine as _;
 use identicon_rs::Identicon;
 use image::io::Reader as ImageReader;
+use image::ImageOutputFormat;
 use image::{imageops, DynamicImage, ImageBuffer, Luma, Rgba, RgbaImage};
 use imageproc::drawing::draw_text_mut;
 use imageproc::rect::Rect;
@@ -164,7 +167,7 @@ pub fn create_certificate(
     Ok(DynamicImage::ImageRgba8(cert_image))
 }
 
-trait FontExt {
+pub trait FontExt {
     fn width(&self, scale: Scale, text: &str) -> u32;
 }
 
@@ -179,4 +182,19 @@ impl FontExt for Font<'_> {
             .map(|g| g.pixel_bounding_box().map_or(0, |b| b.width()))
             .sum::<i32>() as u32
     }
+}
+
+pub fn create_certificate_data_url(
+    test_result: &TestResult,
+    url: &str,
+    issuer: &str,
+) -> Result<String> {
+    let image = create_certificate(test_result, url, issuer)?;
+
+    let mut image_data: Vec<u8> = Vec::new();
+    image
+        .write_to(&mut Cursor::new(&mut image_data), ImageOutputFormat::Png)
+        .unwrap();
+    let res_base64 = general_purpose::STANDARD.encode(image_data);
+    Ok(format!("data:image/png;base64,{}", res_base64))
 }

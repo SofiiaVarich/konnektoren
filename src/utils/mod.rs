@@ -6,8 +6,10 @@ mod verifiable_credential;
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::*;
 
+#[cfg(feature = "certificate-image")]
 mod certificate_image;
-pub use certificate_image::create_certificate;
+#[cfg(feature = "certificate-image")]
+pub use certificate_image::{create_certificate, create_certificate_data_url};
 
 pub fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
     let mut hasher = Sha256::new();
