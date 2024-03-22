@@ -39,7 +39,7 @@ pub fn Navigation() -> Html {
         <nav>
         <Link<Route> to={Route::Konnektoren}>{ "Konnektoren" }</Link<Route>>
         <Link<Route> to={Route::Adjectives}>{ "Adjektive" }</Link<Route>>
-        <Link<Route> to={Route::Home}><Logo img_src={"favicon.png".to_string()} /></Link<Route>>
+        <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
         <Link<Route> to={Route::Verbs}>{ "Verben" }</Link<Route>>
         <Link<Route> to={Route::About}>{ "About" }</Link<Route>>
         </nav>

@@ -1,4 +1,6 @@
 use crate::model::TestResult;
+use urlencoding::encode;
+use web_sys::window;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -8,9 +10,6 @@ pub struct CertificateProps {
 
 #[function_component(Certificate)]
 pub fn certificate(props: &CertificateProps) -> Html {
-    use urlencoding::encode;
-    use web_sys::window;
-
     let hostname = window().unwrap().location().host().unwrap_or_default();
     let protocol = window().unwrap().location().protocol().unwrap_or_default();
 

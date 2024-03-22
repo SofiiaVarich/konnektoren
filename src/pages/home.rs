@@ -22,7 +22,7 @@ pub fn Home() -> Html {
 
     html! {
         <div>
-            <Header title={"Konnektoren".to_string()} img_src={"favicon.png".to_string()} />
+            <Header title={"Konnektoren".to_string()} img_src={"/favicon.png".to_string()} />
            <TestSelector {test_type} />
             {carousel}
         </div>
