@@ -1,5 +1,6 @@
 use crate::model::TestType;
 use crate::utils::keypair_from_static_str;
+use anyhow::{anyhow, Result};
 use base64::{engine::general_purpose, Engine as _};
 use ed25519_dalek::{ed25519::SignatureBytes, Signature, Signer, Verifier};
 use serde::{Deserialize, Serialize};
@@ -48,15 +49,15 @@ impl TestResult {
         general_purpose::STANDARD.encode(buf).to_string()
     }
 
-    pub fn from_base64(encoded: &str) -> Result<Self, &'static str> {
+    pub fn from_base64(encoded: &str) -> Result<Self> {
         let decoded = match general_purpose::STANDARD.decode(encoded) {
             Ok(decoded) => decoded,
-            Err(_) => return Err("Failed to decode the test result."),
+            Err(_) => return Err(anyhow!("Failed to decode the test result.")),
         };
 
         match rmp_serde::from_slice(&decoded) {
             Ok(test_result) => Ok(test_result),
-            Err(_) => Err("Failed to deserialize test result from msgpack."),
+            Err(_) => Err(anyhow!("Failed to deserialize test result from msgpack.")),
         }
     }
 
@@ -116,9 +117,9 @@ mod tests {
     fn test_base64_serialization_deserialization() {
         let test_result = TestResult::new(TestType::Adjectives, 10, 8, 2, "Player".to_string());
         let base64_encoded = test_result.to_base64();
-        let decoded_test_result = TestResult::from_base64(&base64_encoded);
+        let decoded_test_result = TestResult::from_base64(&base64_encoded).unwrap();
 
-        assert_eq!(Ok(test_result), decoded_test_result);
+        assert_eq!(test_result, decoded_test_result);
     }
 
     #[test]

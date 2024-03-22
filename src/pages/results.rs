@@ -85,7 +85,7 @@ pub fn results(props: &ResultsProps) -> Html {
             <div class="results-page">
                 <h1>{ "Oops!" }</h1>
                 <p>{ "It seems like something went wrong with displaying your test results." }</p>
-                <p>{ error_message }</p>
+                <p>{ error_message.to_string() }</p>
                 <p>{ "Maybe the code was incorrect, or perhaps our server just needs a coffee break. 🤷‍♂️ ☕" }</p>
             </div>
         },

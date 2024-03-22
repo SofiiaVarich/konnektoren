@@ -30,6 +30,7 @@ verifiable-credentials = ["chrono", "uuid"]
 certificate-image = ["image", "imageproc", "rusttype"]
 
 [dependencies]
+anyhow = "1.0.81"
 base64 = "0.22.0"
 charts-rs = "0.3.4"
 chrono = { version = "0.4.35", optional = true }
@@ -67,4 +68,3 @@ strum = { version = "0.26", features = ["derive"] }
 utoipa = { version = "4.2.0", optional = true }
 hex = "0.4.3"
 identicon-rs = "=5.0.0"
-anyhow = "1.0.81"
