@@ -7,7 +7,6 @@ use worker::*;
 
 #[event(fetch)]
 pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
-    // Only proceed for GET requests
     if req.method() != Method::Get {
         return Response::error("Method Not Allowed", 405);
     }

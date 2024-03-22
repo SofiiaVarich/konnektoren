@@ -84,9 +84,9 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
 name = "backtrace"
-version = "0.3.69"
+version = "0.3.70"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2089b7e3f35b9dd2d0ed921ead4f6d318c27680d4a5bd167b3ee120edb105837"
+checksum = "95d8e92cac0961e91dbd517496b00f7e9b92363dbe6d42c3198268323798860c"
 dependencies = [
  "addr2line",
  "cc",
@@ -780,7 +780,7 @@ dependencies = [
 [[package]]
 name = "konnektoren"
 version = "0.1.0"
-source = "git+https://github.com/SofiiaVarich/konnektoren.git#c7991c1e063067e521da53899e369d4d80c70600"
+source = "git+https://github.com/SofiiaVarich/konnektoren.git#07869e312642721b0696ca26344daa111a75c09c"
 dependencies = [
  "anyhow",
  "base64",
