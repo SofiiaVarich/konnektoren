@@ -6,10 +6,8 @@ pub struct CertificateProps {
     pub test_result: TestResult,
 }
 
-#[cfg(feature = "certificate-image")]
 #[function_component(Certificate)]
 pub fn certificate(props: &CertificateProps) -> Html {
-    use crate::utils::create_certificate_data_url;
     use urlencoding::encode;
     use web_sys::window;
 
@@ -18,29 +16,38 @@ pub fn certificate(props: &CertificateProps) -> Html {
 
     let encoded_code: String = encode(&props.test_result.to_base64()).into_owned();
 
-    let share_url = format!(
-        "{}//{}/?page=results&code={}",
-        protocol, hostname, encoded_code
-    );
+    #[cfg(feature = "certificate-image")]
+    {
+        use crate::utils::create_certificate_data_url;
+        let share_url = format!(
+            "{}//{}/?page=results&code={}",
+            protocol, hostname, encoded_code
+        );
 
-    match create_certificate_data_url(&props.test_result, &share_url, &hostname) {
-        Ok(img_src) => html! {
-            <div>
-                <div class="certificate-image">
-                    <img src={img_src} />
+        match create_certificate_data_url(&props.test_result, &share_url, &hostname) {
+            Ok(img_src) => html! {
+                    <div class="certificate-image">
+                        <img src={img_src} />
+                    </div>
+            },
+            Err(err) => html! {
+                <div>
+                    <p>{"Error creating certificate image: "}{err}</p>
                 </div>
-            </div>
-        },
-        Err(err) => html! {
-            <div>
-                <p>{"Error creating certificate image: "}{err}</p>
-            </div>
-        },
+            },
+        }
     }
-}
 
-#[cfg(not(feature = "certificate-image"))]
-#[function_component(Certificate)]
-pub fn certificate(_props: &CertificateProps) -> Html {
-    html!()
+    #[cfg(not(feature = "certificate-image"))]
+    {
+        let img_src = format!(
+            "{}//{}/certificate/{}.png",
+            protocol, hostname, encoded_code
+        );
+        html! {
+            <div class="certificate-image">
+                <img src={img_src} />
+            </div>
+        }
+    }
 }

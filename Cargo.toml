@@ -22,7 +22,7 @@ path = "src/bin/tui.rs"
 required-features = ["tui"]
 
 [features]
-default = ["web", "certificate-image"]
+default = ["web"]
 web = ["yew", "yew-router", "yew-bootstrap", "yew-hooks"]
 openapi = ["utoipa"]
 tui = ["crossterm", "ratatui"]
