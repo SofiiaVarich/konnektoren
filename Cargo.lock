@@ -1932,6 +1932,7 @@ dependencies = [
  "getrandom 0.2.12",
  "image",
  "konnektoren",
+ "urlencoding",
  "worker",
 ]
 
