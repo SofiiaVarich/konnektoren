@@ -5,6 +5,9 @@ use std::io::Cursor;
 use urlencoding::{decode, encode};
 use worker::*;
 
+mod certificate;
+use certificate::Certificate;
+
 #[event(fetch)]
 pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
     if req.method() != Method::Get {
@@ -23,7 +26,7 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
 
     let test_result = match TestResult::from_base64(&base64_encoded) {
         Ok(result) => result,
-        Err(_) => return Response::error(format!("Bad Request {}", base64_encoded), 400),
+        Err(_) => return Response::error(format!("Bad Request {}", &base64_encoded), 400),
     };
 
     let issuer = "konnektoren.help";
@@ -34,20 +37,16 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
         "https://konnektoren.help/?page=results&code={}",
         encoded_code
     );
-    match create_certificate(&test_result, &url, issuer) {
-        Ok(image) => {
-            // Convert the DynamicImage to PNG
-            let mut bytes: Vec<u8> = Vec::new();
-            match image.write_to(&mut Cursor::new(&mut bytes), ImageOutputFormat::Png) {
-                Ok(_) => {
-                    // Create a response with the PNG data
-                    Response::from_bytes(bytes).map(|mut res| {
-                        let _ = res.headers_mut().set("Content-Type", "image/png");
-                        res
-                    })
-                }
-                Err(_) => Response::error("Internal Server Error", 500),
-            }
+
+    match Certificate::from_base64(&base64_encoded) {
+        Ok(mut certificate) => {
+            certificate.issuer = issuer.to_string();
+            certificate.url = url;
+            let bytes = certificate.to_png().unwrap();
+            Response::from_bytes(bytes).map(|mut res| {
+                let _ = res.headers_mut().set("Content-Type", "image/png");
+                res
+            })
         }
         Err(_) => Response::error("Internal Server Error", 500),
     }
