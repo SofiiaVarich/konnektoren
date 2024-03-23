@@ -1,6 +1,5 @@
 # Konnektoren Server
 
-
 [![Deploy with Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/workers-sdk/tree/main/templates/experimental/worker-rust)
 
 A template for kick starting a Cloudflare worker project using [`workers-rs`](https://github.com/cloudflare/workers-rs).
@@ -11,6 +10,12 @@ This template is designed for compiling Rust to WebAssembly and publishing the r
 
 ```sh
 npx wrangler dev
+```
+
+## Deploy
+
+```sh
+npx wrangler deploy
 ```
 
 ## Setup
@@ -49,7 +54,7 @@ Read the latest `worker` crate documentation here: https://docs.rs/worker
 
 ## Advanced Example
 
-As this template comprises only the essential setup, we recommend considering our advanced example to leverage its additional functionalities. The advanced example showcases the creation of multiple routes, logging of requests, retrieval of field data from a form, and other features that may prove useful to your project.  
+As this template comprises only the essential setup, we recommend considering our advanced example to leverage its additional functionalities. The advanced example showcases the creation of multiple routes, logging of requests, retrieval of field data from a form, and other features that may prove useful to your project.
 The following example has been taken from: [workers-rs](https://github.com/cloudflare/workers-rs). You can learn more about how to use workers with rust by going there.
 
 ```rust

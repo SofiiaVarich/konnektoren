@@ -828,6 +828,8 @@ dependencies = [
  "getrandom 0.2.12",
  "image",
  "konnektoren",
+ "serde",
+ "serde_json",
  "urlencoding",
  "worker",
 ]
