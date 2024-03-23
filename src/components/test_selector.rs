@@ -1,4 +1,5 @@
 use crate::model::TestType;
+use strum::IntoEnumIterator;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -8,38 +9,30 @@ pub struct TestSelectorProps {
 
 #[function_component(TestSelector)]
 pub fn test_selector(props: &TestSelectorProps) -> Html {
-    let toggle_test = {
+    let set_test_type = {
         let test_type = props.test_type.clone();
-        Callback::from(move |_| {
-            let next_type = match *test_type {
-                TestType::Konnektoren => TestType::Adjectives,
-                TestType::Adjectives => TestType::Verbs,
-                TestType::Verbs => TestType::Nomen,
-                TestType::Nomen => TestType::Konnektoren,
-            };
-            test_type.set(next_type);
-        })
+        move |type_: TestType| {
+            test_type.set(type_);
+        }
     };
 
     html! {
         <div class="test-selector text-center">
-            <button onclick={toggle_test} class="toggle-test-btn">
-                <span class={(*props.test_type == TestType::Konnektoren).then(|| "large-font").unwrap_or("small-font")}>
-                    {TestType::Konnektoren.to_string()}
-                </span>
-                {" / "}
-                <span class={(*props.test_type == TestType::Adjectives).then(|| "large-font").unwrap_or("small-font")}>
-                    {TestType::Adjectives.to_string()}
-                </span>
-                {" / "}
-                <span class={(*props.test_type == TestType::Verbs).then(|| "large-font").unwrap_or("small-font")}>
-                    {TestType::Verbs.to_string()}
-                </span>
-                {" / "}
-                <span class={(*props.test_type == TestType::Nomen).then(|| "large-font").unwrap_or("small-font")}>
-                    {TestType::Nomen.to_string()}
-                </span>
-            </button>
+            { for TestType::iter().map(|type_| {
+                let is_active = *props.test_type == type_;
+                let onclick = {
+                    let set_test_type = set_test_type.clone();
+                    Callback::from(move |_| set_test_type(type_))
+                };
+                html! {
+                    <button
+                        {onclick}
+                        class={classes!("test-type-btn", is_active.then(|| "active"))}
+                    >
+                        { type_.to_string() }
+                    </button>
+                }
+            })}
         </div>
     }
 }

@@ -193,6 +193,11 @@ th {
     line-height: 1.6;
 }
 
+.fire-gradient-progress-bar .progress-bar {
+    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffbf00, #ffff00);
+    color: #000000;
+}
+
 .large-font {
     font-size: 24px;
     font-weight: bold;
@@ -203,12 +208,25 @@ th {
     color: grey;
 }
 
-.toggle-test-btn {
-    background: none;
-    border: none;
+.test-type-btn {
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    background-color: #ffffff;
+    color: #007bff;
+    font-weight: bold;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 10px;
-    font-size: inherit;
+    transition: all 0.3s ease;
+}
+
+.test-type-btn:hover {
+    color: #000;
+}
+
+.test-type-btn.active {
+    color: #ffffff;
+    background-image: linear-gradient(to right, #007bff, #6200ea);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .text-center {

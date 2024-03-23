@@ -30,17 +30,13 @@ impl Default for KonnektorType {
 impl fmt::Display for KonnektorType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
-            KonnektorType::Subjunktionen => {
-                "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)"
-            }
-            KonnektorType::Konjunktionen => {
-                "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)"
-            }
+            KonnektorType::Subjunktionen => "Nebensatz (Verb am Ende) (= Subjunktionen)",
+            KonnektorType::Konjunktionen => "Hauptsatz (Position 0) (= Konjunktionen)",
             KonnektorType::Konjunktionaladverbien => {
-                "Konnektoren mit Hauptsatz (Position 1) (= Konjunktionaladverbien)"
+                "Hauptsatz (Position 1) (= Konjunktionaladverbien)"
             }
-            KonnektorType::Infinitivgruppe => "Konnektoren mit Infinitivgruppe",
-            KonnektorType::BesonderePosition => "Konnektoren mit besonderer Position",
+            KonnektorType::Infinitivgruppe => "Infinitivgruppe",
+            KonnektorType::BesonderePosition => "besondere Position",
         };
         write!(f, "{}", s)
     }

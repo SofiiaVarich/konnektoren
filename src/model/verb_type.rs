@@ -62,7 +62,7 @@ impl fmt::Display for VerbType {
 
 impl TypeTrait for VerbType {
     fn get_type() -> String {
-        "Verben".to_string()
+        "Verben mit Präpositionen".to_string()
     }
 }
 
