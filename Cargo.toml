@@ -1,5 +1,6 @@
 [package]
-name = "worker-rust"
+name = "konnektoren-worker-rust"
+description = "Konnektoren Worker Rust"
 version = "0.1.0"
 edition = "2021"
 
