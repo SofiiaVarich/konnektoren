@@ -2,12 +2,12 @@ use crate::model::TestResult;
 use anyhow::Result;
 use base64::engine::general_purpose;
 use base64::Engine as _;
-use identicon_rs::Identicon;
 use image::io::Reader as ImageReader;
 use image::ImageOutputFormat;
 use image::{imageops, DynamicImage, ImageBuffer, Luma, Rgba, RgbaImage};
 use imageproc::drawing::draw_text_mut;
 use imageproc::rect::Rect;
+use plot_icon::generate_png;
 use qrcode::{EcLevel, QrCode};
 use rusttype::{Font, Scale};
 use std::cmp;
@@ -56,9 +56,13 @@ pub fn create_certificate(
         .decode()
         .expect("Failed to decode image");
 
-    let mut identicon = Identicon::new(&test_result.to_base64());
-    let _ = identicon.set_size(32)?.set_scale(75)?.set_border(0);
-    let identicon_image = identicon.generate_image()?;
+    let identicon_image = {
+        let data: Vec<u8> = generate_png(test_result.to_base64().as_bytes(), 75)
+            .expect("Failed to generate identicon");
+        let mut image = ImageReader::new(Cursor::new(data));
+        image.set_format(image::ImageFormat::Png);
+        image.decode().expect("Failed to decode image")
+    };
 
     let scaled_logo_image = imageops::resize(&logo_image, 75, 75, imageops::FilterType::Nearest);
 

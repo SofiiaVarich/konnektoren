@@ -27,7 +27,7 @@ web = ["yew", "yew-router", "yew-bootstrap", "yew-hooks"]
 openapi = ["utoipa"]
 tui = ["crossterm", "ratatui"]
 verifiable-credentials = ["chrono", "uuid"]
-certificate-image = ["image", "imageproc", "rusttype"]
+certificate-image = ["image", "imageproc", "rusttype", "plot_icon"]
 
 [dependencies]
 anyhow = "1.0.81"
@@ -67,4 +67,4 @@ rmp-serde = "1.1.2"
 strum = { version = "0.26", features = ["derive"] }
 utoipa = { version = "4.2.0", optional = true }
 hex = "0.4.3"
-identicon-rs = "=5.0.0"
+plot_icon = { version = "0.3.0", optional = true }
