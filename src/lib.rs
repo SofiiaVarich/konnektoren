@@ -1,12 +1,12 @@
 use konnektoren::model::TestResult;
-use urlencoding::{decode, encode};
+use urlencoding::decode;
 use worker::*;
 
 mod certificate;
 mod nft;
 
-use certificate::Certificate;
-use nft::Metadata;
+mod services;
+use services::{generate_json_response, generate_png_response};
 
 #[event(fetch)]
 pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
@@ -41,35 +41,4 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
         "json" => generate_json_response(&test_result),
         _ => Response::error("Unsupported format", 400),
     }
-}
-
-fn generate_png_response(test_result: &TestResult) -> Result<Response> {
-    let issuer = "konnektoren.help";
-    let encoded_code: String = encode(&test_result.to_base64()).into_owned();
-    let url = format!(
-        "https://konnektoren.help/?page=results&code={}",
-        encoded_code
-    );
-
-    let certificate = Certificate::new(issuer.to_string(), test_result.clone(), url);
-    match certificate.to_png() {
-        Ok(bytes) => Response::from_bytes(bytes).map(|mut res| {
-            let _ = res.headers_mut().set("Content-Type", "image/png");
-            res
-        }),
-        Err(_) => Response::error("Internal Server Error", 500),
-    }
-}
-
-fn generate_json_response(test_result: &TestResult) -> Result<Response> {
-    let mut metadata = Metadata::from_testresults(test_result);
-    metadata.image = format!(
-        "https://konnektoren.help/certificate/{}.png",
-        encode(&test_result.to_base64()).into_owned()
-    );
-    let json = serde_json::to_string(&metadata).unwrap();
-    Response::ok(json).map(|mut res| {
-        let _ = res.headers_mut().set("Content-Type", "application/json");
-        res
-    })
 }
