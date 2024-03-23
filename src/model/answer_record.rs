@@ -26,9 +26,10 @@ where
 #[cfg(test)]
 mod tests {
     use serde::{Deserialize, Serialize};
+    use strum::EnumIter;
 
     use super::*;
-    #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
+    #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, EnumIter)]
     enum TestType {
         Type1,
         Type2,

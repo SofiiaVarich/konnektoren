@@ -1,15 +1,7 @@
-use super::AdjectiveDetail;
-use super::AdjectiveType;
 use super::AnswerRecord;
 use super::CategorizedItems;
 use super::DetailTrait;
-use super::KonnektorDetail;
-use super::KonnektorType;
-use super::NomenDetail;
-use super::NomenType;
 use super::TypeTrait;
-use super::VerbDetail;
-use super::VerbType;
 use rand::seq::SliceRandom;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
@@ -23,25 +15,10 @@ pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
     pub answers: Vec<AnswerRecord<T>>,
 }
 
-impl Default for CategorizedTest<KonnektorType, KonnektorDetail> {
-    fn default() -> Self {
-        Self::new_of_size(&CategorizedItems::default(), 50)
-    }
-}
-
-impl Default for CategorizedTest<AdjectiveType, AdjectiveDetail> {
-    fn default() -> Self {
-        Self::new_of_size(&CategorizedItems::default(), 50)
-    }
-}
-
-impl Default for CategorizedTest<VerbType, VerbDetail> {
-    fn default() -> Self {
-        Self::new_of_size(&CategorizedItems::default(), 50)
-    }
-}
-
-impl Default for CategorizedTest<NomenType, NomenDetail> {
+impl<T: TypeTrait, D: DetailTrait> Default for CategorizedTest<T, D>
+where
+    CategorizedItems<T, D>: std::default::Default,
+{
     fn default() -> Self {
         Self::new_of_size(&CategorizedItems::default(), 50)
     }
