@@ -33,11 +33,13 @@ pub fn generate_json_response(test_result: &TestResult) -> Result<Response> {
 }
 
 pub async fn upload_image_to_ipfs(test_result: &TestResult, env: &Env) -> Result<Response> {
-    let certificate = Certificate::new(
-        "konnektoren.help".to_string(),
-        test_result.clone(),
-        "".to_string(),
+    let issuer = "konnektoren.help";
+    let encoded_code: String = encode(&test_result.to_base64()).into_owned();
+    let url = format!(
+        "https://konnektoren.help/?page=results&code={}",
+        encoded_code
     );
+    let certificate = Certificate::new(issuer.to_string(), test_result.clone(), url);
     let api_key: String = env.secret("IPFS_API_KEY")?.to_string();
     match certificate.to_png() {
         Ok(bytes) => {

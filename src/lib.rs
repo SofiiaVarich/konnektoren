@@ -10,38 +10,56 @@ use services::{generate_json_response, generate_png_response, upload_image_to_ip
 
 #[event(fetch)]
 pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
-    if req.method() != Method::Get {
-        return Response::error("Method Not Allowed", 405);
-    }
+    let router = Router::new();
+    router
+        .get_async("/certificate/:code", |_req, ctx| async move {
+            if let Some(code) = ctx.param("code") {
+                if code.ends_with(".png") {
+                    let base64_encoded = code.trim_end_matches(".png");
+                    let decoded_data = decode(base64_encoded).unwrap_or_default().to_string();
 
-    let url = req.url()?;
-    let path = url.path();
-    let (base64_encoded, response_format) = match path.strip_prefix("/certificate/") {
-        Some(encoded) => {
-            if encoded.ends_with(".png") {
-                (encoded.trim_end_matches(".png"), "png")
-            } else if encoded.ends_with(".json") {
-                (encoded.trim_end_matches(".json"), "json")
-            } else if encoded.ends_with(".txt") {
-                (encoded.trim_end_matches(".txt"), "txt")
-            } else {
-                return Response::error("Unsupported format", 400);
+                    let test_result = match TestResult::from_base64(&decoded_data) {
+                        Ok(result) => result,
+                        Err(_) => {
+                            return Response::error(format!("Bad Request {}", &decoded_data), 400)
+                        }
+                    };
+                    return generate_png_response(&test_result);
+                }
             }
-        }
-        None => return Response::error("Bad Request", 400),
-    };
+            Response::error("Bad Request", 400)
+        })
+        .get_async("/metadata/:code", |_req, ctx| async move {
+            if let Some(code) = ctx.param("code") {
+                if code.ends_with(".json") {
+                    let base64_encoded = code.trim_end_matches(".json");
+                    let decoded_data = decode(base64_encoded).unwrap_or_default().to_string();
 
-    let decoded_data = decode(base64_encoded).unwrap_or_default().to_string();
+                    let test_result = match TestResult::from_base64(&decoded_data) {
+                        Ok(result) => result,
+                        Err(_) => {
+                            return Response::error(format!("Bad Request {}", &decoded_data), 400)
+                        }
+                    };
+                    return generate_json_response(&test_result);
+                }
+            }
+            Response::error("Bad Request", 400)
+        })
+        .get_async("/generate/:code", |_req, ctx| async move {
+            if let Some(code) = ctx.param("code") {
+                let decoded_data = decode(code).unwrap_or_default().to_string();
 
-    let test_result = match TestResult::from_base64(&decoded_data) {
-        Ok(result) => result,
-        Err(_) => return Response::error(format!("Bad Request {}", &decoded_data), 400),
-    };
-
-    match response_format {
-        "png" => generate_png_response(&test_result),
-        "json" => generate_json_response(&test_result),
-        "txt" => upload_image_to_ipfs(&test_result, &env).await,
-        _ => Response::error("Unsupported format", 400),
-    }
+                let test_result = match TestResult::from_base64(&decoded_data) {
+                    Ok(result) => result,
+                    Err(_) => {
+                        return Response::error(format!("Bad Request {}", &decoded_data), 400)
+                    }
+                };
+                return upload_image_to_ipfs(&test_result, &ctx.env).await;
+            }
+            Response::error("Bad Request", 400)
+        })
+        .run(req, env)
+        .await
 }
