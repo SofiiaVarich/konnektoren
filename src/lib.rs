@@ -6,10 +6,10 @@ mod certificate;
 mod nft;
 
 mod services;
-use services::{generate_json_response, generate_png_response};
+use services::{generate_json_response, generate_png_response, upload_image_to_ipfs};
 
 #[event(fetch)]
-pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
+pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     if req.method() != Method::Get {
         return Response::error("Method Not Allowed", 405);
     }
@@ -22,6 +22,8 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
                 (encoded.trim_end_matches(".png"), "png")
             } else if encoded.ends_with(".json") {
                 (encoded.trim_end_matches(".json"), "json")
+            } else if encoded.ends_with(".txt") {
+                (encoded.trim_end_matches(".txt"), "txt")
             } else {
                 return Response::error("Unsupported format", 400);
             }
@@ -39,6 +41,7 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
     match response_format {
         "png" => generate_png_response(&test_result),
         "json" => generate_json_response(&test_result),
+        "txt" => upload_image_to_ipfs(&test_result, &env).await,
         _ => Response::error("Unsupported format", 400),
     }
 }

@@ -9,11 +9,13 @@ crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1.0.81"
+base64 = "0.22.0"
 getrandom = { version = "0.2", features = ["js"] }
 konnektoren = { git = "https://github.com/SofiiaVarich/konnektoren.git", default-features = false, features = [
     "certificate-image",
 ] }
 image = "0.24"
+reqwest = { version = "0.12", features = ["json", "multipart"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 urlencoding = "2.1.3"
