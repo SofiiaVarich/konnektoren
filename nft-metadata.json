@@ -1,0 +1,10 @@
+{
+  "name": "Konnektoren Help NFT",
+  "symbol": "KHN",
+  "description": "This NFT certifies the holder has demonstrated proficiency in understanding and using German connectors (Konnektoren), crucial for mastering German grammar.",
+  "seller_fee_basis_points": 5,
+  "image": "https://konnektoren.help/favicon.png",
+  "external_url": "https://konnektoren.help",
+  "edition": 1,
+  "background_color": "000000"
+}
