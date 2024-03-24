@@ -33,6 +33,9 @@ jobs:
       - name: Copy robots.txt
         run: cp ./robots.txt ./dist/robots.txt
 
+      - name: Copy NFT Metadata
+        run: cp ./nft-metadata.json ./dist/nft-metadata.json
+
       - name: Generate OpenApi
         run: cargo run --bin konnektoren-openapi --features=openapi && cp ./openapi.json ./dist/openapi.json
 
