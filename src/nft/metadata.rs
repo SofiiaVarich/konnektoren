@@ -16,7 +16,7 @@ pub struct Metadata {
 }
 
 impl Metadata {
-    pub fn from_testresults(test_result: &TestResult) -> Self {
+    pub fn from_testresult(test_result: &TestResult) -> Self {
         let attributes = vec![
             Attribute {
                 trait_type: "Test Type".to_string(),
@@ -49,5 +49,15 @@ impl Metadata {
             image: "URL_TO_CERTIFICATE_IMAGE".to_string(),
             attributes,
         }
+    }
+
+    pub fn from_testresult_and_image_cid(test_result: &TestResult, image_cid: String) -> Self {
+        let mut metadata = Metadata::from_testresult(test_result);
+        metadata.image = format!("https://ipfs.io/ipfs/{}/certificate.png", image_cid);
+        metadata
+    }
+
+    pub fn to_json(&self) -> String {
+        serde_json::to_string(self).expect("Metadata serialization error")
     }
 }
