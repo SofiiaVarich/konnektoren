@@ -25,3 +25,17 @@ Update the secrets:
 ```sh
 npx wrangler secret put IPFS_API_KEY
 ```
+
+## Deploy NFT
+
+Create a .env file with the following content:
+
+```env
+MNEMONIC="hello world ..."
+```
+
+Run the following command:
+
+```sh
+cargo run --features=deploy-nft --bin deploy-nft
+```
