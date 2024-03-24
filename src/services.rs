@@ -23,7 +23,7 @@ pub fn generate_png_response(test_result: &TestResult) -> Result<Response> {
     }
 }
 
-pub fn generate_json_response(test_result: &TestResult) -> Result<Response> {
+pub fn generate_metadata_response(test_result: &TestResult) -> Result<Response> {
     let mut metadata = Metadata::from_testresults(test_result);
     metadata.image = format!(
         "https://konnektoren.help/certificate/{}.png",
@@ -43,8 +43,8 @@ pub async fn upload_image_to_ipfs(test_result: &TestResult, env: &Env) -> Result
     let api_key: String = env.secret("IPFS_API_KEY")?.to_string();
     match certificate.to_png() {
         Ok(bytes) => {
-            let ipfs = Ipfs::new(bytes, api_key);
-            match ipfs.upload().await {
+            let ipfs = Ipfs::new(api_key);
+            match ipfs.upload(bytes, "image.png".to_string()).await {
                 Ok(hash) => Response::from_json(&hash),
                 Err(_) => Response::error("Internal Server Error", 500),
             }

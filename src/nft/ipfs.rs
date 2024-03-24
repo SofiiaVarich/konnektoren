@@ -1,29 +1,25 @@
 use anyhow::{anyhow, Result};
-use base64;
 use reqwest::{multipart, Client};
 
 use serde_json::Value;
 
 pub struct Ipfs {
-    image: Vec<u8>,
     api_key: String,
 }
 
 impl Ipfs {
-    pub fn new(image: Vec<u8>, api_key: String) -> Self {
-        Ipfs { image, api_key }
+    pub fn new(api_key: String) -> Self {
+        Ipfs { api_key }
     }
 
-    pub async fn upload(&self) -> Result<String> {
+    pub async fn upload(&self, data: Vec<u8>, filename: String) -> Result<String> {
         let client = Client::new();
 
-        // Prepare the multipart/form-data request with the image
         let form = multipart::Form::new().part(
             "file",
-            multipart::Part::bytes(self.image.clone()).file_name("image.png"),
+            multipart::Part::bytes(data.clone()).file_name(filename),
         );
 
-        // Send the request to NFT.storage
         let response = client
             .post("https://api.nft.storage/upload")
             .header("Authorization", format!("Bearer {}", self.api_key))
@@ -32,14 +28,12 @@ impl Ipfs {
             .await
             .map_err(|e| anyhow!("Failed to send request: {}", e))?;
 
-        // Handle the response
         if response.status().is_success() {
             let response_json: Value = response
                 .json()
                 .await
                 .map_err(|e| anyhow!("Failed to parse JSON response: {}", e))?;
 
-            // Extract the CID from the response
             if let Some(value) = response_json.get("value") {
                 if let Some(cid) = value.get("cid").and_then(|c| c.as_str()) {
                     return Ok(cid.to_string());
