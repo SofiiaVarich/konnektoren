@@ -11,6 +11,8 @@ mod certificate_image;
 #[cfg(feature = "certificate-image")]
 pub use certificate_image::{create_certificate, create_certificate_data_url};
 
+pub mod translation;
+
 pub fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
     let mut hasher = Sha256::new();
     hasher.update(env!("SIGNATURE_PRIVATE_KEY"));

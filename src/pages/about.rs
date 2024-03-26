@@ -1,13 +1,20 @@
 use crate::components::Footer;
 use yew::prelude::*;
+use yew_i18n::use_translation;
 
 #[function_component(About)]
 pub fn about() -> Html {
+    let mut i18n = use_translation();
+    let selected_language_handle = use_state(|| "en".to_string());
+    let selected_language = (*selected_language_handle).clone();
+
+    let _ = i18n.set_translation_language(&selected_language);
+
     html! {
         <div class="about-page">
-            <h1>{ "About this Learning Platform" }</h1>
+            <h1>{ i18n.t("About this Learning Platform") }</h1>
             <p>
-                { "This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:" }
+                { i18n.t("This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:") }
             </p>
             <ul>
                 <li><strong>{ "Konnektoren" }</strong>{ ": Understand how to connect clauses and sentences to improve the flow of your German writing and speaking." }</li>

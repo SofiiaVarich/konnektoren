@@ -1,19 +1,30 @@
-use crate::pages::{
-    About, AdjectivesPage, Home, KonnektorenPage, Navigation, Results, Route, VerbsPage,
+use crate::{
+    pages::{About, AdjectivesPage, Home, KonnektorenPage, Navigation, Results, Route, VerbsPage},
+    utils::translation::{languages, translations},
 };
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
 use yew_bootstrap::util::*;
+use yew_i18n::I18nProvider;
 use yew_router::prelude::*;
 
 fn switch_main(route: Route) -> Html {
-    match route {
-        Route::About => html! {<About />},
+    let supported_languages = languages();
+    let translations = translations();
+
+    let route = match route {
+        Route::About => html! {<About /> },
         Route::Home => html! {<Home />},
         Route::Konnektoren => html! {<KonnektorenPage />},
         Route::Adjectives => html! {<AdjectivesPage />},
         Route::Verbs => html! {<VerbsPage />},
         Route::Results { code } => html! {<Results { code } />},
+    };
+
+    html! {
+        <I18nProvider supported_languages={supported_languages} translations={translations} >
+            {route}
+        </I18nProvider>
     }
 }
 
@@ -33,8 +44,8 @@ impl Component for App {
             <div>
             {include_cdn()}
             <BrowserRouter>
-                <Navigation />
-                <Switch<Route> render={switch_main} />
+                    <Navigation />
+                    <Switch<Route> render={switch_main} />
             </BrowserRouter>
             {include_cdn_js()}
         </div>
