@@ -1,7 +1,11 @@
 use crate::{
-    pages::{About, AdjectivesPage, Home, KonnektorenPage, Navigation, Results, Route, VerbsPage},
-    utils::translation::{languages, translations},
+    pages::{
+        About, AdjectivesPage, Home, KonnektorenPage, LanguagePage, Navigation, Results, Route,
+        VerbsPage,
+    },
+    utils::translation::{languages, translations, LANGUAGE_KEY},
 };
+use gloo_storage::{LocalStorage, Storage};
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
 use yew_bootstrap::util::*;
@@ -12,19 +16,32 @@ fn switch_main(route: Route) -> Html {
     let supported_languages = languages();
     let translations = translations();
 
-    let route = match route {
-        Route::About => html! {<About /> },
-        Route::Home => html! {<Home />},
-        Route::Konnektoren => html! {<KonnektorenPage />},
-        Route::Adjectives => html! {<AdjectivesPage />},
-        Route::Verbs => html! {<VerbsPage />},
-        Route::Results { code } => html! {<Results { code } />},
-    };
+    let lang: Option<String> = LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| None);
 
-    html! {
-        <I18nProvider supported_languages={supported_languages} translations={translations} >
-            {route}
-        </I18nProvider>
+    match lang {
+        Some(_lang) => {
+            let route = match route {
+                Route::About => html! {<About /> },
+                Route::Home => html! {<Home />},
+                Route::Konnektoren => html! {<KonnektorenPage />},
+                Route::Adjectives => html! {<AdjectivesPage />},
+                Route::Verbs => html! {<VerbsPage />},
+                Route::Results { code } => html! {<Results { code } />},
+            };
+
+            html! {
+                <I18nProvider supported_languages={supported_languages} translations={translations} >
+                    {route}
+                </I18nProvider>
+            }
+        }
+        None => {
+            html! {
+                <I18nProvider supported_languages={supported_languages} translations={translations} >
+                    <LanguagePage />
+                </I18nProvider>
+            }
+        }
     }
 }
 

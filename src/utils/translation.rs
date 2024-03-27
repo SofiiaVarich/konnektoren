@@ -14,3 +14,13 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     translations.insert("de".to_string(), de);
     translations
 }
+
+pub fn flag(lang: &'static str) -> &'static str {
+    match lang {
+        "en" => "🇺🇸",
+        "de" => "🇩🇪",
+        _ => "🌐",
+    }
+}
+
+pub const LANGUAGE_KEY: &str = "selected_language";
