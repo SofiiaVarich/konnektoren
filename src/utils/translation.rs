@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 pub fn languages() -> Vec<&'static str> {
-    vec!["ua", "en", "de"]
+    vec!["en", "ua", "de"]
 }
 
 pub fn translations() -> HashMap<String, serde_json::Value> {
