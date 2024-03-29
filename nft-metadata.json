@@ -1,16 +1,5 @@
 {
-  "name": "Konnektoren Help NFT",
-  "symbol": "KHN",
-  "description": "This NFT certifies the holder has demonstrated proficiency in understanding and using German connectors (Konnektoren), crucial for mastering German grammar.",
-  "image": "https://konnektoren.help/favicon.png",
-  "external_url": "https://konnektoren.help",
-  "properties": {
-    "files": [
-      {
-        "uri": "https://konnektoren.help/favicon.png",
-        "type": "image/png"
-      }
-    ]
-  },
-  "category": "image"
+  "name": "Konnektoren Help",
+  "description": "Proof of Participation for Konnektoren",
+  "image": "https://konnektoren.help/favicon.png"
 }
