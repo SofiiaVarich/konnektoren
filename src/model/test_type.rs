@@ -7,19 +7,14 @@ use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, EnumIter, Deserialize, Hash, Eq)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Serialize, EnumIter, Deserialize, Hash, Eq)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum TestType {
+    #[default]
     Konnektoren,
     Adjectives,
     Verbs,
     Nomen,
-}
-
-impl std::default::Default for TestType {
-    fn default() -> Self {
-        TestType::Konnektoren
-    }
 }
 
 impl std::fmt::Display for TestType {

@@ -12,7 +12,7 @@ pub struct Adjectives {
 impl Default for Adjectives {
     fn default() -> Self {
         let yaml_content = include_str!("../adjectives.yml");
-        serde_yaml::from_str(&yaml_content)
+        serde_yaml::from_str(yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err))
     }
 }

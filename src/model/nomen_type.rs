@@ -5,9 +5,10 @@ use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
+#[derive(Default, Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum NomenType {
+    #[default]
     #[serde(rename = "bringen")]
     Bringen,
     #[serde(rename = "geraten")]
@@ -26,12 +27,6 @@ pub enum NomenType {
     Stossen,
     #[serde(rename = "ziehen")]
     Ziehen,
-}
-
-impl Default for NomenType {
-    fn default() -> Self {
-        NomenType::Bringen
-    }
 }
 
 impl fmt::Display for NomenType {

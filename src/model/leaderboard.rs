@@ -1,5 +1,3 @@
-use std::hash::{Hash, Hasher};
-
 use super::TestResult;
 use serde::{Deserialize, Serialize};
 

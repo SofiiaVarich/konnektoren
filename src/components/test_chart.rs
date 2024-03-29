@@ -33,8 +33,7 @@ fn prepare_pie_chart_data<T: TypeTrait, D: DetailTrait>(test: &CategorizedTest<T
         ]
     });
 
-    let json_str = chart_data.to_string();
-    json_str
+    chart_data.to_string()
 }
 
 #[derive(Properties, PartialEq)]

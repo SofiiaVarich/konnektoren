@@ -5,9 +5,10 @@ use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
+#[derive(Default, Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum AdjectiveType {
+    #[default]
     #[serde(rename = "an")]
     An,
     #[serde(rename = "auf")]
@@ -24,12 +25,6 @@ pub enum AdjectiveType {
     Von,
     #[serde(rename = "zu")]
     Zu,
-}
-
-impl Default for AdjectiveType {
-    fn default() -> Self {
-        AdjectiveType::An
-    }
 }
 
 impl fmt::Display for AdjectiveType {

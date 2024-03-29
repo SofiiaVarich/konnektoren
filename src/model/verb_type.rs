@@ -5,9 +5,10 @@ use strum::EnumIter;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
+#[derive(Default, Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum VerbType {
+    #[default]
     #[serde(rename = "an")]
     An,
     #[serde(rename = "auf")]
@@ -32,12 +33,6 @@ pub enum VerbType {
     Vor,
     #[serde(rename = "zu")]
     Zu,
-}
-
-impl Default for VerbType {
-    fn default() -> Self {
-        VerbType::An
-    }
 }
 
 impl fmt::Display for VerbType {

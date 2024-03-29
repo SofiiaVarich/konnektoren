@@ -98,7 +98,7 @@ impl History {
 mod tests {
     use super::super::TestType;
     use super::*;
-    use chrono::{NaiveDate, Utc};
+    use chrono::{NaiveDate, TimeZone, Utc};
 
     #[test]
     fn history_new() {
@@ -148,7 +148,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 1).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 1, 0, 0, 0).unwrap(),
         );
         let test_result2 = TestResult::new(
             TestType::Adjectives,
@@ -156,7 +156,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 2).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 2, 0, 0, 0).unwrap(),
         );
         let test_result3 = TestResult::new(
             TestType::Adjectives,
@@ -164,7 +164,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 3).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 3, 0, 0, 0).unwrap(),
         );
         let test_result4 = TestResult::new(
             TestType::Adjectives,
@@ -172,7 +172,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 4).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 4, 0, 0, 0).unwrap(),
         );
         let test_result5 = TestResult::new(
             TestType::Adjectives,
@@ -180,7 +180,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 5).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 5, 0, 0, 0).unwrap(),
         );
         let test_result6 = TestResult::new(
             TestType::Adjectives,
@@ -188,7 +188,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 6).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 6, 0, 0, 0).unwrap(),
         );
         let test_result7 = TestResult::new(
             TestType::Adjectives,
@@ -196,7 +196,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 8).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 8, 0, 0, 0).unwrap(),
         );
         let test_result8 = TestResult::new(
             TestType::Adjectives,
@@ -204,7 +204,7 @@ mod tests {
             8,
             2,
             "Player".to_string(),
-            DateTime::<Utc>::from_utc(NaiveDate::from_ymd(2021, 1, 9).and_hms(0, 0, 0), Utc),
+            Utc.with_ymd_and_hms(2021, 1, 9, 0, 0, 0).unwrap(),
         );
         history.add_test_result(test_result1);
         history.add_test_result(test_result2);

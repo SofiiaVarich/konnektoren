@@ -11,7 +11,7 @@ pub fn select_language() -> Html {
     let selected_language =
         use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "".to_string()));
 
-    let _ = i18n.set_translation_language(&*selected_language);
+    let _ = i18n.set_translation_language(&selected_language);
 
     let on_select_change = {
         let selected_language = selected_language.clone();
@@ -34,7 +34,7 @@ pub fn select_language() -> Html {
                 <select onchange={on_select_change} value={(*selected_language).clone()}>
                     <option value="" selected={selected_language.is_empty()} disabled=true>{ i18n.t("Select Language") }</option>
                     { for languages().iter().map(|&lang| html! {
-                        <option value={lang} selected={lang == *selected_language}>{format!("{} {}", flag(&lang), lang)}</option>
+                        <option value={lang} selected={lang == *selected_language}>{format!("{} {}", flag(lang), lang)}</option>
                     })}
                 </select>
             </p>

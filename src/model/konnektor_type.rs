@@ -6,9 +6,10 @@ use super::{TestType, TypeTrait};
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
+#[derive(Default, Serialize, Deserialize, Debug, PartialEq, Clone, EnumIter)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub enum KonnektorType {
+    #[default]
     #[serde(rename = "Konnektoren mit Nebensatz (Verb am Ende) (= Subjunktionen)")]
     Subjunktionen,
     #[serde(rename = "Konnektoren mit Hauptsatz (Position 0) (= Konjunktionen)")]
@@ -19,12 +20,6 @@ pub enum KonnektorType {
     Infinitivgruppe,
     #[serde(rename = "Konnektoren mit besonderer Position")]
     BesonderePosition,
-}
-
-impl Default for KonnektorType {
-    fn default() -> Self {
-        KonnektorType::Subjunktionen
-    }
 }
 
 impl fmt::Display for KonnektorType {

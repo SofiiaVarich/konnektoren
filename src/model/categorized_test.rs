@@ -58,7 +58,7 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
     }
 
     pub fn new_of_size(items: &CategorizedItems<T, D>, size: usize) -> Self {
-        let mut test = Self::new(&items);
+        let mut test = Self::new(items);
         test.random_indices = test.random_indices.into_iter().take(size).collect();
         test
     }

@@ -26,7 +26,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
 
     let on_generate_click = {
         let player_name = player_name.clone();
-        let test_type = props.test_type.clone();
+        let test_type = props.test_type;
         let total_questions = props.total_questions;
         let correct_answers = props.correct_answers;
         let incorrect_answers = props.incorrect_answers;
@@ -34,7 +34,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
 
         Callback::from(move |_| {
             let mut test_result = TestResult::new(
-                test_type.clone(),
+                test_type,
                 total_questions,
                 correct_answers,
                 incorrect_answers,

@@ -18,7 +18,7 @@ fn switch_main(route: Route) -> Html {
     let supported_languages = languages();
     let translations = translations();
 
-    let lang: Option<String> = LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| None);
+    let lang: Option<String> = LocalStorage::get(LANGUAGE_KEY).unwrap_or(None);
 
     match lang {
         Some(_lang) => {

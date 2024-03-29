@@ -11,7 +11,7 @@ pub fn profile_page() -> Html {
     let mut i18n = use_translation();
     let selected_language =
         use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
-    let _ = i18n.set_translation_language(&*selected_language);
+    let _ = i18n.set_translation_language(&selected_language);
 
     let player =
         use_state(|| LocalStorage::get::<Player>(PLAYER_KEY).unwrap_or_else(|_| Player::default()));
@@ -54,7 +54,7 @@ pub fn profile_page() -> Html {
                 name: (*name).clone(),
                 account: Some((*account).clone()),
             };
-            LocalStorage::set(PLAYER_KEY, &updated_player).expect("Failed to save player");
+            LocalStorage::set(PLAYER_KEY, updated_player).expect("Failed to save player");
             show_save_notification.set(true);
             let show_save_notification = show_save_notification.clone();
             let timeout = Timeout::new(3000, move || {

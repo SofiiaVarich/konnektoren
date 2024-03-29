@@ -70,13 +70,13 @@ impl TestResult {
     pub fn create_signature(&mut self) {
         let (signing_key, _) = keypair_from_static_str();
         let test_result_copy = TestResult {
-            test_type: self.test_type.clone(),
+            test_type: self.test_type,
             total_questions: self.total_questions,
             correct_answers: self.correct_answers,
             incorrect_answers: self.incorrect_answers,
             performance_percentage: self.performance_percentage,
             player_name: self.player_name.clone(),
-            date: self.date.clone(),
+            date: self.date,
             signature: None,
         };
 

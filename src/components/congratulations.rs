@@ -28,7 +28,7 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
             <h2>{"Congratulations!"}</h2>
             <SoundPlayer sound_url="/fanfare-3-rpg.ogg" />
             <p>{format!("You have completed the test with a score of {:.1}% ({}/{})", performance, correct_answers, total_answers)}</p>
-            {message::<T, D>(performance)}
+            {message::<T>(performance)}
             {player_input::<T>(total_answers, correct_answers, total_answers - correct_answers)}
         </div>
     }
@@ -46,7 +46,7 @@ fn player_input<T: TypeTrait>(
     }
 }
 
-fn message<T: TypeTrait, D: DetailTrait>(performance: f64) -> Html {
+fn message<T: TypeTrait>(performance: f64) -> Html {
     let message = if performance >= 90.0 {
         "Outstanding! You've mastered this topic with excellent results."
     } else if performance >= 75.0 {

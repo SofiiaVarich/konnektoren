@@ -52,7 +52,7 @@ impl Default for CategorizedItems<AdjectiveType, AdjectiveDetail> {
         let yaml_content = include_str!("../adjectives.yml");
 
         let prepositions: CategorizedItems<AdjectiveType, AdjectiveDetail> =
-            serde_yaml::from_str(&yaml_content)
+            serde_yaml::from_str(yaml_content)
                 .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
 
         prepositions
@@ -64,7 +64,7 @@ impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
         let yaml_content = include_str!("../konnektoren.yml");
 
         let konnektoren: CategorizedItems<KonnektorType, KonnektorDetail> =
-            serde_yaml::from_str(&yaml_content)
+            serde_yaml::from_str(yaml_content)
                 .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
 
         konnektoren
@@ -75,7 +75,7 @@ impl Default for CategorizedItems<VerbType, VerbDetail> {
     fn default() -> Self {
         let yaml_content = include_str!("../verbs.yml");
 
-        let verbs: CategorizedItems<VerbType, VerbDetail> = serde_yaml::from_str(&yaml_content)
+        let verbs: CategorizedItems<VerbType, VerbDetail> = serde_yaml::from_str(yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
         verbs
     }
