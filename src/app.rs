@@ -119,6 +119,27 @@ fn redirect_if_needed() {
             .expect("could not push state");
     }
 
+    if query.contains("page=profile") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/profile"))
+            .expect("could not push state");
+    }
+
+    if query.contains("page=history") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/history"))
+            .expect("could not push state");
+    }
+
+    if query.contains("page=config") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/config"))
+            .expect("could not push state");
+    }
+
     if query.contains("page=results") {
         let code = query
             .split('&')
