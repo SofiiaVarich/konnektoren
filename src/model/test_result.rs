@@ -2,9 +2,11 @@ use crate::model::TestType;
 use crate::utils::keypair_from_static_str;
 use anyhow::{anyhow, Result};
 use base64::{engine::general_purpose, Engine as _};
+use chrono::{DateTime, Utc};
 use ed25519_dalek::{ed25519::SignatureBytes, Signature, Signer, Verifier};
 use serde::{Deserialize, Serialize};
 use std::str;
+
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
@@ -17,6 +19,7 @@ pub struct TestResult {
     pub incorrect_answers: usize,
     pub performance_percentage: f64,
     pub player_name: String,
+    pub date: DateTime<Utc>,
     pub signature: Option<Vec<u8>>,
 }
 
@@ -27,6 +30,7 @@ impl TestResult {
         correct_answers: usize,
         incorrect_answers: usize,
         player_name: String,
+        date: DateTime<Utc>,
     ) -> Self {
         let performance_percentage = (correct_answers as f64 / total_questions as f64) * 100.0;
         TestResult {
@@ -36,6 +40,7 @@ impl TestResult {
             incorrect_answers,
             performance_percentage,
             player_name,
+            date,
             signature: None,
         }
     }
@@ -70,6 +75,7 @@ impl TestResult {
             incorrect_answers: self.incorrect_answers,
             performance_percentage: self.performance_percentage,
             player_name: self.player_name.clone(),
+            date: self.date.clone(),
             signature: None,
         };
 
@@ -90,6 +96,7 @@ impl TestResult {
             incorrect_answers: self.incorrect_answers,
             performance_percentage: self.performance_percentage,
             player_name: self.player_name.clone(),
+            date: self.date.clone(),
             signature: None,
         };
 

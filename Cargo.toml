@@ -22,18 +22,18 @@ path = "src/bin/tui.rs"
 required-features = ["tui"]
 
 [features]
-default = ["web"]
+default = ["web", "certificate-image"]
 web = ["yew", "yew-router", "yew-bootstrap", "yew-hooks"]
 openapi = ["utoipa"]
 tui = ["crossterm", "ratatui"]
-verifiable-credentials = ["chrono", "uuid"]
+verifiable-credentials = ["uuid"]
 certificate-image = ["image", "imageproc", "rusttype", "plot_icon"]
 
 [dependencies]
 anyhow = "1.0.81"
 base64 = "0.22.0"
 charts-rs = "0.3.4"
-chrono = { version = "0.4.35", optional = true }
+chrono = { version = "0.4.35", features = ["serde"] }
 ed25519-dalek = { version = "2.1", default-features = false }
 gloo-timers = "0.3"
 image = { version = "0.24", optional = true }

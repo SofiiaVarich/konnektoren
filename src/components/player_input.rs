@@ -24,6 +24,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
         let total_questions = props.total_questions;
         let correct_answers = props.correct_answers;
         let incorrect_answers = props.incorrect_answers;
+        let date = chrono::Utc::now();
 
         Callback::from(move |_| {
             let mut test_result = TestResult::new(
@@ -32,6 +33,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
                 correct_answers,
                 incorrect_answers,
                 (*player_name).clone(),
+                date,
             );
             test_result.create_signature();
 

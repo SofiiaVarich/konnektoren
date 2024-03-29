@@ -148,6 +148,20 @@ pub fn create_certificate(
         &performance_message,
     );
 
+    // Drawing the date
+    let date_str = format!("{}", test_result.date.format("%d %B %Y"));
+    let scale_date = Scale::uniform(20.0);
+    let date_width = font.width(scale_date, &date_str);
+    draw_text_mut(
+        &mut cert_image,
+        text_color,
+        cmp::max(0, (cert_width as i32 - date_width as i32) / 2) as i32,
+        350,
+        scale_date,
+        &font,
+        &date_str,
+    );
+
     let issued_by_message = format!("Issued by {}", issuer);
     let scale_issued_by = Scale::uniform(20.0);
     let issued_by_width = font.width(scale_issued_by, &issued_by_message);
