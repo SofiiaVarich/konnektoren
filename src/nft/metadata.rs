@@ -37,7 +37,7 @@ impl Metadata {
             Attribute {
                 trait_type: "Performance Percentage".to_string(),
                 value: serde_json::Value::Number(
-                    serde_json::Number::from_f64(test_result.performance_percentage)
+                    serde_json::Number::from_f64(test_result.performance_percentage.into())
                         .expect("Performance percentage conversion error"),
                 ),
             },

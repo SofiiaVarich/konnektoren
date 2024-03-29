@@ -2603,7 +2603,7 @@ dependencies = [
 [[package]]
 name = "konnektoren"
 version = "0.1.0"
-source = "git+https://github.com/SofiiaVarich/konnektoren.git#3ac375324b6b819a0d087569634d316ac8de073f"
+source = "git+https://github.com/SofiiaVarich/konnektoren.git#83887f0a232851261853f146068fcb29b797fc53"
 dependencies = [
  "anyhow",
  "base64 0.22.0",
@@ -2612,9 +2612,11 @@ dependencies = [
  "ed25519-dalek 2.1.1",
  "gloo-storage 0.3.0",
  "gloo-timers 0.3.0",
+ "gloo-utils 0.2.0",
  "hex",
  "image",
  "imageproc",
+ "js-sys",
  "plot_icon",
  "qrcode",
  "rand 0.8.5",
@@ -2628,6 +2630,7 @@ dependencies = [
  "strum",
  "urlencoding",
  "wasm-bindgen",
+ "wasm-bindgen-futures",
  "web-sys",
  "yew-i18n",
  "yew-navbar",
@@ -6093,6 +6096,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4be2531df63900aeb2bca0daaaddec08491ee64ceecbee5076636a3b026795a8"
 dependencies = [
  "cfg-if",
+ "serde",
  "wasm-bindgen-macro",
 ]
 
