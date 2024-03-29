@@ -1,4 +1,4 @@
-use super::TypeTrait;
+use super::{TestType, TypeTrait};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use strum::EnumIter;
@@ -51,6 +51,10 @@ impl fmt::Display for AdjectiveType {
 impl TypeTrait for AdjectiveType {
     fn get_type() -> String {
         "Adjektive mit Präpositionen".to_string()
+    }
+
+    fn get_t() -> TestType {
+        TestType::Adjectives
     }
 }
 

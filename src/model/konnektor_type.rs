@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 use strum::EnumIter;
 
-use super::TypeTrait;
+use super::{TestType, TypeTrait};
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
@@ -45,6 +45,10 @@ impl fmt::Display for KonnektorType {
 impl TypeTrait for KonnektorType {
     fn get_type() -> String {
         "Konnektoren".to_string()
+    }
+
+    fn get_t() -> TestType {
+        TestType::Konnektoren
     }
 }
 

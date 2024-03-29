@@ -1,7 +1,7 @@
 use yew::prelude::*;
 
 use crate::components::{PlayerInput, SoundPlayer};
-use crate::model::{CategorizedTest, DetailTrait, TestType, TypeTrait};
+use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
 
 #[derive(Properties, PartialEq)]
 pub struct CongratulationsProps<T: TypeTrait, D: DetailTrait> {
@@ -39,12 +39,7 @@ fn player_input<T: TypeTrait>(
     correct_answers: usize,
     incorrect_answers: usize,
 ) -> Html {
-    let test_type = match T::get_type().as_str() {
-        "Konnektoren" => TestType::Konnektoren,
-        "Adjektive" => TestType::Adjectives,
-        "Verben" => TestType::Verbs,
-        _ => TestType::Konnektoren,
-    };
+    let test_type = T::get_t();
 
     html! {
         <PlayerInput test_type={test_type} total_questions={total_questions} correct_answers={correct_answers} incorrect_answers={incorrect_answers} />

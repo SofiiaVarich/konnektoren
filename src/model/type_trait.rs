@@ -1,6 +1,8 @@
 use serde::Serialize;
 use strum::IntoEnumIterator;
 
+use super::TestType;
+
 pub trait TypeTrait:
     PartialEq
     + Clone
@@ -11,4 +13,5 @@ pub trait TypeTrait:
     + IntoEnumIterator
 {
     fn get_type() -> String;
+    fn get_t() -> TestType;
 }

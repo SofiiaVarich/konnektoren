@@ -1,4 +1,4 @@
-use super::TypeTrait;
+use super::{TestType, TypeTrait};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use strum::EnumIter;
@@ -54,6 +54,10 @@ impl fmt::Display for NomenType {
 impl TypeTrait for NomenType {
     fn get_type() -> String {
         "Nomen-Verb-Verbindungen".to_string()
+    }
+
+    fn get_t() -> TestType {
+        TestType::Nomen
     }
 }
 

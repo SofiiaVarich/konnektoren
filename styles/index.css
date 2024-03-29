@@ -397,25 +397,65 @@ li {
 
 /* History Page Styles */
 .history-page {
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
     max-width: 800px;
-    margin: 40px auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .history-page h1 {
     color: #333;
-    font-size: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
 .history-page p {
     color: #666;
-    font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.history-page h2 {
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.history-page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.history-page li {
+    background-color: #eee;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.history-page li:hover {
+    background-color: #e0e0e0;
+}
+
+.history-page .gradient-background {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 175, 189, 1) 0%,
+        rgba(255, 195, 160, 1) 100%
+    );
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .history-page {
+        margin: 10px;
+        padding: 15px;
+    }
 }

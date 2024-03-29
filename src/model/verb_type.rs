@@ -1,4 +1,4 @@
-use super::TypeTrait;
+use super::{TestType, TypeTrait};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use strum::EnumIter;
@@ -63,6 +63,10 @@ impl fmt::Display for VerbType {
 impl TypeTrait for VerbType {
     fn get_type() -> String {
         "Verben mit Präpositionen".to_string()
+    }
+
+    fn get_t() -> TestType {
+        TestType::Verbs
     }
 }
 

@@ -1,5 +1,6 @@
-use crate::model::history::HISTORY_KEY;
-use crate::model::{History, TestResult, TestType};
+use crate::model::{
+    history::HISTORY_KEY, player::PLAYER_KEY, History, Player, TestResult, TestType,
+};
 use crate::route::Route;
 use gloo_storage::{LocalStorage, Storage};
 use serde::{Deserialize, Serialize};
@@ -17,7 +18,10 @@ pub struct PlayerInputProps {
 
 #[function_component(PlayerInput)]
 pub fn player_input(props: &PlayerInputProps) -> Html {
-    let player_name = use_state(|| "".to_string());
+    let default_player_name = LocalStorage::get::<Player>(PLAYER_KEY)
+        .map(|player| player.name)
+        .unwrap_or_default();
+    let player_name = use_state(|| default_player_name);
     let navigator = use_navigator().expect("No navigator");
 
     let on_generate_click = {
@@ -52,7 +56,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
 
     html! {
         <div class="player-input-container">
-            <input type="text" placeholder="Enter your name" oninput={Callback::from(move |e: InputEvent| {
+            <input type="text" placeholder="Enter your name" value={(*player_name).clone()} oninput={Callback::from(move |e: InputEvent| {
                 let input: HtmlInputElement = e.target_unchecked_into();
                 player_name.set(input.value());
             })} />
