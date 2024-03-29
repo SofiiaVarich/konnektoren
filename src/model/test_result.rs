@@ -10,14 +10,14 @@ use std::str;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Hash, Eq)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct TestResult {
     pub test_type: TestType,
     pub total_questions: usize,
     pub correct_answers: usize,
     pub incorrect_answers: usize,
-    pub performance_percentage: f64,
+    pub performance_percentage: u8,
     pub player_name: String,
     pub date: DateTime<Utc>,
     pub signature: Option<Vec<u8>>,
@@ -32,7 +32,8 @@ impl TestResult {
         player_name: String,
         date: DateTime<Utc>,
     ) -> Self {
-        let performance_percentage = (correct_answers as f64 / total_questions as f64) * 100.0;
+        let performance_percentage =
+            ((correct_answers as f64 / total_questions as f64) * 100.0) as u8;
         TestResult {
             test_type,
             total_questions,
@@ -150,7 +151,7 @@ mod tests {
         assert_eq!(test_result.total_questions, 10);
         assert_eq!(test_result.correct_answers, 8);
         assert_eq!(test_result.incorrect_answers, 2);
-        assert_eq!(test_result.performance_percentage, 80.0);
+        assert_eq!(test_result.performance_percentage, 80);
     }
 
     #[test]

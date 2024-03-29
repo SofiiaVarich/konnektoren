@@ -1,3 +1,5 @@
+use std::hash::{Hash, Hasher};
+
 use super::TestResult;
 use serde::{Deserialize, Serialize};
 
@@ -23,7 +25,9 @@ impl Leaderboard {
     }
 
     pub fn get_ranked(&self) -> Vec<TestResult> {
-        let mut tests = self.tests.clone();
+        let distinct = self.tests.iter().collect::<std::collections::HashSet<_>>();
+        let mut tests: Vec<TestResult> = distinct.into_iter().cloned().collect();
+
         tests.sort_by(|a, b| {
             b.performance_percentage
                 .partial_cmp(&a.performance_percentage)

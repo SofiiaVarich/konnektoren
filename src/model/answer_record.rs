@@ -28,8 +28,6 @@ mod tests {
     use serde::{Deserialize, Serialize};
     use strum::EnumIter;
 
-    use crate::model::TestType;
-
     use super::*;
     #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, EnumIter)]
     enum TestType {

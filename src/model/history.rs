@@ -54,7 +54,7 @@ impl History {
         let mut performances: Vec<f64> = self
             .test_results
             .iter()
-            .map(|result| result.performance_percentage)
+            .map(|result| result.performance_percentage.into())
             .collect();
 
         if performances.is_empty() {
@@ -83,7 +83,7 @@ impl History {
         let mut counts = HashMap::new();
 
         for result in &self.test_results {
-            *totals.entry(result.test_type).or_insert(0.0) += result.performance_percentage;
+            *totals.entry(result.test_type).or_insert(0.0) += result.performance_percentage as f64;
             *counts.entry(result.test_type).or_insert(0) += 1;
         }
 
