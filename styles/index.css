@@ -249,38 +249,6 @@ th {
     max-height: 2.5rem;
 }
 
-nav {
-    background-color: #004d40;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-@media (max-width: 768px) {
-    nav a {
-        margin: 0 5px;
-    }
-}
-
-nav a:hover {
-    color: #b2dfdb;
-}
-
 .chart-container {
     max-width: 100%;
     overflow-x: auto;

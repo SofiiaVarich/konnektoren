@@ -122,7 +122,14 @@ mod tests {
 
     #[test]
     fn test_base64_serialization_deserialization() {
-        let test_result = TestResult::new(TestType::Adjectives, 10, 8, 2, "Player".to_string());
+        let test_result = TestResult::new(
+            TestType::Adjectives,
+            10,
+            8,
+            2,
+            "Player".to_string(),
+            Utc::now(),
+        );
         let base64_encoded = test_result.to_base64();
         let decoded_test_result = TestResult::from_base64(&base64_encoded).unwrap();
 
@@ -131,7 +138,14 @@ mod tests {
 
     #[test]
     fn test_result_new() {
-        let test_result = TestResult::new(TestType::Adjectives, 10, 8, 2, "Player".to_string());
+        let test_result = TestResult::new(
+            TestType::Adjectives,
+            10,
+            8,
+            2,
+            "Player".to_string(),
+            Utc::now(),
+        );
         assert_eq!(test_result.test_type, TestType::Adjectives);
         assert_eq!(test_result.total_questions, 10);
         assert_eq!(test_result.correct_answers, 8);
@@ -141,7 +155,14 @@ mod tests {
 
     #[test]
     fn test_signature_verification() {
-        let mut test_result = TestResult::new(TestType::Adjectives, 10, 8, 2, "Player".to_string());
+        let mut test_result = TestResult::new(
+            TestType::Adjectives,
+            10,
+            8,
+            2,
+            "Player".to_string(),
+            Utc::now(),
+        );
 
         test_result.create_signature();
         let is_verified = test_result.verify();

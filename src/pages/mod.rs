@@ -7,7 +7,6 @@ mod language_page;
 mod results;
 mod verbs;
 
-pub use crate::components::Navigation;
 pub use about::About;
 pub use adjectives::AdjectivesPage;
 pub use config::ConfigPage;

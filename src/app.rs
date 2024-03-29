@@ -1,7 +1,7 @@
 use crate::{
+    components::{MainMenu, Navigation},
     pages::{
-        About, AdjectivesPage, ConfigPage, Home, KonnektorenPage, LanguagePage, Navigation,
-        Results, VerbsPage,
+        About, AdjectivesPage, ConfigPage, Home, KonnektorenPage, LanguagePage, Results, VerbsPage,
     },
     route::Route,
     utils::translation::{languages, translations, LANGUAGE_KEY},
@@ -64,6 +64,7 @@ impl Component for App {
             {include_cdn()}
             <BrowserRouter>
                     <Navigation />
+                    <MainMenu />
                     <Switch<Route> render={switch_main} />
             </BrowserRouter>
             {include_cdn_js()}
