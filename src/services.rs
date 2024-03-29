@@ -1,5 +1,7 @@
+use konnektoren::model::leaderboard::{Leaderboard, LEADERBOARD_KEY};
 use konnektoren::model::TestResult;
 use urlencoding::encode;
+use worker::kv::KvStore;
 use worker::*;
 
 use crate::certificate::Certificate;
@@ -78,4 +80,24 @@ pub async fn generate_and_upload_metadata(
         test_result: test_result.clone(),
         metadata,
     })
+}
+
+pub async fn update_leaderboard(kv: &KvStore, test_result: &TestResult) -> Result<()> {
+    let mut leaderboard = load_leaderboard(&kv).await?;
+    leaderboard.add_test(test_result.clone());
+    store_leaderboard(&kv, &leaderboard).await?;
+    Ok(())
+}
+
+pub async fn load_leaderboard(kv: &KvStore) -> Result<Leaderboard> {
+    let leaderboard: Option<Leaderboard> = kv.get(LEADERBOARD_KEY).json().await?;
+    Ok(leaderboard.unwrap_or_default())
+}
+
+pub async fn store_leaderboard(kv: &KvStore, leaderboard: &Leaderboard) -> Result<()> {
+    kv.put(LEADERBOARD_KEY, &leaderboard)?
+        .expiration_ttl(86400)
+        .execute()
+        .await?;
+    Ok(())
 }

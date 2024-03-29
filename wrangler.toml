@@ -2,6 +2,10 @@ name = "konnektoren-worker-rust"
 main = "build/worker/shim.mjs"
 compatibility_date = "2023-12-01"
 
+kv_namespaces = [
+    { binding = "KONNEKTOREN_LEADERBOARD", id = "5ac6e74323564a928a92c79ab2270fa1", preview_id = "90bedf4b553f49f098c215fa7a69e301" },
+]
+
 [build]
 command = "cargo install -q worker-build && worker-build --release"
 

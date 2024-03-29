@@ -1,12 +1,13 @@
-use konnektoren::model::TestResult;
-use serde::{Deserialize, Serialize};
-use worker::*;
-
 use crate::nft::Metadata;
 use crate::services::{
     generate_and_upload_metadata, generate_metadata_response, generate_png_response,
+    load_leaderboard, update_leaderboard,
 };
+use konnektoren::model::leaderboard::Leaderboard;
+use konnektoren::model::TestResult;
+use serde::{Deserialize, Serialize};
 use urlencoding::decode;
+use worker::*;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct GenerateResult {
@@ -29,6 +30,7 @@ pub async fn handle_certificate_request(
                 Ok(result) => result,
                 Err(_) => return Response::error(format!("Bad Request {}", &decoded_data), 400),
             };
+            update_leaderboard(&ctx.kv("KONNEKTOREN_LEADERBOARD")?, &test_result).await?;
             return generate_png_response(&test_result);
         }
     }
@@ -75,4 +77,13 @@ pub async fn handle_metadata_request(
         }
     }
     Response::error("Bad Request", 400)
+}
+
+pub async fn handle_leaderboard_request(
+    _req: Request,
+    ctx: RouteContext<()>,
+) -> worker::Result<Response> {
+    let kv = ctx.kv("KONNEKTOREN_LEADERBOARD")?;
+    let leaderboard: Leaderboard = load_leaderboard(&kv).await?;
+    Response::from_json(&leaderboard)
 }
