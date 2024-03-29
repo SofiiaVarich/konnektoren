@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 pub const LEADERBOARD_SIZE: usize = 50;
 pub const LEADERBOARD_KEY: &str = "leaderboard";
 
-#[derive(Default, Serialize, Deserialize, Clone)]
+#[derive(Default, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Leaderboard {
     tests: Vec<TestResult>,
 }
@@ -20,5 +20,16 @@ impl Leaderboard {
 
     pub fn get_tests(&self) -> &Vec<TestResult> {
         &self.tests
+    }
+
+    pub fn get_ranked(&self) -> Vec<TestResult> {
+        let mut tests = self.tests.clone();
+        tests.sort_by(|a, b| {
+            b.performance_percentage
+                .partial_cmp(&a.performance_percentage)
+                .unwrap()
+        });
+        tests.truncate(LEADERBOARD_SIZE);
+        tests
     }
 }

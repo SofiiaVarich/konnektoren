@@ -1,5 +1,5 @@
+use crate::model::Leaderboard;
 use gloo_utils::format::JsValueSerdeExt;
-use serde::{Deserialize, Serialize};
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 use wasm_bindgen_futures::JsFuture;
@@ -8,19 +8,6 @@ use web_sys::RequestInit;
 use web_sys::RequestMode;
 use web_sys::Response;
 use yew::prelude::*;
-
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct TestResult {
-    pub test_type: String, // Simplified for example
-    pub performance_percentage: f64,
-    pub player_name: String,
-    pub date: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Default)]
-pub struct Leaderboard {
-    pub tests: Vec<TestResult>,
-}
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
@@ -56,10 +43,10 @@ pub fn leaderboard_page() -> Html {
         <div class="leaderboard-page">
             <h1>{"Leaderboard"}</h1>
             <ul>
-                { for leaderboard.tests.iter().map(|test| {
+                { for leaderboard.get_ranked().iter().map(|test| {
                     html! {
                         <li>
-                            { format!("{}: {}% - {}", test.player_name, test.performance_percentage, test.date) }
+                            { format!("{}: {}% - {}", test.player_name, test.performance_percentage, test.date.to_rfc2822()) }
                         </li>
                     }
                 })}
