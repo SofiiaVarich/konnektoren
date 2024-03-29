@@ -1,8 +1,8 @@
 use crate::{
     components::{MainMenu, Navigation},
     pages::{
-        About, AdjectivesPage, ConfigPage, Home, KonnektorenPage, LanguagePage, ProfilePage,
-        Results, VerbsPage,
+        About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LanguagePage,
+        ProfilePage, Results, VerbsPage,
     },
     route::Route,
     utils::translation::{languages, translations, LANGUAGE_KEY},
@@ -31,6 +31,7 @@ fn switch_main(route: Route) -> Html {
                 Route::Results { code } => html! {<Results { code } />},
                 Route::Config => html! {<ConfigPage />},
                 Route::Profile => html! {<ProfilePage />},
+                Route::History => html! {<HistoryPage />},
             };
 
             html! {

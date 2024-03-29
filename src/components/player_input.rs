@@ -1,5 +1,7 @@
-use crate::model::{TestResult, TestType};
+use crate::model::history::HISTORY_KEY;
+use crate::model::{History, TestResult, TestType};
 use crate::route::Route;
+use gloo_storage::{LocalStorage, Storage};
 use serde::{Deserialize, Serialize};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
@@ -36,6 +38,12 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
                 date,
             );
             test_result.create_signature();
+
+            let mut history: History =
+                LocalStorage::get(HISTORY_KEY).unwrap_or_else(|_| History::new());
+            history.add_test_result(test_result.clone());
+
+            LocalStorage::set("history", &history).expect("Failed to save history");
 
             let encoded = test_result.to_base64();
             navigator.push(&Route::Results { code: encoded });

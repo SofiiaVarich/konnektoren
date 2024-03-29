@@ -1,6 +1,7 @@
 mod about;
 mod adjectives;
 mod config;
+mod history;
 mod home;
 mod konnektoren;
 mod language_page;
@@ -11,6 +12,7 @@ mod verbs;
 pub use about::About;
 pub use adjectives::AdjectivesPage;
 pub use config::ConfigPage;
+pub use history::HistoryPage;
 pub use home::Home;
 pub use konnektoren::KonnektorenPage;
 pub use language_page::LanguagePage;

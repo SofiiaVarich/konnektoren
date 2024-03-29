@@ -6,7 +6,7 @@ mod categorized_items;
 mod categorized_test;
 mod category;
 mod detail_trait;
-mod history;
+pub mod history;
 mod konnektor_detail;
 mod konnektor_type;
 mod nomen_detail;

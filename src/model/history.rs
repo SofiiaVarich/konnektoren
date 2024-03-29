@@ -2,6 +2,8 @@ use super::TestResult;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
+pub const HISTORY_KEY: &str = "history";
+
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct History {
     test_results: Vec<TestResult>,
@@ -52,7 +54,7 @@ impl History {
 mod tests {
     use super::super::TestType;
     use super::*;
-    use chrono::{TimeZone, Utc};
+    use chrono::{NaiveDate, Utc};
 
     #[test]
     fn history_new() {
