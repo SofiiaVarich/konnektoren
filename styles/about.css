@@ -1,11 +1,11 @@
 /* About Page Styles */
 .about-page {
-    max-width: 800px; /* Limit the content width for better readability */
-    margin: 2rem auto; /* Center the content with some margin on the top and bottom */
-    padding: 1rem; /* Add some padding inside the container */
-    background-color: #fafafa; /* Light background color for the content area */
-    border-radius: 8px; /* Slightly rounded corners for a modern look */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .about-page h1 {
@@ -32,5 +32,5 @@
 }
 
 .about-page strong {
-    color: #004D40; /* Use a strong color to highlight important terms */
+    color: #004d40; /* Use a strong color to highlight important terms */
 }

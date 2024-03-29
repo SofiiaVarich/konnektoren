@@ -1,10 +1,10 @@
 use crate::{
     pages::{
-        About, AdjectivesPage, Home, KonnektorenPage, LanguagePage, Navigation, Results,
-        VerbsPage,
+        About, AdjectivesPage, ConfigPage, Home, KonnektorenPage, LanguagePage, Navigation,
+        Results, VerbsPage,
     },
-    utils::translation::{languages, translations, LANGUAGE_KEY},
     route::Route,
+    utils::translation::{languages, translations, LANGUAGE_KEY},
 };
 use gloo_storage::{LocalStorage, Storage};
 use wasm_bindgen::JsValue;
@@ -28,6 +28,7 @@ fn switch_main(route: Route) -> Html {
                 Route::Adjectives => html! {<AdjectivesPage />},
                 Route::Verbs => html! {<VerbsPage />},
                 Route::Results { code } => html! {<Results { code } />},
+                Route::Config => html! {<ConfigPage />},
             };
 
             html! {

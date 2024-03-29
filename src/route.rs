@@ -12,6 +12,8 @@ pub enum Route {
     Verbs,
     #[at("/about")]
     About,
+    #[at("/config")]
+    Config,
     #[at("/results/:code")]
     Results { code: String },
 }
