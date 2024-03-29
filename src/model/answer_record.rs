@@ -28,6 +28,8 @@ mod tests {
     use serde::{Deserialize, Serialize};
     use strum::EnumIter;
 
+    use crate::model::TestType;
+
     use super::*;
     #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, EnumIter)]
     enum TestType {
@@ -50,6 +52,10 @@ mod tests {
     impl TypeTrait for TestType {
         fn get_type() -> String {
             "TestType".to_string()
+        }
+
+        fn get_t() -> crate::model::TestType {
+            crate::model::TestType::Konnektoren
         }
     }
 

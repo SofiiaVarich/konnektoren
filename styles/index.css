@@ -459,3 +459,59 @@ li {
         padding: 15px;
     }
 }
+
+/* Leaderboard Page Styles */
+.leaderboard-page {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.leaderboard-page h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li > div {
+    display: flex;
+    align-items: center;
+}
+
+.player-name {
+    font-weight: 600;
+    color: #0056b3;
+}
+
+.performance-percentage {
+    margin-left: auto;
+    padding-right: 1rem;
+    color: #28a745;
+    font-weight: 500;
+}
+
+.date {
+    color: #6c757d;
+    font-size: 0.9rem;
+}

@@ -2,7 +2,7 @@ use crate::{
     components::{MainMenu, Navigation},
     pages::{
         About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LanguagePage,
-        ProfilePage, Results, VerbsPage,
+        LeaderboardPage, ProfilePage, Results, VerbsPage,
     },
     route::Route,
     utils::translation::{languages, translations, LANGUAGE_KEY},
@@ -32,6 +32,7 @@ fn switch_main(route: Route) -> Html {
                 Route::Config => html! {<ConfigPage />},
                 Route::Profile => html! {<ProfilePage />},
                 Route::History => html! {<HistoryPage />},
+                Route::Leaderboard => html! {<LeaderboardPage />},
             };
 
             html! {
@@ -108,6 +109,13 @@ fn redirect_if_needed() {
         let history = window.history().expect("couldn't get history");
         history
             .push_state_with_url(&JsValue::NULL, "", Some("/verbs"))
+            .expect("could not push state");
+    }
+
+    if query.contains("page=leaderboard") {
+        let history = window.history().expect("couldn't get history");
+        history
+            .push_state_with_url(&JsValue::NULL, "", Some("/leaderboard"))
             .expect("could not push state");
     }
 

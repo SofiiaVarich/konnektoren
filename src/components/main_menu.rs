@@ -31,6 +31,7 @@ pub fn main_menu() -> Html {
                     <Link<Route> to={Route::Home}>{html!{<Logo img_src={"/favicon.png".to_string()} />}}</Link<Route>>
                     <Link<Route> to={Route::Profile}>{ "Profile" }</Link<Route>>
                     <Link<Route> to={Route::History}>{ "History" }</Link<Route>>
+                    <Link<Route> to={Route::Leaderboard}>{ "Leaderboard" }</Link<Route>>
                     <Link<Route> to={Route::About}>{ "About" }</Link<Route>>
                     <Link<Route> to={Route::Config}>{ "Config" }</Link<Route>>
                 </div>

@@ -18,6 +18,8 @@ pub enum Route {
     Profile,
     #[at("/history")]
     History,
+    #[at("/leaderboard")]
+    Leaderboard,
     #[at("/results/:code")]
     Results { code: String },
 }
