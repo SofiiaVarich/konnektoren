@@ -1,5 +1,5 @@
 use crate::model::{TestResult, TestType};
-use crate::pages::Route;
+use crate::route::Route;
 use serde::{Deserialize, Serialize};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;

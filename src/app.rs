@@ -1,9 +1,10 @@
 use crate::{
     pages::{
-        About, AdjectivesPage, Home, KonnektorenPage, LanguagePage, Navigation, Results, Route,
+        About, AdjectivesPage, Home, KonnektorenPage, LanguagePage, Navigation, Results,
         VerbsPage,
     },
     utils::translation::{languages, translations, LANGUAGE_KEY},
+    route::Route,
 };
 use gloo_storage::{LocalStorage, Storage};
 use wasm_bindgen::JsValue;

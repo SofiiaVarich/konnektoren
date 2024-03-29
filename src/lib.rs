@@ -8,6 +8,7 @@ pub mod openapi_spec;
 
 #[cfg(feature = "web")]
 pub mod pages;
+pub mod route;
 pub mod utils;
 
 #[cfg(feature = "tui")]

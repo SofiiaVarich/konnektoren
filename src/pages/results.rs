@@ -1,4 +1,5 @@
-use crate::{components::Certificate, model::TestResult, pages::Route};
+use crate::route::Route;
+use crate::{components::Certificate, model::TestResult};
 
 #[cfg(feature = "verifiable-credentials")]
 use crate::components::VerifiableCredential;
