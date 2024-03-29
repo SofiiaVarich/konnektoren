@@ -4,5 +4,8 @@
   "Please select a language from the dropdown.": "Будь ласка, виберіть мову з випадаючого списку.",
   "Select Language": "Виберіть мову",
   "This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:": "Ця платформа призначена для допомоги особам у покращенні їх розуміння та використання німецької граматики. Зокрема, ви можете дізнатися про:",
-  "Config": "Конфіг"
+  "Config": "Конфіг",
+  "Player Profile": "Профіль гравця",
+  "Use a nickname as your name. It will be used for certificates and displayed on the leaderboard.": "Використовуйте псевдонім як своє ім'я. Він буде використовуватися для сертифікатів та відображатися на дошці лідерів.",
+  "Connect your Solana account to receive NFTs as rewards for top players.": "Підключіть свій обліковий запис Solana, щоб отримувати NFT-токени як винагороду для кращих гравців."
 }

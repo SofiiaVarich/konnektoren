@@ -4,5 +4,8 @@
   "Please select a language from the dropdown.": "Bitte wählen Sie eine Sprache aus der Dropdown-Liste aus.",
   "Select Language": "Sprache auswählen",
   "This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:": "This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about: ",
-  "Config": "Konfiguration"
+  "Config": "Konfiguration",
+  "Player Profile": "Spielerprofil",
+  "Use a nickname as your name. It will be used for certificates and displayed on the leaderboard.": "Verwenden Sie einen Spitznamen als Ihren Namen. Es wird für Zertifikate verwendet und auf der Bestenliste angezeigt.",
+  "Connect your Solana account to receive NFTs as rewards for top players.": "Verbinden Sie Ihr Solana-Konto, um NFTs als Belohnungen für Top-Spieler zu erhalten."
 }

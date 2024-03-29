@@ -11,7 +11,7 @@ pub fn language_page() -> Html {
     let selected_language =
         use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
 
-    let _ = i18n.set_translation_language(&*selected_language);
+    let _ = i18n.set_translation_language(&selected_language);
 
     html! {
         <div class="language-page">

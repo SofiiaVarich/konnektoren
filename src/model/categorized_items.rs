@@ -85,7 +85,7 @@ impl Default for CategorizedItems<NomenType, NomenDetail> {
     fn default() -> Self {
         let yaml_content = include_str!("../nomen.yml");
 
-        let nomen: CategorizedItems<NomenType, NomenDetail> = serde_yaml::from_str(&yaml_content)
+        let nomen: CategorizedItems<NomenType, NomenDetail> = serde_yaml::from_str(yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
         nomen
     }

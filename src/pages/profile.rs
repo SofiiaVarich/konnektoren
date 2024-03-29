@@ -66,14 +66,16 @@ pub fn profile_page() -> Html {
 
     html! {
         <div class="profile-page">
-            <h2>{ "Player Profile" }</h2>
+            <h2>{ i18n.t("Player Profile") }</h2>
+                <p>{ i18n.t("Use a nickname as your name. It will be used for certificates and displayed on the leaderboard.") }</p>
+            <p>{ i18n.t("Connect your Solana account to receive NFTs as rewards for top players.") }</p>
             <div>
-                <label for="name">{ "Name: " }</label>
+                <label for="name">{ "Name (Nickname): " }</label>
                 <input id="name" type="text" value={(*name).clone()} oninput={on_name_change} />
             </div>
             <div>
-                <label for="account">{ "Account: " }</label>
-                <input id="account" type="text" value={(*account).clone()} oninput={on_account_change} />
+                <label for="account">{ "Solana Account: " }</label>
+                <input id="account" type="text" value={(*account).clone()} oninput={on_account_change} placeholder="Solana Account Address" />
             </div>
             if has_changes() {
                 <button onclick={on_save}>{ "Save Changes" }</button>
