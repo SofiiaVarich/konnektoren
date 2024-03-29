@@ -1,9 +1,20 @@
 use serde::{Deserialize, Serialize};
 
+pub const PLAYER_KEY: &str = "player_profile";
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Player {
     /// The player's name
-    name: String,
+    pub name: String,
     /// The player's solana account
-    account: String,
+    pub account: Option<String>,
+}
+
+impl Default for Player {
+    fn default() -> Self {
+        Self {
+            name: "Anonymous".into(),
+            account: None,
+        }
+    }
 }

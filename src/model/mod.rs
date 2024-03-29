@@ -10,7 +10,7 @@ mod konnektor_detail;
 mod konnektor_type;
 mod nomen_detail;
 mod nomen_type;
-mod player;
+pub mod player;
 mod test_result;
 mod test_type;
 mod type_trait;

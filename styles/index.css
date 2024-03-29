@@ -334,3 +334,63 @@ li {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.profile-page {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-page h2 {
+    color: #007bff;
+    margin-bottom: 24px;
+}
+
+.profile-page input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-page button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-page button:hover {
+    background-color: #0056b3;
+}
+
+.profile-page .notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        top 0.3s ease;
+    pointer-events: none;
+}
+
+.profile-page .notification.show {
+    opacity: 1;
+    top: 30px;
+}
