@@ -3,6 +3,7 @@ use worker::*;
 mod certificate;
 mod nft;
 mod routes;
+pub mod vc;
 
 mod services;
 use routes::{

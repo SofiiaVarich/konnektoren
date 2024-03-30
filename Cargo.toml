@@ -5,19 +5,35 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [[bin]]
 name = "deploy-nft"
 path = "src/bin/deploy_nft.rs"
 required-features = ["deploy-nft"]
 
+[[bin]]
+name = "issue-vc"
+path = "src/bin/issue_vc.rs"
+required-features = []
+
 [features]
-default = []
+default = ["issue-vc"]
 deploy-nft = ["dotenv", "bip39", "solana-client", "solana-sdk", "mpl-core"]
+issue-vc = [
+    "axum",
+    "dotenv",
+    "ngrok",
+    "qrcode",
+    "tokio",
+    "tower-http",
+    "tracing",
+    "tracing-subscriber",
+]
 
 [dependencies]
 anyhow = "1.0.81"
+axum = { version = "0.7", features = ["tokio"], optional = true }
 base64 = "0.22.0"
 getrandom = { version = "0.2", features = ["js"] }
 konnektoren = { git = "https://github.com/SofiiaVarich/konnektoren.git", default-features = false, features = [
@@ -35,6 +51,15 @@ solana-sdk = { version = "1.17", optional = true }
 dotenv = { version = "0.15.0", optional = true }
 bip39 = { version = "2.0", features = ["std"], optional = true }
 mpl-core = { version = "0.3.0", optional = true }
+ngrok = { version = "0.13.1", optional = true }
+qrcode = { version = "0.14.0", optional = true }
+tokio = { version = "1.37.0", features = [
+    "rt-multi-thread",
+    "macros",
+], optional = true }
+tower-http = { version = "0.5", features = ["trace"], optional = true }
+tracing = { version = "0.1", optional = true }
+tracing-subscriber = { version = "0.3", optional = true }
 
 [profile.release]
 opt-level = "s"

@@ -39,3 +39,9 @@ Run the following command:
 ```sh
 cargo run --features=deploy-nft --bin deploy-nft
 ```
+
+## Run VC Issue service
+
+```sh
+cargo run --features=issue-vc --bin issue-vc
+```
