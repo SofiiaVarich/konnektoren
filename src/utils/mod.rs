@@ -27,3 +27,19 @@ pub fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
 
     (signing_key, verify_key)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ed25519_dalek::Verifier;
+    use ed25519_dalek::Signer;
+
+    #[test]
+    fn test_keypair_from_static_str() {
+        let (signing_key, verifying_key) = keypair_from_static_str();
+
+        let message = b"Hello, World!";
+        let signature = signing_key.sign(message);
+        assert!(verifying_key.verify(message, &signature).is_ok());
+    }
+}
