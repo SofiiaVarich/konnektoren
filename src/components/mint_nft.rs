@@ -113,6 +113,30 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
         }
     };
 
+    let nft = match page_link.as_ref() {
+        Some(link) => {
+            html! {
+                <div class="mint-nft_title">
+                <a href={link.clone()} target="_blank">
+                    { "Claimed ->" }
+                </a>
+                </div>
+            }
+        }
+        None => html! {
+            <>
+            <div class="mint-nft_title">
+                { "Claim NFT" }
+            </div>
+            <div class="mint-nft_button">
+                <button onclick={on_click}>
+                    { "Mint" }
+                </button>
+            </div>
+            </>
+        },
+    };
+
     match test_result.performance_percentage {
         0..=14 => {
             html! {}
@@ -120,14 +144,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
         _ => {
             html! {
                 <div class="mint-nft">
-                    <div class="mint-nft_title">
-                        { "Claim NFT" }
-                    </div>
-                    <div class="mint-nft_button">
-                        <button onclick={on_click}>
-                            { "Mint" }
-                        </button>
-                    </div>
+                    { nft }
                     { error_msg }
                 </div>
             }
