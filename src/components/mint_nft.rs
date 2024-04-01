@@ -1,6 +1,7 @@
 use crate::model::player::PLAYER_KEY;
 use crate::model::Player;
 use crate::model::TestResult;
+use crate::model::TestType;
 use gloo_storage::{LocalStorage, Storage};
 use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
@@ -15,6 +16,15 @@ use yew::prelude::*;
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MintResponse {
     pub page: String,
+}
+
+fn nft_url(test_type: &TestType) -> String {
+    match test_type {
+        TestType::Konnektoren => "/assets/nft-konnektoren.png".to_string(),
+        TestType::Adjectives => "/assets/nft-adjectives.png".to_string(),
+        TestType::Verbs => "/assets/nft-verbs.png".to_string(),
+        TestType::Nomen => "/assets/nft-nouns.png".to_string(),
+    }
 }
 
 #[derive(Properties, PartialEq)]
@@ -134,7 +144,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
             html! {
                 <div class="mint-nft_title">
                 <a href={link.clone()} target="_blank">
-                    { "Claimed ->" }
+                    <img src={nft_url(&test_result.test_type)} tag="nft" />
                 </a>
                 </div>
             }
