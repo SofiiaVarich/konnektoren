@@ -32,14 +32,13 @@
 
 /* Main Menu Container */
 .main-menu {
-    position: relative;
+    position: fixed;
+    top: 10px;
+    right: 10px;
 }
 
 /* Burger Menu Icon */
 .burger-menu {
-    position: fixed;
-    top: 10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
     z-index: 999;
     cursor: pointer;
     padding: 0.8rem;
@@ -57,16 +56,16 @@
 .menu-items {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0; /* Adjusted to slide out from the right */
     width: 250px;
     height: 100%;
     background-color: #fff;
-    box-shadow: 3px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow direction adjusted for right side */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to the start (right side) */
     padding-top: 60px; /* Adjusted to not overlap with burger menu */
-    transform: translateX(-100%);
+    transform: translateX(100%); /* Adjusted to be hidden on the right side */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -86,5 +85,5 @@
 
 /* Display the menu when is_menu_open is true */
 .main-menu .menu-items.active {
-    transform: translateX(0);
+    transform: translateX(0); /* Adjusted to slide in from the right */
 }

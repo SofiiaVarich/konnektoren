@@ -21,8 +21,8 @@ pub fn main_menu() -> Html {
     };
 
     html! {
-        <div class="main-menu">
-            <div class="burger-menu" onclick={toggle_menu}>
+        <div class="main-menu" onclick={toggle_menu}>
+            <div class="burger-menu">
                 {"☰"}
             </div>
             if *is_menu_open {
