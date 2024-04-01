@@ -26,6 +26,7 @@ pub struct MintNftProps {
 pub fn mint_nft(props: &MintNftProps) -> Html {
     let player =
         use_state(|| LocalStorage::get::<Player>(PLAYER_KEY).unwrap_or_else(|_| Player::default()));
+    let is_loading = use_state(|| false);
 
     let page_link = use_state(|| None);
     let error_message = use_state(|| None::<String>);
@@ -35,12 +36,15 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
     let receiver: String = player.account.clone().unwrap_or_default();
 
     let on_click = {
+        let is_loading = is_loading.clone();
+        is_loading.set(true);
         let page_link = page_link.clone();
         let error_message = error_message.clone();
         let test_result_clone = test_result.clone();
         let receiver = receiver.clone();
 
         Callback::from(move |_: MouseEvent| {
+            let is_loading = is_loading.clone();
             if receiver.is_empty() {
                 error_message.set(Some(
                     "Please set your Solana account address in the profile page.".to_string(),
@@ -66,6 +70,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
 
                 match JsFuture::from(window.fetch_with_request(&request)).await {
                     Ok(resp_value) => {
+                        is_loading.set(false);
                         let resp: web_sys::Response = resp_value.dyn_into().unwrap();
                         if resp.ok() {
                             match resp.json() {
@@ -92,10 +97,21 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
                             error_message.set(Some("Request failed.".into()));
                         }
                     }
-                    Err(_) => error_message.set(Some("Failed to fetch mint endpoint.".into())),
+                    Err(_) => {
+                        is_loading.set(false);
+                        error_message.set(Some("Failed to fetch mint endpoint.".into()))
+                    }
                 }
             });
         })
+    };
+
+    let spinner = if *is_loading {
+        html! {
+            <div class="loader"></div>
+        }
+    } else {
+        html! {}
     };
 
     let test_result = props.test_result.clone();
@@ -144,6 +160,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
         _ => {
             html! {
                 <div class="mint-nft">
+                    { spinner }
                     { nft }
                     { error_msg }
                 </div>
