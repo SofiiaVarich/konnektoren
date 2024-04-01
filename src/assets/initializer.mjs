@@ -1,5 +1,5 @@
 export default function myInitializer() {
-  let startTime;
+  let startTime = 0;
 
   return {
     onStart: () => {
@@ -19,17 +19,6 @@ export default function myInitializer() {
         loadingMessage.textContent = "Loading...";
       }
     },
-    onComplete: () => {
-      const currentTime = performance.now();
-      const elapsedTime = currentTime - startTime;
-      const remainingTime = Math.max(200 - elapsedTime, 0);
-
-      setTimeout(() => {
-        console.debug("Loading... done!");
-        document.getElementById("loading-container").style.display = "none";
-      }, remainingTime);
-    },
-    onSuccess: (wasm) => {},
     onFailure: (error) => {
       console.warn("Loading... failed!", error);
     },
