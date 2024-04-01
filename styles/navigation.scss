@@ -1,6 +1,6 @@
 .navigation {
   nav {
-    background-color: #004d40;
+    background: linear-gradient(to right, #7F25FD, #FF86A1);
     padding: 1rem 2rem;
     display: flex;
     justify-content: center;
@@ -11,6 +11,7 @@
     left: 0;
     width: 100%;
     z-index: 100;
+
 
     a {
       color: white;
