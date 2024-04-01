@@ -8,6 +8,11 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [[bin]]
+name = "underdog-nft"
+path = "src/bin/underdog_nft.rs"
+required-features = []
+
+[[bin]]
 name = "deploy-nft"
 path = "src/bin/deploy_nft.rs"
 required-features = ["deploy-nft"]
@@ -18,8 +23,9 @@ path = "src/bin/issue_vc.rs"
 required-features = []
 
 [features]
-default = ["issue-vc"]
+default = ["issue-vc", "underdog"]
 deploy-nft = ["dotenv", "bip39", "solana-client", "solana-sdk", "mpl-core"]
+underdog = ["bip39", "dotenv", "tokio", "solana-sdk"]
 issue-vc = [
     "axum",
     "dotenv",

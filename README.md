@@ -45,3 +45,9 @@ cargo run --features=deploy-nft --bin deploy-nft
 ```sh
 cargo run --features=issue-vc --bin issue-vc
 ```
+
+## Run create NFT with underdog
+
+```sh
+cargo run --features=underdog --bin underdog-nft
+```
