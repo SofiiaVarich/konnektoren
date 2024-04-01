@@ -1,3 +1,4 @@
+use crate::components::MintNFT;
 use crate::model::TestResult;
 use crate::route::Route;
 use yew::prelude::*;
@@ -33,6 +34,9 @@ pub fn history_entry(props: &HistoryEntryProps) -> Html {
                     </li>
                 </ul>
             </Link<Route>>
+            <div class="history-entry_mint">
+                <MintNFT test_result={ props.test_result.clone() } />
+            </div>
         </div>
     }
 }

@@ -517,6 +517,9 @@ li > div {
 }
 
 .history-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: 1px solid #ddd;
     margin-bottom: 1rem;
     border-radius: 8px;
@@ -528,7 +531,12 @@ li > div {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.history-entry:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .history-entry ul {
+    flex: 1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -536,10 +544,10 @@ li > div {
     justify-content: space-between;
     align-items: center;
     background-color: #f0f0f0;
+    list-style-type: none;
 }
 
 .history-entry li {
-    flex: 1;
     padding: 0.5rem 1rem;
     text-align: center;
 }
@@ -562,4 +570,60 @@ li > div {
 .history-entry a {
     color: inherit;
     text-decoration: none;
+}
+
+.history-entry_mint {
+    padding: 0.5rem 1rem;
+    text-align: right;
+}
+
+.mint-nft {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mint-nft_title {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.mint-nft_button button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition:
+        background-color 0.3s,
+        transform 0.2s;
+}
+
+.mint-nft_button button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.mint-nft_button button:active {
+    background-color: #3e8e41;
+    transform: translateY(1px);
+}
+
+.mint-nft_message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }

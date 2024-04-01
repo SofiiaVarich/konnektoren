@@ -5,8 +5,10 @@ mod congratulations;
 mod explanation;
 mod footer;
 mod header;
+mod history_entry;
 mod logo;
 mod main_menu;
+mod mint_nft;
 mod navigation;
 mod player_input;
 mod select_language;
@@ -17,7 +19,6 @@ mod test_results;
 mod test_selector;
 mod test_statistics;
 mod type_selector;
-mod history_entry;
 
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
@@ -29,8 +30,10 @@ pub use congratulations::Congratulations;
 pub use explanation::Explanation;
 pub use footer::Footer;
 pub use header::Header;
+pub use history_entry::HistoryEntry;
 pub use logo::Logo;
 pub use main_menu::MainMenu;
+pub use mint_nft::MintNFT;
 pub use navigation::Navigation;
 pub use player_input::PlayerInput;
 pub use select_language::SelectLanguage;
@@ -41,7 +44,6 @@ pub use test_results::TestResults;
 pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use type_selector::TypeSelector;
-pub use history_entry::HistoryEntry;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;

@@ -31,8 +31,8 @@ pub fn keypair_from_static_str() -> (SigningKey, VerifyingKey) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use ed25519_dalek::Verifier;
     use ed25519_dalek::Signer;
+    use ed25519_dalek::Verifier;
 
     #[test]
     fn test_keypair_from_static_str() {

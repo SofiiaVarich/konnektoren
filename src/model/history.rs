@@ -98,7 +98,7 @@ impl History {
 mod tests {
     use super::super::TestType;
     use super::*;
-    use chrono::{NaiveDate, TimeZone, Utc};
+    use chrono::{TimeZone, Utc};
 
     #[test]
     fn history_new() {
