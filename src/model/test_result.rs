@@ -6,6 +6,7 @@ use chrono::{DateTime, Utc};
 use ed25519_dalek::{ed25519::SignatureBytes, Signature, Signer, Verifier};
 use serde::{Deserialize, Serialize};
 use sha2::Digest;
+use sha2::Sha256;
 use std::str;
 
 #[cfg(feature = "openapi")]
@@ -50,8 +51,9 @@ impl TestResult {
     pub fn to_sha256(&self) -> Vec<u8> {
         let data = self.to_base64();
 
-        let hash = sha2::Sha256::digest(&data.as_bytes());
-        hash.to_vec()
+        let mut sha256 = Sha256::new();
+        sha256.update(data);
+        format!("{:X}", sha256.finalize()).into_bytes()
     }
 
     pub fn to_base64(&self) -> String {
