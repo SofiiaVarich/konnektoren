@@ -1,4 +1,4 @@
-use konnektoren::model::leaderboard::{Leaderboard, LEADERBOARD_KEY};
+use konnektoren::model::leaderboard::Leaderboard;
 use konnektoren::model::TestResult;
 use urlencoding::encode;
 use worker::kv::KvStore;
@@ -88,23 +88,35 @@ pub async fn generate_and_upload_metadata(
 }
 
 pub async fn update_leaderboard(kv: &KvStore, test_result: &TestResult) -> Result<()> {
-    let mut leaderboard = load_leaderboard(&kv).await?;
-    leaderboard.add_test(test_result.clone());
-    store_leaderboard(&kv, &leaderboard).await?;
+    let hash: String = match String::from_utf8(test_result.to_sha256()) {
+        Ok(hash) => hash,
+        Err(_) => return Err("Could not convert hash to string".into()),
+    };
+    kv.put(&format!("testresult:{}", hash), &test_result)?
+        .expiration_ttl(286400)
+        .execute()
+        .await?;
+
     Ok(())
 }
 
 pub async fn load_leaderboard(kv: &KvStore) -> Result<Leaderboard> {
-    let leaderboard: Option<Leaderboard> = kv.get(LEADERBOARD_KEY).json().await?;
-    Ok(leaderboard.unwrap_or_default())
-}
+    let mut leaderboard = Leaderboard::new();
 
-pub async fn store_leaderboard(kv: &KvStore, leaderboard: &Leaderboard) -> Result<()> {
-    kv.put(LEADERBOARD_KEY, &leaderboard)?
-        .expiration_ttl(86400)
+    let keys = kv
+        .list()
+        .prefix("testresult:".to_string())
         .execute()
-        .await?;
-    Ok(())
+        .await?
+        .keys;
+
+    for key in keys {
+        if let Ok(Some(test_result)) = kv.get(&key.name).json().await {
+            leaderboard.add_test(test_result);
+        }
+    }
+
+    Ok(leaderboard)
 }
 
 pub async fn mint_nft(

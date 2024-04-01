@@ -31,7 +31,7 @@ pub async fn create_nft(
         .header("Accept", "application/json")
         .header("Content-Type", "application/json")
         .body(serde_json::to_string(&json!({
-            "name": "Konnektoren",
+            "name": format!("{test_type}"),
             "symbol": "KHN",
             "image": format!("https://konnektoren.help{nft_img_url}"),
             "receiverAddress": receiver,
