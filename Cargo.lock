@@ -2765,6 +2765,7 @@ dependencies = [
  "getrandom 0.2.12",
  "image 0.24.9",
  "konnektoren",
+ "log",
  "mpl-core",
  "ngrok",
  "qrcode 0.14.0",
@@ -2779,6 +2780,7 @@ dependencies = [
  "tracing-subscriber",
  "urlencoding",
  "worker",
+ "worker_logger",
 ]
 
 [[package]]
@@ -6869,6 +6871,16 @@ dependencies = [
  "js-sys",
  "wasm-bindgen",
  "web-sys",
+]
+
+[[package]]
+name = "worker_logger"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3feaee8b9d44f53f5d8100158d30b254539ad4327d545e00de7ad9a2b2f43431"
+dependencies = [
+ "log",
+ "worker",
 ]
 
 [[package]]

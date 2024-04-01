@@ -1,7 +1,7 @@
 use crate::nft::Metadata;
 use crate::services::{
     generate_and_upload_metadata, generate_metadata_response, generate_png_response,
-    load_leaderboard, update_leaderboard,
+    load_leaderboard, mint_nft, update_leaderboard,
 };
 use konnektoren::model::leaderboard::Leaderboard;
 use konnektoren::model::TestResult;
@@ -86,4 +86,50 @@ pub async fn handle_leaderboard_request(
     let kv = ctx.kv("KONNEKTOREN_LEADERBOARD")?;
     let leaderboard: Leaderboard = load_leaderboard(&kv).await?;
     Response::from_json(&leaderboard)
+}
+
+pub async fn handle_mint_request(req: Request, ctx: RouteContext<()>) -> worker::Result<Response> {
+    let parsed_url = Url::parse(req.url()?.as_str())?;
+
+    let mut query_pairs = parsed_url.query_pairs();
+    let receiver: Option<String> = query_pairs
+        .clone()
+        .find(|(key, _)| key == "receiver")
+        .map(|(_, value)| value.into());
+    let code: Option<String> = query_pairs
+        .find(|(key, _)| key == "code")
+        .map(|(_, value)| value.into());
+
+    log::info!("Receiver: {:?}, Code: {:?}", receiver, code);
+
+    if let (Some(receiver), Some(code)) = (receiver, code) {
+        let api_key: String = ctx.secret("UNDERDOG_API_KEY")?.to_string();
+        let project_id: String = ctx.var("UNDERDOG_PROJECT_ID")?.to_string();
+
+        let decoded_data = match decode(&code) {
+            Ok(data) => data,
+            Err(_) => return Response::error("Bad Request", 400),
+        };
+
+        let test_result = match TestResult::from_base64(&decoded_data) {
+            Ok(result) => result,
+            Err(_) => return Response::error(format!("Bad Request {}", &decoded_data), 400),
+        };
+
+        log::info!("Test Result: {:?}", test_result);
+
+        let mint_address = match mint_nft(&test_result, receiver.clone(), project_id, api_key).await
+        {
+            Ok(address) => address,
+            Err(err) => return Response::error(format!("Error minting: {err}"), 500),
+        };
+
+        return Response::from_json(&serde_json::json!({
+            "receiver": receiver,
+            "address": mint_address.to_string(),
+            "page": format!("https://xray.helius.xyz/token/{}?network=devnet", mint_address)
+        }));
+    }
+
+    Response::error("Bad Request", 400)
 }

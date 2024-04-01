@@ -23,7 +23,7 @@ path = "src/bin/issue_vc.rs"
 required-features = []
 
 [features]
-default = ["issue-vc", "underdog"]
+default = []
 deploy-nft = ["dotenv", "bip39", "solana-client", "solana-sdk", "mpl-core"]
 underdog = ["bip39", "dotenv", "tokio", "solana-sdk"]
 issue-vc = [
@@ -66,6 +66,8 @@ tokio = { version = "1.37.0", features = [
 tower-http = { version = "0.5", features = ["trace"], optional = true }
 tracing = { version = "0.1", optional = true }
 tracing-subscriber = { version = "0.3", optional = true }
+log = "0.4.21"
+worker_logger = "0.2.0"
 
 [profile.release]
 opt-level = "s"

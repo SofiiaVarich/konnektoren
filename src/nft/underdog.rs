@@ -4,7 +4,7 @@ use serde_json::{json, Value};
 
 pub const UNDERDOG_API_ENDPOINT: &str = "https://dev.underdogprotocol.com";
 
-pub async fn create_nft(receiver: String, project_id: String, api_key: &String) -> Result<Value> {
+pub async fn create_nft(receiver: &String, project_id: &String, api_key: &String) -> Result<Value> {
     let client = Client::new();
     let req = client
         .post(format!(
@@ -28,13 +28,13 @@ pub async fn create_nft(receiver: String, project_id: String, api_key: &String) 
 }
 
 pub async fn fetch_mint_address(
-    project_id: String,
-    nft_id: String,
+    project_id: &String,
+    nft_id: &String,
     api_key: &String,
 ) -> Result<String> {
     let client = Client::new();
     let mut pending = true;
-    let mut timeout = 10;
+    let mut timeout = 100;
     let mut nft: Value = json!({});
 
     while timeout > 0 && pending {
@@ -48,6 +48,8 @@ pub async fn fetch_mint_address(
         let body_nft = res.text().await?;
 
         nft = serde_json::from_str(&body_nft)?;
+
+        log::debug!("NFT: {:?}", nft);
 
         match nft.get("status") {
             Some(status) => {
@@ -63,14 +65,15 @@ pub async fn fetch_mint_address(
         }
 
         timeout -= 1;
-
-        if pending {
-            std::thread::sleep(std::time::Duration::from_millis(500));
-        }
     }
 
-    match nft.get("mintAddress") {
-        Some(mint_address) => Ok(mint_address.as_str().unwrap().to_string()),
-        None => Err(anyhow::anyhow!("Mint address not found")),
+    let mint_address = match nft.get("mintAddress") {
+        Some(mint_address) => mint_address.as_str().unwrap().to_string(),
+        None => return Err(anyhow::anyhow!("Mint address not found")),
+    };
+    if mint_address.is_empty() {
+        return Err(anyhow::anyhow!("Mint address not found"));
     }
+
+    Ok(mint_address)
 }

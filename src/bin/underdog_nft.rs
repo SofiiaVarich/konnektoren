@@ -29,18 +29,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Payer: {}", payer.pubkey().to_string());
 
-    let body: Value = create_nft(
-        payer.pubkey().to_string(),
-        project_id.to_string(),
-        &UNDERDOG_API_KEY,
-    )
-    .await?;
+    let body: Value =
+        create_nft(&payer.pubkey().to_string(), &project_id, &UNDERDOG_API_KEY).await?;
 
     println!("Response: {}", body);
 
     let nft_id = format!("{}", body["nftId"].as_i64().unwrap());
 
-    let mint_address = fetch_mint_address(project_id, nft_id, &UNDERDOG_API_KEY).await?;
+    let mint_address = fetch_mint_address(&project_id, &nft_id, &UNDERDOG_API_KEY).await?;
 
     println!("https://xray.helius.xyz/token/{mint_address}?network=devnet");
 

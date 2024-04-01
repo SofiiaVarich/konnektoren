@@ -5,7 +5,7 @@ use worker::kv::KvStore;
 use worker::*;
 
 use crate::certificate::Certificate;
-use crate::nft::{Ipfs, Metadata};
+use crate::nft::{create_nft, fetch_mint_address, Ipfs, Metadata};
 use crate::routes::GenerateResult;
 
 pub fn generate_png_response(test_result: &TestResult) -> Result<Response> {
@@ -100,4 +100,29 @@ pub async fn store_leaderboard(kv: &KvStore, leaderboard: &Leaderboard) -> Resul
         .execute()
         .await?;
     Ok(())
+}
+
+pub async fn mint_nft(
+    test_result: &TestResult,
+    receiver: String,
+    project_id: String,
+    api_key: String,
+) -> anyhow::Result<String> {
+    if !test_result.verify() {
+        return Err(anyhow::anyhow!("TestResult is not valid"));
+    }
+
+    if test_result.performance_percentage < 15 {
+        return Err(anyhow::anyhow!("Performance is too low to mint NFT"));
+    }
+
+    let nft = create_nft(&receiver, &project_id, &api_key).await?;
+
+    log::info!("NFT created: {:?}", nft);
+
+    let nft_id = format!("{}", nft["nftId"].as_i64().unwrap());
+
+    let mint_address = fetch_mint_address(&project_id, &nft_id, &api_key).await?;
+
+    Ok(mint_address)
 }
