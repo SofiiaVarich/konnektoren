@@ -32,20 +32,36 @@ pub fn leaderboard_page() -> Html {
                 .await
                 .unwrap();
             let resp: Response = resp_value.dyn_into().unwrap();
-            let json = JsFuture::from(resp.json().unwrap()).await.unwrap();
-            let leaderboard_json: Leaderboard = json.into_serde().unwrap();
 
-            if leaderboard_json != *leaderboard {
-                leaderboard.set(leaderboard_json);
+            if !resp.ok() {
+                return;
+            }
+
+            match resp.json() {
+                Ok(json) => match json.into_serde::<Leaderboard>() {
+                    Ok(leaderboard_json) => {
+                        leaderboard.set(leaderboard_json);
+                    }
+                    Err(_) => {}
+                },
+                Err(_) => {}
             }
         });
 
         || ()
     });
 
+    let empty_message = match leaderboard.get_ranked().is_empty() {
+        true => html! {
+            <p>{"Loading..."}</p>
+        },
+        false => html! {},
+    };
+
     html! {
         <div class="leaderboard-page">
             <h1>{"Leaderboard"}</h1>
+            { empty_message }
             <ul>
                 { for leaderboard.get_ranked().iter().map(|test| {
                     let navigator = navigator.clone();
@@ -56,7 +72,7 @@ pub fn leaderboard_page() -> Html {
                     };
                     html! {
                         <li {onclick}>
-                            { format!("{}: {}% - {}", test.player_name, test.performance_percentage, test.date.to_rfc2822()) }
+                            { format!("{}: {}% - {}", test.player_name, test.performance_percentage, test.date.format("%Y-%m-%d %H:%M:%S").to_string()) }
                         </li>
                     }
                 })}

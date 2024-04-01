@@ -17,6 +17,7 @@ mod test_results;
 mod test_selector;
 mod test_statistics;
 mod type_selector;
+mod history_entry;
 
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
@@ -40,6 +41,7 @@ pub use test_results::TestResults;
 pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use type_selector::TypeSelector;
+pub use history_entry::HistoryEntry;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;

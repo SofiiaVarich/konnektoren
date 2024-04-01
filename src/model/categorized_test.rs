@@ -20,7 +20,7 @@ where
     CategorizedItems<T, D>: std::default::Default,
 {
     fn default() -> Self {
-        Self::new_of_size(&CategorizedItems::default(), 50)
+        Self::new_of_size(&CategorizedItems::default(), 20)
     }
 }
 

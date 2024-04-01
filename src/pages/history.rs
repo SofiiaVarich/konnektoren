@@ -1,3 +1,4 @@
+use crate::components::HistoryEntry;
 use crate::model::{history::HISTORY_KEY, History};
 use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
@@ -33,6 +34,12 @@ pub fn history_page() -> Html {
                     html! { <li>{ format!("{:?}: {:.2}%", test_type, avg_perf) }</li> }
                 })}
             </ul>
+            <h2>{ "Test History" }</h2>
+            <div class="history-entries">
+                { for history.get_test_results().iter().map(|test_result| {
+                    html! { <HistoryEntry test_result={test_result.clone()} /> }
+                })}
+            </div>
         </div>
     }
 }
