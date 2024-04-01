@@ -10,9 +10,21 @@ use web_sys::RequestMode;
 use web_sys::Response;
 use yew::prelude::*;
 use yew_router::prelude::*;
+use crate::utils::translation::LANGUAGE_KEY;
+use gloo_storage::{LocalStorage, Storage};
+use yew_i18n::use_translation;
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
+
+    let mut i18n = use_translation();
+
+    let selected_language =
+        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+
+    let _ = i18n.set_translation_language(&selected_language);
+
+
     let navigator = use_navigator().expect("No navigator");
 
     let leaderboard = use_state(Leaderboard::default);
@@ -53,14 +65,14 @@ pub fn leaderboard_page() -> Html {
 
     let empty_message = match leaderboard.get_ranked().is_empty() {
         true => html! {
-            <p>{"Loading..."}</p>
+            <p>{ i18n.t("Loading...")}</p>
         },
         false => html! {},
     };
 
     html! {
         <div class="leaderboard-page">
-            <h1>{"Leaderboard"}</h1>
+            <h1>{ i18n.t("Leaderboard")}</h1>
             { empty_message }
             <ul>
                 { for leaderboard.get_ranked().iter().map(|test| {
