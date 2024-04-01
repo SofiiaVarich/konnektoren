@@ -1,7 +1,10 @@
 use crate::nft::Metadata;
+#[cfg(feature = "ipfs")]
+use crate::services::generate_and_upload_metadata;
+
 use crate::services::{
-    generate_and_upload_metadata, generate_metadata_response, generate_png_response,
-    load_leaderboard, mint_nft, update_leaderboard,
+    generate_metadata_response, generate_png_response, load_leaderboard, mint_nft,
+    update_leaderboard,
 };
 use konnektoren::model::leaderboard::Leaderboard;
 use konnektoren::model::TestResult;
@@ -37,6 +40,7 @@ pub async fn handle_certificate_request(
     Response::error("Bad Request", 400)
 }
 
+#[cfg(feature = "ipfs")]
 pub async fn handle_generate_request(
     _req: Request,
     ctx: RouteContext<()>,

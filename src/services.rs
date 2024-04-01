@@ -5,7 +5,10 @@ use worker::kv::KvStore;
 use worker::*;
 
 use crate::certificate::Certificate;
-use crate::nft::{create_nft, fetch_mint_address, Ipfs, Metadata};
+#[cfg(feature = "ipfs")]
+use crate::nft::Ipfs;
+use crate::nft::{create_nft, fetch_mint_address, Metadata};
+#[cfg(feature = "ipfs")]
 use crate::routes::GenerateResult;
 
 pub fn generate_png_response(test_result: &TestResult) -> Result<Response> {
@@ -39,6 +42,7 @@ pub fn generate_metadata(test_result: &TestResult) -> Result<Metadata> {
     Ok(metadata)
 }
 
+#[cfg(feature = "ipfs")]
 pub async fn upload_image_to_ipfs(test_result: &TestResult, api_key: String) -> Result<String> {
     let issuer = "konnektoren.help";
     let encoded_code: String = encode(&test_result.to_base64()).into_owned();
@@ -56,6 +60,7 @@ pub async fn upload_image_to_ipfs(test_result: &TestResult, api_key: String) -> 
         .unwrap())
 }
 
+#[cfg(feature = "ipfs")]
 pub async fn generate_and_upload_metadata(
     test_result: &TestResult,
     api_key: String,
@@ -116,7 +121,7 @@ pub async fn mint_nft(
         return Err(anyhow::anyhow!("Performance is too low to mint NFT"));
     }
 
-    let nft = create_nft(&receiver, &project_id, &api_key).await?;
+    let nft = create_nft(&test_result.test_type, &receiver, &project_id, &api_key).await?;
 
     log::info!("NFT created: {:?}", nft);
 

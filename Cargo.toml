@@ -5,12 +5,12 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
 
 [[bin]]
 name = "underdog-nft"
 path = "src/bin/underdog_nft.rs"
-required-features = []
+required-features = ["underdog"]
 
 [[bin]]
 name = "deploy-nft"
@@ -20,12 +20,14 @@ required-features = ["deploy-nft"]
 [[bin]]
 name = "issue-vc"
 path = "src/bin/issue_vc.rs"
-required-features = []
+required-features = ["issue-vc"]
 
 [features]
 default = []
+debug = ["worker_logger"]
 deploy-nft = ["dotenv", "bip39", "solana-client", "solana-sdk", "mpl-core"]
 underdog = ["bip39", "dotenv", "tokio", "solana-sdk"]
+ipfs = ["reqwest/multipart"]
 issue-vc = [
     "axum",
     "dotenv",
@@ -45,8 +47,8 @@ getrandom = { version = "0.2", features = ["js"] }
 konnektoren = { git = "https://github.com/SofiiaVarich/konnektoren.git", default-features = false, features = [
     "certificate-image",
 ] }
-image = "0.24"
-reqwest = { version = "0.12", features = ["json", "multipart"] }
+image = { version = "0.24", default-features = false }
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 urlencoding = "2.1.3"
@@ -67,7 +69,7 @@ tower-http = { version = "0.5", features = ["trace"], optional = true }
 tracing = { version = "0.1", optional = true }
 tracing-subscriber = { version = "0.3", optional = true }
 log = "0.4.21"
-worker_logger = "0.2.0"
+worker_logger = { version = "0.2.0", optional = true }
 
 [profile.release]
 opt-level = "s"

@@ -1,10 +1,27 @@
 use anyhow::Result;
+use konnektoren::model::TestType;
 use reqwest::Client;
 use serde_json::{json, Value};
 
 pub const UNDERDOG_API_ENDPOINT: &str = "https://dev.underdogprotocol.com";
 
-pub async fn create_nft(receiver: &String, project_id: &String, api_key: &String) -> Result<Value> {
+fn nft_img_url(test_type: &TestType) -> String {
+    match test_type {
+        TestType::Konnektoren => "/assets/nft-konnektoren.png".to_string(),
+        TestType::Adjectives => "/assets/nft-adjectives.png".to_string(),
+        TestType::Verbs => "/assets/nft-verbs.png".to_string(),
+        TestType::Nomen => "/assets/nft-nouns.png".to_string(),
+    }
+}
+
+pub async fn create_nft(
+    test_type: &TestType,
+    receiver: &String,
+    project_id: &String,
+    api_key: &String,
+) -> Result<Value> {
+    let nft_img_url = nft_img_url(test_type);
+
     let client = Client::new();
     let req = client
         .post(format!(
@@ -16,7 +33,7 @@ pub async fn create_nft(receiver: &String, project_id: &String, api_key: &String
         .body(serde_json::to_string(&json!({
             "name": "Konnektoren",
             "symbol": "KHN",
-            "image": "https://konnektoren.help/favicon.png",
+            "image": format!("https://konnektoren.help{nft_img_url}"),
             "receiverAddress": receiver,
         }))?);
 
