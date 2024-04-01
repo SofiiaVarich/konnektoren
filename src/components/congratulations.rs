@@ -1,4 +1,7 @@
+use crate::utils::translation::LANGUAGE_KEY;
+use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
+use yew_i18n::use_translation;
 
 use crate::components::{PlayerInput, SoundPlayer};
 use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
@@ -10,6 +13,13 @@ pub struct CongratulationsProps<T: TypeTrait, D: DetailTrait> {
 
 #[function_component(Congratulations)]
 pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProps<T, D>) -> Html {
+    let mut i18n = use_translation();
+
+    let selected_language =
+        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+
+    let _ = i18n.set_translation_language(&selected_language);
+
     let correct_answers = props
         .test
         .answers
@@ -25,7 +35,7 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
 
     html! {
         <div class="congratulations-container">
-            <h2>{"Congratulations!"}</h2>
+            <h2>{ i18n.t("Congratulations!")}</h2>
             <SoundPlayer sound_url="/fanfare-3-rpg.ogg" />
             <p>{format!("You have completed the test with a score of {:.1}% ({}/{})", performance, correct_answers, total_answers)}</p>
             {message::<T>(performance)}

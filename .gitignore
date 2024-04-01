@@ -24,3 +24,5 @@ openapi.json
 did.json
 
 .DS_Store
+.idea
+

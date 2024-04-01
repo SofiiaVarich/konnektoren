@@ -1,11 +1,10 @@
-use yew::prelude::*;
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
+use yew::prelude::*;
 use yew_i18n::use_translation;
 
 #[function_component(Footer)]
 pub fn footer() -> Html {
-
     let mut i18n = use_translation();
 
     let selected_language =
