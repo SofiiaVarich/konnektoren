@@ -20,12 +20,12 @@ pub fn about() -> Html {
                 { i18n.t("This platform is dedicated to helping individuals improve their understanding and use of German grammar. Specifically, you can learn about:") }
             </p>
             <ul>
-                <li><strong>{ "Konnektoren" }</strong>{ ": Understand how to connect clauses and sentences to improve the flow of your German writing and speaking." }</li>
-                <li><strong>{ "Adjektive" }</strong>{ ": Dive into the use of adjectives, including those with prepositions, to add detail and depth to your descriptions." }</li>
-                <li><strong>{ "Verben" }</strong>{ ": Master the use of verbs, particularly those with prepositions, to express actions and states more effectively." }</li>
+                <li><strong>{ i18n.t("Konnektoren") }</strong>{ i18n.t(": Understand how to connect clauses and sentences to improve the flow of your German writing and speaking." )}</li>
+                <li><strong>{ i18n.t("Adjektive") }</strong>{ i18n.t(": Dive into the use of adjectives, including those with prepositions, to add detail and depth to your descriptions." )}</li>
+                <li><strong>{ i18n.t("Verben") }</strong>{ i18n.t(": Master the use of verbs, particularly those with prepositions, to express actions and states more effectively." )}</li>
             </ul>
             <p>
-                { "Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities." }
+                { i18n.t("Through interactive tests and comprehensive examples, this platform aims to enhance your German grammar skills, making you more confident in your language abilities.") }
             </p>
 
             <SelectLanguage />
