@@ -4,6 +4,12 @@ Konnektoren
 
 ## Quickstart
 
+## git clone and pull
+
+```sh
+git pull
+```
+
 ### Prerequisites
 
 ```bash
