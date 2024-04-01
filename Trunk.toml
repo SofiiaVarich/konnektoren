@@ -3,3 +3,7 @@ trunk-version = "0.19.0-alpha.1"
 [build]
 target = "index.html"
 dist = "dist"
+
+[[proxy]]
+rewrite = "/leaderboard.json"
+backend = "https://konnektoren.help/leaderboard.json"

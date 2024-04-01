@@ -31,6 +31,10 @@ pub fn leaderboard_page() -> Html {
     use_effect(move || {
         let leaderboard = leaderboard_clone.clone();
         spawn_local(async move {
+            if !leaderboard.get_tests().is_empty() {
+                return;
+            }
+
             let mut opts = RequestInit::new();
             opts.method("GET");
             opts.mode(RequestMode::Cors);
@@ -44,17 +48,25 @@ pub fn leaderboard_page() -> Html {
             let resp: Response = resp_value.dyn_into().unwrap();
 
             if !resp.ok() {
+                log::error!("Response not ok: {:?}", resp);
                 return;
             }
 
             match resp.json() {
-                Ok(json) => match json.into_serde::<Leaderboard>() {
-                    Ok(leaderboard_json) => {
-                        leaderboard.set(leaderboard_json);
+                Ok(json_promise) => {
+                    let json = JsFuture::from(json_promise).await.unwrap();
+                    match json.into_serde::<Leaderboard>() {
+                        Ok(leaderboard_json) => {
+                            leaderboard.set(leaderboard_json);
+                        }
+                        Err(err) => {
+                            log::error!("Failed to parse leaderboard: {:?}", err);
+                        }
                     }
-                    Err(_) => {}
-                },
-                Err(_) => {}
+                }
+                Err(err) => {
+                    log::error!("Failed to parse leaderboard: {:?}", err);
+                }
             }
         });
 

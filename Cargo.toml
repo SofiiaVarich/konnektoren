@@ -75,3 +75,5 @@ yew-navbar = "0.1.1"
 wasm-bindgen-futures = "0.4.42"
 js-sys = "0.3.69"
 gloo-utils = "0.2.0"
+log = "0.4.21"
+console_log = { version = "1", features = ["color"] }

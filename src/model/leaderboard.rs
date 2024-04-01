@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 pub const LEADERBOARD_SIZE: usize = 50;
 pub const LEADERBOARD_KEY: &str = "leaderboard";
 
-#[derive(Default, Serialize, Deserialize, Clone, PartialEq)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Leaderboard {
     tests: Vec<TestResult>,
 }

@@ -164,7 +164,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
     };
 
     match test_result.performance_percentage {
-        0..=14 => {
+        0..=89 => {
             html! {}
         }
         _ => {
