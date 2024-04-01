@@ -7,11 +7,13 @@ use mpl_core::{
 use solana_client::rpc_client::RpcClient;
 use solana_sdk::{
     derivation_path::DerivationPath,
+    pubkey::Pubkey,
     signature::{Keypair, Signer},
     signer::SeedDerivable,
     transaction::Transaction,
 };
 use std::env;
+use std::str::FromStr;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv().ok();
@@ -115,7 +117,11 @@ pub fn create_asset_in_collection(
     collection: &Keypair,
     metadata_uri: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    const PROGRAM_ADDRESS: &str = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s";
+    let PROGRAM_ID = Pubkey::from_str(PROGRAM_ADDRESS).unwrap();
+
     let create_collection_ix = CreateCollectionV1Builder::new()
+        //.system_program(PROGRAM_ID)
         .collection(collection.pubkey())
         .payer(payer.pubkey())
         .name("Konnektoren Help".into())
@@ -138,6 +144,7 @@ pub fn create_asset_in_collection(
     println!("Signature: {:?}", res);
 
     let create_asset_ix = CreateV1Builder::new()
+        .system_program(PROGRAM_ID)
         .asset(asset.pubkey())
         .payer(payer.pubkey())
         .name("Konnektoren Help".into())

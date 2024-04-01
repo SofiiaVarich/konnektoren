@@ -1,7 +1,7 @@
 use worker::*;
 
 mod certificate;
-mod nft;
+pub mod nft;
 mod routes;
 pub mod vc;
 

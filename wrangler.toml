@@ -11,3 +11,6 @@ command = "cargo install -q worker-build && worker-build --release"
 
 [env.dev]
 build = { command = "cargo install -q worker-build && worker-build --dev" }
+
+[env.production.vars]
+UNDERDOG_PROJECT_ID = 2

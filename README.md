@@ -24,6 +24,7 @@ Update the secrets:
 
 ```sh
 npx wrangler secret put IPFS_API_KEY
+npx wrangler secret put UNDERDOG_API_KEY
 ```
 
 ## Deploy NFT
