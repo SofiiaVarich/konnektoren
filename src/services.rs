@@ -129,7 +129,7 @@ pub async fn mint_nft(
         return Err(anyhow::anyhow!("TestResult is not valid"));
     }
 
-    if test_result.performance_percentage < 15 {
+    if test_result.performance_percentage < 90 {
         return Err(anyhow::anyhow!("Performance is too low to mint NFT"));
     }
 
