@@ -47,7 +47,6 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
 
     let on_click = {
         let is_loading = is_loading.clone();
-        is_loading.set(true);
         let page_link = page_link.clone();
         let error_message = error_message.clone();
         let test_result_clone = test_result.clone();
@@ -55,6 +54,7 @@ pub fn mint_nft(props: &MintNftProps) -> Html {
 
         Callback::from(move |_: MouseEvent| {
             let is_loading = is_loading.clone();
+            is_loading.set(true);
             if receiver.is_empty() {
                 error_message.set(Some(
                     "Please set your Solana account address in the profile page.".to_string(),
