@@ -1,9 +1,10 @@
 @use "../abstracts" as *;
 
 body {
-  font-family: var(--ff-primary);
-  background-color: var(--background-primary);
-  color: var(--text-primary);
+    margin: 0;
+    padding: 0 0 70px;
+    font-family: "Arial", sans-serif;
+    color: $primary-color;
 }
 
 h1,

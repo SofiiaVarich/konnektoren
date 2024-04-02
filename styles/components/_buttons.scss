@@ -1,0 +1,56 @@
+@use "../abstracts" as *;
+
+@media (max-width: 768px) {
+    .button {
+        padding: 20px 25px;
+        font-size: 1.2rem;
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.button {
+    background-color: $primary-color;
+    color: #ffffff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    text-align: center;
+    margin: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: $hover-color;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+        background-color: $active-color;
+        transform: translateY(1px);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        animation: bounce 0.5s ease forwards;
+    }
+
+    @keyframes bounce {
+        0% { transform: scale(1); }
+        30% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+}
+
+@media (max-width: 768px) {
+    .button {
+        padding: $btn-padding-mobile;
+        font-size: $btn-font-size-mobile;
+        min-width: 120px;
+    }
+}
