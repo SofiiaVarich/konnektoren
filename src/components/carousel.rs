@@ -9,8 +9,6 @@ use crate::model::CategorizedTest;
 use crate::model::DetailTrait;
 use crate::model::TypeTrait;
 use yew::prelude::*;
-use yew_bootstrap::component::Button;
-
 #[derive(Properties, PartialEq)]
 pub struct CarouselProps<T: TypeTrait + 'static, D: DetailTrait> {
     pub konnektoren: CategorizedItems<T, D>,
@@ -87,7 +85,7 @@ where
                     <div>
                         <Congratulations<T, D> test={self.test.clone()} />
                         <div class="d-flex justify-content-between mt-2">
-                            <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
+                            <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
                         </div>
                         { self.test_results() }
                     </div>
@@ -99,9 +97,9 @@ where
                     <CarouselCard<D> detail={detail.clone()} hide_example={self.hide_example} />
                         <TypeSelector<T> on_select={ctx.link().callback(Msg::SelectType::<T>)} />
                     <div class="d-flex justify-content-between mt-2">
-                        <Button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</Button>
-                        <Button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</Button>
-                        <Button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</Button>
+                        <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
+                        <button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
+                        <button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</button>
                     </div>
                     { self.test_results() }
                 </div>

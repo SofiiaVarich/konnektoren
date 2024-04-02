@@ -1,7 +1,6 @@
 use crate::model::TypeTrait;
 use rand::seq::SliceRandom;
 use yew::prelude::*;
-use yew_bootstrap::component::{Button, ButtonGroup};
 
 #[derive(Properties, PartialEq)]
 pub struct TypeSelectorProps<T: TypeTrait> {
@@ -40,17 +39,17 @@ impl<T: TypeTrait> Component for TypeSelector<T> {
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
             <div id="typeselector" class="d-flex justify-content-center">
-            <ButtonGroup>
+            <div class="button-group">
             {for self.button_order.iter().map(|t_type| {
                 let button_text = t_type.to_string();
                 let t_type_clone = t_type.clone();
                 html! {
-                    <Button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(t_type_clone.clone()))}>
+                    <button onclick={ctx.link().callback(move |_| Msg::ButtonClicked(t_type_clone.clone()))}>
                         {button_text}
-                    </Button>
+                    </button>
                 }
             })}
-        </ButtonGroup>
+        </div>
             </div>
         }
     }
