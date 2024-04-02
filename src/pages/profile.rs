@@ -1,3 +1,4 @@
+use crate::components::Wallet;
 use crate::model::{player::PLAYER_KEY, Player};
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
@@ -37,11 +38,10 @@ pub fn profile_page() -> Html {
         })
     };
 
-    let on_account_change = {
+    let on_address_change = {
         let account = account.clone();
-        Callback::from(move |e: InputEvent| {
-            let input: HtmlInputElement = e.target_unchecked_into();
-            account.set(input.value());
+        Callback::from(move |address| {
+            account.set(address);
         })
     };
 
@@ -73,10 +73,7 @@ pub fn profile_page() -> Html {
                 <label for="name">{ i18n.t("Name (Nickname): ") }</label>
                 <input id="name" type="text" value={(*name).clone()} oninput={on_name_change} />
             </div>
-            <div>
-                <label for="account">{ i18n.t("Solana Account: ") }</label>
-                <input id="account" type="text" value={(*account).clone()} oninput={on_account_change} placeholder="Solana Account Address" />
-            </div>
+            <Wallet address={(*account).clone()} on_change={on_address_change} />
             if has_changes() {
                 <button onclick={on_save}>{ "Save Changes" }</button>
             }
