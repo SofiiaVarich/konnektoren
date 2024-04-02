@@ -26,7 +26,10 @@ pub fn history_page() -> Html {
     let average_performance_by_test_type = history.average_performance_by_test_type();
 
     html! {
+        <>
+        <div class="history-background-image"></div>
         <div class="history-page">
+
           <div class="pages/history_bg.jpg"></div>
             <h1>{ i18n.t("Learning History") }</h1>
             <p>{ format!( "Longest streak: {} days in a row", longest_streak) }</p>
@@ -51,5 +54,6 @@ pub fn history_page() -> Html {
                 })}
             </div>
         </div>
+        </>
     }
 }

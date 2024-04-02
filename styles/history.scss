@@ -4,13 +4,13 @@
   overflow: hidden; /* Hide overflow to prevent background image from sticking out */
 }
 
-.background-image {
+.history-background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('history_bg.jpg'); /* Replace with your background image URL */
+  background-image: url('/assets/history_bg.jpg'); /* Replace with your background image URL */
   background-size: cover;
   filter: blur(8px); /* Add blur effect to the background */
   z-index: -1; /* Send the background behind other content */
