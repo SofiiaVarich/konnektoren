@@ -82,13 +82,16 @@
             }
 
             #loading-progress {
-                background: linear-gradient(to right, #7F25FD, #FF86A1); /* Gradient color */
+                background: linear-gradient(
+                    to right,
+                    #7f25fd,
+                    #ff86a1
+                ); /* Gradient color */
                 padding: 1rem 2rem;
                 width: 50%;
                 height: 30px;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
-
         </style>
         <link data-trunk rel="scss" href="styles/index.scss" />
         <link data-trunk rel="scss" href="styles/about.scss" />
@@ -96,26 +99,31 @@
         <link data-trunk rel="scss" href="styles/navigation.scss" />
         <link data-trunk rel="scss" href="styles/results.scss" />
         <link data-trunk rel="scss" href="styles/leaderboard.scss" />
+
         <link
-                data-trunk
-                rel="rust"
-                href="Cargo.toml"
-                data-wasm-opt="z"
-                data-bin="konnektoren-pwa"
-                data-cargo-features="web"
-                data-initializer="src/assets/initializer.mjs"
+            data-trunk
+            rel="rust"
+            href="Cargo.toml"
+            data-wasm-opt="z"
+            data-bin="konnektoren-pwa"
+            data-cargo-features="web"
+            data-initializer="src/assets/initializer.mjs"
         />
         <link data-trunk rel="icon" href="favicon.ico" />
         <link data-trunk rel="copy-file" href="src/assets/favicon.png" />
         <link data-trunk rel="copy-file" href="robots.txt" />
         <link data-trunk rel="copy-file" href="src/assets/fanfare-3-rpg.ogg" />
         <link data-trunk rel="copy-dir" href="src/assets/" />
+
+        <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+        <link data-trunk rel="copy-file" href="index.js" />
+        <script src="index.js"></script>
     </head>
     <body>
-    <div id="loading-container" style="display: none">
-        <div class="progress-bar" style="width: 0%"></div>
-        <div id="loading-progress"></div>
-        <div id="loading-message"></div>
-    </div>
+        <div id="loading-container" style="display: none">
+            <div class="progress-bar" style="width: 0%"></div>
+            <div id="loading-progress"></div>
+            <div id="loading-message"></div>
+        </div>
     </body>
 </html>
