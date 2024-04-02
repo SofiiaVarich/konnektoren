@@ -4,7 +4,6 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 1rem;
-  background-color: #ffffff;
   border-radius: 20px;
   border: 2px solid #ffd700;
   box-shadow:
@@ -15,6 +14,17 @@
           0 0 200px rgba(255, 215, 0, 0.3);
 }
 
+.leaderboard-background-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/leaderboard_bg.jpg'); /* Replace with your background image URL */
+  background-size: cover;
+  filter: blur(8px); /* Add blur effect to the background */
+  z-index: -1;
+}
 
 .leaderboard-page h1 {
   color: #333;
@@ -23,7 +33,6 @@
   text-align: center;
   animation: glow 2s infinite alternate;
 }
-
 
 .leaderboard-page ul {
   list-style: none;

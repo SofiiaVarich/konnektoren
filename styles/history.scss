@@ -2,6 +2,8 @@
 .history-page {
   position: relative;
   overflow: hidden; /* Hide overflow to prevent background image from sticking out */
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow to the frame */
 }
 
 .history-background-image {
@@ -20,11 +22,12 @@
   position: relative;
   z-index: 1; /* Bring the content above the background */
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8); /* Add semi-transparent white background for readability */
+  background-color: #ffe0e0; /* Light pink background color */
   border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add initial shadow */
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   animation: fadeIn 1s ease; /* Add fade-in animation */
+  transition: box-shadow 0.3s ease; /* Add transition for hover effect */
+  overflow: hidden; /* Hide overflow to prevent shadow clipping */
 }
 
 /* Add gradient shadow effect */
@@ -35,9 +38,14 @@
   left: -10px;
   right: -10px;
   bottom: -10px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)); /* Adjust gradient colors as needed */
+  background: linear-gradient(90deg, #ffb6c1, #ffe0e0); /* Gradient colors */
   z-index: -1;
   border-radius: 8px;
+}
+
+/* Add shadow on hover */
+.content:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Adjust shadow size and color for hover effect */
 }
 
 @keyframes fadeIn {

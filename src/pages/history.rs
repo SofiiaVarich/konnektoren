@@ -29,8 +29,6 @@ pub fn history_page() -> Html {
         <>
         <div class="history-background-image"></div>
         <div class="history-page">
-
-          <div class="pages/history_bg.jpg"></div>
             <h1>{ i18n.t("Learning History") }</h1>
             <p>{ format!( "Longest streak: {} days in a row", longest_streak) }</p>
             <p>{ format!("Total tests taken: {}", test_count) }</p>

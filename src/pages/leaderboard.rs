@@ -81,7 +81,10 @@ pub fn leaderboard_page() -> Html {
     };
 
     html! {
+    <>
+    <div class="leaderboard-background-image"></div>
         <div class="leaderboard-page">
+           <div class="pages/leaderboard_bg.jpg"></div>
             <h1>{ i18n.t("Leaderboard")}</h1>
             { empty_message }
             <ul>
@@ -100,5 +103,6 @@ pub fn leaderboard_page() -> Html {
                 })}
             </ul>
         </div>
+       </>
     }
 }
