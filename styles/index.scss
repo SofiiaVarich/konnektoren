@@ -1,18 +1,5 @@
-$primary-color: #6200ea;
-$hover-color: #7b61ff;
-$active-color: #5642a6;
-$error-color: #721c24;
-$error-bg: #f8d7da;
-$success-color: #4caf50;
-$success-bg: #d4edda;
-$incorrect-bg: #f8d7da;
-$footer-background-color: #f8f9fa;
-$footer-border-color: #e7e7e7;
-$table-margin-mobile: 10px;
-$table-padding-mobile: 4px;
-$btn-font-size-mobile: 0.9rem;
-$btn-padding-mobile: 10px;
-$test-results-padding-mobile: 0 10px;
+@use "./abstracts" as *;
+
 
 body {
     margin: 0;
