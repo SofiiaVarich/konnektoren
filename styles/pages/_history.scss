@@ -1,0 +1,166 @@
+/* History Page Styles */
+.history-page {
+  position: relative;
+  overflow: hidden; /* Hide overflow to prevent background image from sticking out */
+}
+
+.history-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/history_bg.jpg'); /* Replace with your background image URL */
+  background-size: cover;
+  filter: blur(8px); /* Add blur effect to the background */
+  z-index: -1; /* Send the background behind other content */
+}
+
+.content {
+  position: relative;
+  z-index: 1; /* Bring the content above the background */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Add semi-transparent white background for readability */
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add initial shadow */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 1s ease; /* Add fade-in animation */
+}
+
+/* Add gradient shadow effect */
+.content::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)); /* Adjust gradient colors as needed */
+  z-index: -1;
+  border-radius: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* History Page Styles */
+.history-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        color: #444;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        background-color: #eee;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
+
+    .gradient-background {
+        background: linear-gradient(90deg, rgba(255, 175, 189, 1) 0%, rgba(255, 195, 160, 1) 100%);
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+
+
+.history-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    ul {
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f0f0f0;
+        list-style-type: none;
+    }
+
+    li {
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+
+    &_type, &_result, &_date {
+        font-weight: bold;
+        color: #0056b3;
+    }
+
+    &_result {
+        color: #28a745;
+    }
+
+    &_date {
+        color: #6c757d;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    &_mint {
+        padding: 0.5rem 1rem;
+        text-align: right;
+    }
+}

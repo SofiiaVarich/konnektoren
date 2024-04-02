@@ -1,0 +1,14 @@
+@use "../abstracts" as *;
+
+body {
+    margin: 0;
+    padding: 0 0 70px;
+    font-family: "Arial", sans-serif;
+    color: $primary-color;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+}
