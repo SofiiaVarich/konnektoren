@@ -6,14 +6,20 @@ use yew_router::prelude::*;
 #[function_component]
 pub fn Navigation() -> Html {
     html! {
-        <div class="navigation">
-            <nav>
-            <Link<Route> to={Route::Konnektoren}>{ "Konnektoren" }</Link<Route>>
-            <Link<Route> to={Route::Adjectives}>{ "Adjektive" }</Link<Route>>
-            <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
-            <Link<Route> to={Route::Verbs}>{ "Verben" }</Link<Route>>
-            <Link<Route> to={Route::Leaderboard}>{ "Leaderboard" }</Link<Route>>
-            </nav>
+        <div class="navigation-wrapper">
+            <div class="fluffy-ball">
+            <div class="eye left-eye"></div>
+            <div class="eye right-eye"></div>
+            </div>
+            <div class="navigation">
+                <nav>
+                    <Link<Route> to={Route::Konnektoren}>{ "Konnektoren" }</Link<Route>>
+                    <Link<Route> to={Route::Adjectives}>{ "Adjektive" }</Link<Route>>
+                    <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
+                    <Link<Route> to={Route::Verbs}>{ "Verben" }</Link<Route>>
+                    <Link<Route> to={Route::Leaderboard}>{ "Leaderboard" }</Link<Route>>
+                </nav>
+            </div>
         </div>
     }
 }

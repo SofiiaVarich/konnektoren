@@ -1,4 +1,83 @@
+.fluffy-ball {
+  width: 100px; /* Adjusted size */
+  height: 100px; /* Adjusted size */
+  background: radial-gradient(circle at center, #FCCDD3 0%, #F9A9BC 70%, #F583A7 100%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Fixed relative to the viewport */
+  bottom: 100px; /* Adjust based on your navigation's height */
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), /* General shadow */
+  inset 0 4px 4px rgba(255, 255, 255, 0.2), /* Top inner highlight */
+  inset 0 -3px 3px rgba(0, 0, 0, 0.1); /* Bottom inner shadow */
+  z-index: 101; /* Ensure it's above the navigation bar */
+  /* Ensure the hair is visible outside the ball */
+  overflow: visible;
+}
+
+
+/* Style for the cat mouth's center downturned arc */
+.fluffy-ball::after {
+  content: '';
+  position: absolute;
+  bottom: 15px; /* Position slightly above the side arcs to create the downturn */
+  left: 50%;
+  width: 3px; /* Smaller width for the downturned arc */
+  height: 5px; /* Smaller height for the downturned arc */
+  background-color: #000;
+  border-radius: 10px / 5px; /* More circular arc */
+  transform: translateX(-50%) rotate(180deg); /* Rotate to create the downturn */
+  z-index: 102; /* Above the fur but below the eyes */
+}
+
+.eye {
+  width: 30px;
+  height: 30px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+  top: 35%;
+}
+
+.left-eye {
+  left: 10px;
+}
+
+.right-eye {
+  right: 10px;
+}
+
+.eye::before {
+  content: "";
+  position: absolute;
+  width: 25px; /* Making the pupil almost as large as the eye */
+  height: 25px; /* Making the pupil almost as large as the eye */
+  background-color: #000;
+  border-radius: 50%;
+  top: 0; /* Adjust the pupil to the top */
+  left: 50%;
+  transform: translateX(-50%) translateY(-10%);
+}
+
+.eye::after {
+  content: "";
+  position: absolute;
+  width: 5px; /* Adjusting the sparkle size */
+  height: 5px; /* Adjusting the sparkle size */
+  background-color: #FFF;
+  border-radius: 50%;
+  top: 15%; /* Adjust based on the pupil's new position to look upwards */
+  left: 60%; /* Adjusting the sparkle position to be within the pupil */
+}
+
 .navigation {
+  position: relative; /* Ensure this is positioned in the flow */
+  z-index: 1; /* Higher than the default to layer on top if needed */
+  /* Your existing styling */
+
   nav {
     background: linear-gradient(to right, #7F25FD, #FF86A1);
     padding: 1rem 2rem;
@@ -27,7 +106,7 @@
   }
 
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     nav a {
       font-size: 0.8rem;
       margin: 0 5px;
