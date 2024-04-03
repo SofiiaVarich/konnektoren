@@ -92,11 +92,11 @@ where
             }
         } else if let Some(detail) = self.test.current() {
             html! {
-                <div>
+                <div class="carousel">
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
                     <CarouselCard<D> detail={detail.clone()} hide_example={self.hide_example} />
                         <TypeSelector<T> on_select={ctx.link().callback(Msg::SelectType::<T>)} />
-                    <div class="d-flex justify-content-between mt-2">
+                    <div class="action-buttons">
                         <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
                         <button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</button>
