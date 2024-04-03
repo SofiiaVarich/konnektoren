@@ -27,7 +27,7 @@ pub fn test_selector(props: &TestSelectorProps) -> Html {
                 html! {
                     <button
                         {onclick}
-                        class={classes!("test-type-btn", is_active.then_some("active"))}
+                        class={classes!("test-type-button", is_active.then_some("active"))}
                     >
                         { type_.to_string() }
                     </button>

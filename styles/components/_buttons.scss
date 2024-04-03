@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-.button {
+button {
     background-color: $primary-color;
     color: #ffffff;
     border: none;
@@ -52,5 +52,26 @@
         padding: $btn-padding-mobile;
         font-size: $btn-font-size-mobile;
         min-width: 120px;
+    }
+}
+
+.test-type-button {
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    background-color: #ffffff;
+    color: #007bff;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        color: #000;
+    }
+
+    &.active {
+        color: #ffffff;
+        background-image: linear-gradient(to right, #007bff, $primary-color);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 }
