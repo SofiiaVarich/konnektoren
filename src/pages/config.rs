@@ -14,10 +14,16 @@ pub fn config_page() -> Html {
     let _ = i18n.set_translation_language(&selected_language);
 
     html! {
-        <div class="config-page">
+    <div class="navigation-wrapper">
+                <div class="fluffy-ball">
+                 <div class="eye left-eye"></div>
+                 <div class="eye right-eye"></div>
+                </div>
+            <div class="config-page">
             <h1>{ i18n.t("Config") }</h1>
             <SelectLanguage />
             <Footer />
+        </div>
         </div>
     }
 }

@@ -7,10 +7,6 @@ use yew_router::prelude::*;
 pub fn Navigation() -> Html {
     html! {
         <div class="navigation-wrapper">
-            <div class="fluffy-ball">
-            <div class="eye left-eye"></div>
-            <div class="eye right-eye"></div>
-            </div>
             <div class="navigation">
                 <nav>
                     <Link<Route> to={Route::Konnektoren}>{ "Konnektoren" }</Link<Route>>
