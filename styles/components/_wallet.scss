@@ -1,4 +1,3 @@
-
 .wallet {
   display: flex;
   align-items: center;
@@ -7,15 +6,21 @@
   label {
     margin-right: 5px;
   }
-
   input {
     flex-grow: 1;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    background-image: linear-gradient(to right, #8e9bcc, #cc65ce); /* Gradient background */
+    color: white;
+    transition: border-color 0.3s, background-image 0.3s; /* Add transition effects */
 
     &:focus {
-      border-color: #007bff;
+      border-color: #5f72bd; /* Adjust border color on focus */
+    }
+
+    &:hover {
+      background-image: linear-gradient(to right, #cc65ce, #8e9bcc); /* Change gradient on hover */
     }
   }
 
@@ -23,13 +28,13 @@
     padding: 8px 16px;
     border-radius: 4px;
     border: none;
-    background-color: #007bff;
+    background-image: linear-gradient(to right, #ff8a00, #e52e71); /* Gradient background */
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #0056b3;
+      background-image: linear-gradient(to right, #e52e71, #ff8a00); /* Gradient background on hover */
     }
   }
 }
