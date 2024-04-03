@@ -1,6 +1,5 @@
+use crate::components::ProgressBar;
 use yew::prelude::*;
-use yew_bootstrap::component::{Progress, ProgressBar};
-use yew_bootstrap::util::Color;
 
 #[derive(Properties, PartialEq)]
 pub struct ProgressBarProps {
@@ -17,8 +16,8 @@ pub fn test_progress_bar(props: &ProgressBarProps) -> Html {
     };
 
     html! {
-        <Progress class="mb-3 fire-gradient-progress-bar">
-            <ProgressBar value={progress as i32} label={format!("Question {} of {}", props.current + 1, props.total)} style={Color::Info} />
-        </Progress>
+        <div class="fire-gradient-progress-bar">
+            <ProgressBar value={progress} label={format!("Question {} of {}", props.current + 1, props.total)} />
+        </div>
     }
 }

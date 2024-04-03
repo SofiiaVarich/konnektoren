@@ -10,7 +10,6 @@ use crate::{
 use gloo_storage::{LocalStorage, Storage};
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
-use yew_bootstrap::util::*;
 use yew_i18n::I18nProvider;
 use yew_router::prelude::*;
 
@@ -65,13 +64,11 @@ impl Component for App {
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
             <div>
-            {include_cdn()}
             <BrowserRouter>
                     <Navigation />
                     <MainMenu />
                     <Switch<Route> render={switch_main} />
             </BrowserRouter>
-            {include_cdn_js()}
         </div>
         }
     }

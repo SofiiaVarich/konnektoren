@@ -1,6 +1,5 @@
 use crate::model::DetailTrait;
 use yew::prelude::*;
-use yew_bootstrap::component::card::*;
 
 #[derive(Properties, PartialEq)]
 pub struct ModelProps<D: DetailTrait> {
@@ -41,19 +40,19 @@ impl<D: DetailTrait + 'static> Component for CarouselCard<D> {
             html! {}
         } else {
             html! {
-                <CardText>{ &*self.detail.get_example() }</CardText>
+                <div class="card-text">{ &*self.detail.get_example() }</div>
             }
         };
 
         html! {
-            <Card class="text-center">
-                <CardBody>
-                    <CardTitle class="mb-4">{ &*self.detail.get_detail() }</CardTitle>
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="card-title">{ &*self.detail.get_detail() }</div>
                     {
                         example
                     }
-                </CardBody>
-            </Card>
+                </div>
+            </div>
         }
     }
 }
