@@ -1,3 +1,10 @@
+/* Set background image for the whole page */
+body {
+  background-image: url('/assets/config_bg.jpg'); /* Replace 'background-image.jpg' with the path to your image */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+}
+
 .fluffy-ball {
   width: 100px; /* Adjusted size */
   height: 100px; /* Adjusted size */
