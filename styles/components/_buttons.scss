@@ -15,17 +15,20 @@
 }
 
 button {
-    background-color: $primary-color;
-    color: #ffffff;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-    text-align: center;
-    margin: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: middle;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
+    -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255, 139, 253, 0);
+    box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(255, 139, 253, 0);
+    text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px, #FF2D95 0px 0px 50px, #FF2D95 0px 0px 75px;
+    border: 3px double #FF4294;
+    border-radius: 3px;
+    color: #00004A;
+    font-family: 'Arial', bold;
+    font-size: 16px;
 
     &:hover {
         background-color: $hover-color;
