@@ -1,15 +1,11 @@
 $glow-rgb: rgb(239, 42, 201);
 
-body {
-  background: linear-gradient(145deg, rgb(119, 46, 195), rgb(58, 18, 153));
-  height: 100vh;
-  overflow: hidden;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.cursor-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .glow-point {

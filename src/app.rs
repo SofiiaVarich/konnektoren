@@ -1,5 +1,5 @@
 use crate::{
-    components::{MainMenu, Navigation},
+    components::{Cursor, MainMenu, Navigation},
     pages::{
         About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LanguagePage,
         LeaderboardPage, ProfilePage, Results, VerbsPage,
@@ -69,6 +69,7 @@ impl Component for App {
                     <MainMenu />
                     <Switch<Route> render={switch_main} />
             </BrowserRouter>
+            <Cursor length={20} />
         </div>
         }
     }
