@@ -88,7 +88,7 @@ pub fn leaderboard_page() -> Html {
             <h1>{ i18n.t("Leaderboard")}</h1>
             { empty_message }
             <ul>
-                { for leaderboard.get_ranked().iter().map(|test| {
+                { for leaderboard.get_ranked().iter().filter(|e| e.performance_percentage > 24).map(|test| {
                     let navigator = navigator.clone();
                     let encoded = test.to_base64();
                     let onclick = {
@@ -102,6 +102,7 @@ pub fn leaderboard_page() -> Html {
                     }
                 })}
             </ul>
+            <p>{ i18n.t("Only the top 25% of the leaderboard is shown.")}</p>
         </div>
        </>
     }
