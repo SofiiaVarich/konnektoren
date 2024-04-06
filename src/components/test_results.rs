@@ -22,7 +22,7 @@ pub fn test_results<T: TypeTrait, D: DetailTrait>(props: &TestResultsProps<T, D>
                     </tr>
                 </thead>
                 <tbody>
-                    {for props.test.answers.iter().filter(|answer| answer.was_answered).map(|answer| {
+                    {for props.test.answers.iter().rev().filter(|answer| answer.was_answered).map(|answer| {
                         let detail = props.test.items.get_detail_by_index(answer.detail_index).unwrap();
                         let row_class = if answer.is_correct() { "correct-answer" } else { "incorrect-answer" };
 

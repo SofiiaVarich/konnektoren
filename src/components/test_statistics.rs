@@ -65,8 +65,7 @@ pub fn test_statistics<T: TypeTrait + 'static, D: DetailTrait + 'static>(
 
     html! {
     <>
-        <div class="carousel-background-image"></div>
-        <div class="test-statistics-container d-flex justify-content-center">
+        <div class="test-statistics">
             <div>
                 <h2>{"Test Statistics"}</h2>
                 <p>{format!("Total Questions: {}", props.test.len())}</p>

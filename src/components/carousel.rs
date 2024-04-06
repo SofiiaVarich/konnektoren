@@ -40,7 +40,7 @@ pub enum Msg<T: TypeTrait> {
 
 impl<T: TypeTrait + 'static, D: DetailTrait + 'static> Carousel<T, D> {
     fn test_results(&self) -> Html {
-        if self.test.is_finished() {
+        if !self.test.is_finished() {
             html! { <TestResults<T, D> test={self.test.clone()} /> }
         } else {
             html! {
@@ -82,16 +82,17 @@ where
     fn view(&self, ctx: &Context<Self>) -> Html {
         if self.test.is_finished() {
             html! {
-                    <div>
-                        <Congratulations<T, D> test={self.test.clone()} />
-                        <div class="d-flex justify-content-between mt-2">
-                            <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
-                        </div>
-                        { self.test_results() }
+                <div>
+                    <Congratulations<T, D> test={self.test.clone()} />
+                    <div class="action-buttons">
+                        <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
                     </div>
+                    { self.test_results() }
+                </div>
             }
         } else if let Some(detail) = self.test.current() {
-            html! {
+            html! {<>
+                <div class="carousel-background-image"></div>
                 <div class="carousel">
                 <TestProgressBar current={self.test.current_index() } total={self.test.len()} />
                     <CarouselCard<D> detail={detail.clone()} hide_example={self.hide_example} />
@@ -103,6 +104,7 @@ where
                     </div>
                     { self.test_results() }
                 </div>
+                </>
             }
         } else {
             html! { <p>{ format!("No {} found", T::get_type()) }</p> }

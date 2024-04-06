@@ -1,0 +1,24 @@
+@use "../abstracts" as *;
+
+.test-results {
+    margin: 3rem;
+    padding: 0 5%;
+    overflow-x: auto;
+    color: $tertiary-color;
+
+
+    .correct-answer {
+        background-color: $success-bg;
+        color: $success-color;
+    }
+
+    .incorrect-answer {
+        background-color: $incorrect-bg;
+        color: $error-color;
+    }
+
+
+    @media (max-width: 768px) {
+        padding: $test-results-padding-mobile;
+    }
+}

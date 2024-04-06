@@ -42,26 +42,6 @@
     text-align: center;
 }
 
-.test-results {
-    margin-top: 20px;
-    padding: 0 5%;
-    overflow-x: auto;
-
-    @media (max-width: 768px) {
-        padding: $test-results-padding-mobile;
-    }
-}
-
-.correct-answer {
-    background-color: $success-bg;
-    color: $success-color;
-}
-
-.incorrect-answer {
-    background-color: $incorrect-bg;
-    color: $error-color;
-}
-
 .congratulations-container {
     margin: 20px auto;
     padding: 20px;
