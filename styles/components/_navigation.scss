@@ -39,56 +39,92 @@
   }
 }
 
+/* Main Menu and Color Theme Updates */
 .main-menu {
   position: fixed;
   top: 10px;
   right: 10px;
   z-index: 500;
+  color: #EE82EE; /* Soft violet for text */
+}
 
-  .burger-menu {
-    z-index: 999;
-    cursor: pointer;
-    padding: 0.8rem;
-    font-size: 24px; // Adjust as needed
-    background-color: #333; // Dark background for contrast
-    color: white;
-    border: 2px solid #666; // Subtle border for more definition
-    border-radius: 4px; // Optional: adds rounded corners
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.burger-menu {
+  z-index: 999;
+  cursor: pointer;
+  padding: 0.8rem;
+  font-size: 24px;
+  background-color: #D147A3; /* Vibrant pink */
+  color: white;
+  border: 2px solid #B53591; /* Deeper pink for definition */
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Fixed positioning relative to the viewport */
+  top: 10px; /* 10 pixels from the top of the viewport */
+  right: 10px; /* 10 pixels from the right of the viewport */
+}
+
+.main-menu.active .burger-menu {
+  transform: rotate(90deg);
+  transition: transform 0.5s ease;
+}
+
+.menu-items {
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+  will-change: transform;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #E1D3F2; /* Light violet for the menu background */
+  box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.menu-items a {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.menu-items a:hover {
+  background-color: #CA5BA6; /* Slightly different shade for hover */
+  color: #FFF; /* Change text color to white for contrast */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideFadeInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-
-  .menu-items {
-    position: fixed;
-    top: 0;
-    right: 0; // Adjusted to slide out from the right
-    width: 250px;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.1); // Shadow direction adjusted for right side
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; // Align items to the start (right side)
-    padding-top: 60px; // Adjusted to not overlap with burger menu
-    transform: translateX(100%); // Adjusted to be hidden on the right side
-    transition: transform 0.3s ease-in-out;
-
-    a {
-      padding: 10px 20px;
-      text-decoration: none;
-      color: #333;
-      width: 100%;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease-in-out;
-
-      &:hover {
-        background-color: #f4f4f4;
-      }
-    }
-
-    &.active {
-      transform: translateX(0); // Adjusted to slide in from the right
-    }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
+
+.menu-items {
+  /* Keep your existing styles, add the animation property below */
+  animation: slideFadeInRight 0.5s ease-in-out forwards;
+  display: none; /* Initially hidden */
+}
+
+.menu-items.active {
+  display: flex; /* Make visible and animate when active */
+}
+
+.menu-items.active {
+  transform: translateX(0);
+}
+
