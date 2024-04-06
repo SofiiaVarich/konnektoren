@@ -1,6 +1,13 @@
-.fire-gradient-progress-bar .progress-bar {
-    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffbf00, #ffff00);
-    color: #000000;
+@keyframes glowingBorder {
+    0% {
+        box-shadow: 0 0 5px #ff5f6d;
+    }
+    50% {
+        box-shadow: 0 0 20px #ffc371;
+    }
+    100% {
+        box-shadow: 0 0 5px #ff5f6d;
+    }
 }
 
 .progress-container {
@@ -10,12 +17,24 @@
     overflow: hidden;
 }
 
-.progress-bar {
+.fire-gradient-progress-bar .progress-bar, .progress-bar {
     height: 20px;
     line-height: 20px;
-    color: white;
+    color: black; /* Ensuring text color is white */
     text-align: center;
-    background: linear-gradient(90deg, #ff5f6d, #ffc371);
     transition: width 0.4s ease;
     border-radius: 8px;
+    animation: intenseMoveGradient 3s linear infinite, glowingBorder 3s infinite alternate;
+}
+
+.fire-gradient-progress-bar .progress-bar {
+    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffbf00, #ffff00);
+    background-size: 200% 100%;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #ff5f6d, #ffc371);
+    background-size: 200% 100%;
+    position: relative;
+    z-index: 10;
 }
