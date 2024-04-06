@@ -128,3 +128,25 @@
   transform: translateX(0);
 }
 
+/* Reduce space between links and scale down for mobile */
+@media (max-width: 768px) {
+  nav a {
+      margin: 0 8px; /* Reduced margin */
+      font-size: 14px; /* Smaller font size */
+      padding: 10px 8px; /* Adjust padding to fit smaller screen */
+  }
+  
+  /* Adjust burger menu size for consistency */
+  .burger-menu {
+      width: 40px; /* Smaller width */
+      height: 30px; /* Smaller height */
+      flex-direction: column; /* Stack lines vertically */
+      justify-content: space-between; /* Space out the lines */
+  }
+  
+  .burger-menu .burger {
+      width: 100%; /* Full width of parent */
+      height: 2px; /* Thinner lines */
+      background-color: #fff; /* Line color */
+  }
+}

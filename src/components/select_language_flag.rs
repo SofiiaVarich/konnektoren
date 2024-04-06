@@ -7,7 +7,8 @@ use yew_i18n::use_translation;
 pub fn select_language_flag() -> Html {
     let mut i18n = use_translation();
 
-    let selected_language = use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+    let selected_language =
+        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
     let _ = i18n.set_translation_language(&*selected_language);
 
     let on_flag_click = {
