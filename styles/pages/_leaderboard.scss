@@ -1,5 +1,6 @@
 /* leaderboard.scss */
 
+
 .leaderboard-page {
   max-width: 800px;
   margin: 2rem auto;
@@ -13,36 +14,55 @@
           0 0 120px rgba(0, 0, 0, 0.05),
           0 0 160px rgba(255, 215, 0, 0.5),
           0 0 200px rgba(255, 215, 0, 0.3);
+
 }
 
-.leaderboard-background-image{
+
+.leaderboard-background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/leaderboard_bg.jpg'); /* Replace with your background image URL */
+  background-image: url('/assets/leaderboard_bg.jpg');
   background-size: cover;
-  filter: blur(8px); /* Add blur effect to the background */
+  filter: blur(8px);
   z-index: -1;
 }
 
+
 .leaderboard-page h1 {
-  color: #333;
+  color: #000000;
   font-size: 2.25rem;
   margin-bottom: 1rem;
   text-align: center;
   animation: glow 2s infinite alternate;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 
 .leaderboard-page ul {
   list-style: none;
   padding: 0;
+  text-align: center;
 }
 
+
 .leaderboard-page li {
-  color: #666;
+  color: #333333;
   font-size: 1rem;
+  font-weight: bold;
   line-height: 1.6;
   margin-bottom: 1rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffd700, #ffab00);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.leaderboard-page li:hover {
+  transform: translateY(-3px);
 }
