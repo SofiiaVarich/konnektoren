@@ -1,7 +1,10 @@
-use gloo_timers::callback::{Interval, Timeout};
+use gloo_timers::callback::Timeout;
+use wasm_bindgen::closure::Closure;
 use std::cell::RefCell;
 use std::rc::Rc;
 use yew::prelude::*;
+use wasm_bindgen::JsCast;
+use rand::Rng;
 
 #[derive(Properties, PartialEq)]
 pub struct CursorProps {
@@ -27,9 +30,12 @@ impl Default for Star {
 
 impl Star {
     fn to_html(&self) -> Html {
+        let mut rng = rand::thread_rng();
+            let animation_class = format!("star glow-point fall-{}", rng.gen_range(1..=3));
         html! {
-            <div class="glow-point star" style={format!("position: absolute; left: {}px; top: {}px; color: white; visibility: {}", self.x, self.y, if self.visible { "visible" } else { "hidden" })}>
-                //{"⭐"}
+            
+            <div class={animation_class} style={format!("position: absolute; left: {}px; top: {}px; color: white; visibility: {}", self.x, self.y, if self.visible { "visible" } else { "hidden" })}>
+                //{"✨"}
             </div>
         }
     }
@@ -38,16 +44,39 @@ impl Star {
 #[function_component(Cursor)]
 pub fn cursor_component(props: &CursorProps) -> Html {
     let mouse_position = use_state(|| (0, 0));
-    let stars = use_state(|| Rc::new(RefCell::new((0..props.length).map(|_| Star::default()).collect::<Vec<_>>())));
+    let stars = use_state(|| {
+        Rc::new(RefCell::new(
+            (0..props.length)
+                .map(|_| Star::default())
+                .collect::<Vec<_>>(),
+        ))
+    });
     let star_index = use_state(|| 0);
     let trigger_render = use_state(|| ());
 
-    let on_mouse_move = {
+    {
         let mouse_position = mouse_position.clone();
-        Callback::from(move |e: MouseEvent| {
-            mouse_position.set((e.client_x(), e.client_y()));
-        })
-    };
+        use_effect_with((), move |_| {
+            let closure = Closure::wrap(Box::new(move |event: MouseEvent| {
+                mouse_position.set((event.client_x(), event.client_y()));
+            }) as Box<dyn FnMut(_)>);
+
+            web_sys::window()
+                .and_then(|win| win.document())
+                .expect("should have a document on window")
+                .add_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref())
+                .expect("should register `mousemove` event");
+
+            || {
+                web_sys::window()
+                    .and_then(|win| win.document())
+                    .expect("should have a document on window")
+                    .remove_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref())
+                    .expect("should unregister `mousemove` event");
+                closure.forget();
+            }
+        });
+    }
 
     use_effect_with(mouse_position.clone(), {
         let stars = stars.clone();
@@ -55,8 +84,7 @@ pub fn cursor_component(props: &CursorProps) -> Html {
         let star_index = star_index.clone();
         move |mouse_position| {
             let (x, y) = **mouse_position;
-            let index = *star_index % length; // Ensure index is always within bounds
-
+            let index = *star_index % length;
             {
                 let mut stars = stars.borrow_mut();
                 if let Some(star) = stars.get_mut(index) {
@@ -66,7 +94,7 @@ pub fn cursor_component(props: &CursorProps) -> Html {
                 }
             }
 
-            Timeout::new(1000, {
+            Timeout::new(1500, {
                 let stars = stars.clone();
                 move || {
                     let mut stars = stars.borrow_mut();
@@ -85,7 +113,7 @@ pub fn cursor_component(props: &CursorProps) -> Html {
     });
 
     html! {
-        <div onmousemove={on_mouse_move} class="cursor-container">
+        <div class="cursor-container">
             {
                 for stars.borrow().iter().filter(|star| star.visible).map(|star| {
                     star.to_html()

@@ -2,6 +2,7 @@ mod carousel;
 mod carousel_card;
 mod certificate;
 mod congratulations;
+mod cursor;
 mod explanation;
 mod footer;
 mod header;
@@ -21,7 +22,6 @@ mod test_selector;
 mod test_statistics;
 mod type_selector;
 mod wallet;
-mod cursor;
 
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
@@ -30,6 +30,7 @@ pub use carousel::Carousel;
 pub use carousel_card::CarouselCard;
 pub use certificate::Certificate;
 pub use congratulations::Congratulations;
+pub use cursor::Cursor;
 pub use explanation::Explanation;
 pub use footer::Footer;
 pub use header::Header;
@@ -49,7 +50,6 @@ pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use type_selector::TypeSelector;
 pub use wallet::Wallet;
-pub use cursor::Cursor;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;
