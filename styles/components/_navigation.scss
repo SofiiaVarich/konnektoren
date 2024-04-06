@@ -1,10 +1,20 @@
+$background-linear-gradient-start: #7F25FD;
+$background-linear-gradient-end: #FF86A1;
+$link-color: white;
+$link-hover-color: #b2dfdb;
+$main-menu-text-color: #EE82EE;
+$burger-menu-background-color: #D147A3;
+$burger-menu-border-color: #B53591;
+$menu-background-color: #E1D3F2;
+$menu-hover-background-color: #CA5BA6;
+$menu-hover-text-color: #FFF;
+
 .navigation {
-  position: relative; /* Ensure this is positioned in the flow */
-  z-index: 1; /* Higher than the default to layer on top if needed */
-  /* Your existing styling */
+  position: relative;
+  z-index: 1;
 
   nav {
-    background: linear-gradient(to right, #7F25FD, #FF86A1);
+    background: linear-gradient(to right, $background-linear-gradient-start, $background-linear-gradient-end);
     padding: 1rem 2rem;
     display: flex;
     justify-content: center;
@@ -15,21 +25,20 @@
     left: 0;
     width: 100%;
     z-index: 100;
-    animation: slideIn 0.5s ease-in-out; /* Apply animation to nav */
+    animation: slideIn 0.5s ease-in-out;
 
     a {
-      color: white;
+      color: $link-color;
       text-decoration: none;
       margin: 0 15px;
       font-weight: 500;
       transition: color 0.3s;
 
       &:hover {
-        color: #b2dfdb;
+        color: $link-hover-color;
       }
     }
   }
-
 
   @media (max-width: 768px) {
     nav a {
@@ -39,13 +48,12 @@
   }
 }
 
-/* Main Menu and Color Theme Updates */
 .main-menu {
   position: fixed;
   top: 10px;
   right: 10px;
   z-index: 500;
-  color: #EE82EE; /* Soft violet for text */
+  color: $main-menu-text-color;
 }
 
 .burger-menu {
@@ -53,16 +61,16 @@
   cursor: pointer;
   padding: 0.8rem;
   font-size: 24px;
-  background-color: #D147A3; /* Vibrant pink */
+  background-color: $burger-menu-background-color;
   color: white;
-  border: 2px solid #B53591; /* Deeper pink for definition */
+  border: 2px solid $burger-menu-border-color;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed; /* Fixed positioning relative to the viewport */
-  top: 10px; /* 10 pixels from the top of the viewport */
-  right: 10px; /* 10 pixels from the right of the viewport */
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 
 .main-menu.active .burger-menu {
@@ -79,28 +87,32 @@
   right: 0;
   width: 250px;
   height: 100%;
-  background-color: #E1D3F2; /* Light violet for the menu background */
+  background-color: $menu-background-color;
   box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding-top: 60px;
-}
 
-.menu-items a {
-  padding: 10px 20px;
-  text-decoration: none;
-  color: #333;
-  width: 100%;
-  box-sizing: border-box;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
+  a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    width: 100%;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-.menu-items a:hover {
-  background-color: #CA5BA6; /* Slightly different shade for hover */
-  color: #FFF; /* Change text color to white for contrast */
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    &:hover {
+      background-color: $menu-hover-background-color;
+      color: $menu-hover-text-color;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.active {
+    display: flex;
+    animation: slideFadeInRight 0.5s ease-in-out forwards;
+  }
 }
 
 @keyframes slideFadeInRight {
@@ -114,39 +126,21 @@
   }
 }
 
-.menu-items {
-  /* Keep your existing styles, add the animation property below */
-  animation: slideFadeInRight 0.5s ease-in-out forwards;
-  display: none; /* Initially hidden */
-}
-
-.menu-items.active {
-  display: flex; /* Make visible and animate when active */
-}
-
-.menu-items.active {
-  transform: translateX(0);
-}
-
-/* Reduce space between links and scale down for mobile */
+// Mobile adjustments
 @media (max-width: 768px) {
-  nav a {
-      margin: 0 8px; /* Reduced margin */
-      font-size: 14px; /* Smaller font size */
-      padding: 10px 8px; /* Adjust padding to fit smaller screen */
-  }
-  
-  /* Adjust burger menu size for consistency */
   .burger-menu {
-      width: 40px; /* Smaller width */
-      height: 30px; /* Smaller height */
-      flex-direction: column; /* Stack lines vertically */
-      justify-content: space-between; /* Space out the lines */
+    width: 40px;
+    height: 30px;
+    .burger {
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+    }
   }
-  
-  .burger-menu .burger {
-      width: 100%; /* Full width of parent */
-      height: 2px; /* Thinner lines */
-      background-color: #fff; /* Line color */
+
+  nav a {
+    margin: 0 8px;
+    font-size: 14px;
+    padding: 10px 8px;
   }
 }

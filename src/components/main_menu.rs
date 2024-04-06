@@ -21,13 +21,7 @@ pub fn main_menu() -> Html {
     };
 
     html! {
-
-            <div class="burger-menu">
-            <div class="burger">
-              <div class="top"></div>
-              <div class="mid"></div>
-              <div class="bot"></div>
-              </div>
+        <div class="main-menu">
              <button class="burger-menu" aria-expanded={is_menu_open.to_string()} onclick={toggle_menu}>
                 {"☰"}
                   </button>
