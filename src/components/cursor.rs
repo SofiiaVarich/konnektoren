@@ -1,10 +1,10 @@
 use gloo_timers::callback::Timeout;
-use wasm_bindgen::closure::Closure;
+use rand::Rng;
 use std::cell::RefCell;
 use std::rc::Rc;
-use yew::prelude::*;
+use wasm_bindgen::closure::Closure;
 use wasm_bindgen::JsCast;
-use rand::Rng;
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct CursorProps {
@@ -31,9 +31,9 @@ impl Default for Star {
 impl Star {
     fn to_html(&self) -> Html {
         let mut rng = rand::thread_rng();
-            let animation_class = format!("star glow-point fall-{}", rng.gen_range(1..=3));
+        let animation_class = format!("star glow-point fall-{}", rng.gen_range(1..=3));
         html! {
-            
+
             <div class={animation_class} style={format!("position: absolute; left: {}px; top: {}px; color: white; visibility: {}", self.x, self.y, if self.visible { "visible" } else { "hidden" })}>
                 //{"✨"}
             </div>
@@ -71,7 +71,10 @@ pub fn cursor_component(props: &CursorProps) -> Html {
                 web_sys::window()
                     .and_then(|win| win.document())
                     .expect("should have a document on window")
-                    .remove_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref())
+                    .remove_event_listener_with_callback(
+                        "mousemove",
+                        closure.as_ref().unchecked_ref(),
+                    )
                     .expect("should unregister `mousemove` event");
                 closure.forget();
             }

@@ -1,13 +1,12 @@
 use crate::{
     components::{Cursor, MainMenu, Navigation},
     pages::{
-        About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LanguagePage,
-        LeaderboardPage, ProfilePage, Results, VerbsPage,
+        About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LeaderboardPage,
+        ProfilePage, Results, VerbsPage,
     },
     route::Route,
-    utils::translation::{languages, translations, LANGUAGE_KEY},
+    utils::translation::{languages, translations},
 };
-use gloo_storage::{LocalStorage, Storage};
 use wasm_bindgen::JsValue;
 use yew::prelude::*;
 use yew_i18n::I18nProvider;
@@ -17,36 +16,23 @@ fn switch_main(route: Route) -> Html {
     let supported_languages = languages();
     let translations = translations();
 
-    let lang: Option<String> = LocalStorage::get(LANGUAGE_KEY).unwrap_or(None);
+    let route = match route {
+        Route::About => html! {<About /> },
+        Route::Home => html! {<Home />},
+        Route::Konnektoren => html! {<KonnektorenPage />},
+        Route::Adjectives => html! {<AdjectivesPage />},
+        Route::Verbs => html! {<VerbsPage />},
+        Route::Results { code } => html! {<Results { code } />},
+        Route::Config => html! {<ConfigPage />},
+        Route::Profile => html! {<ProfilePage />},
+        Route::History => html! {<HistoryPage />},
+        Route::Leaderboard => html! {<LeaderboardPage />},
+    };
 
-    match lang {
-        Some(_lang) => {
-            let route = match route {
-                Route::About => html! {<About /> },
-                Route::Home => html! {<Home />},
-                Route::Konnektoren => html! {<KonnektorenPage />},
-                Route::Adjectives => html! {<AdjectivesPage />},
-                Route::Verbs => html! {<VerbsPage />},
-                Route::Results { code } => html! {<Results { code } />},
-                Route::Config => html! {<ConfigPage />},
-                Route::Profile => html! {<ProfilePage />},
-                Route::History => html! {<HistoryPage />},
-                Route::Leaderboard => html! {<LeaderboardPage />},
-            };
-
-            html! {
-                <I18nProvider supported_languages={supported_languages} translations={translations} >
-                    {route}
-                </I18nProvider>
-            }
-        }
-        None => {
-            html! {
-                <I18nProvider supported_languages={supported_languages} translations={translations} >
-                    <LanguagePage />
-                </I18nProvider>
-            }
-        }
+    html! {
+        <I18nProvider supported_languages={supported_languages} translations={translations} >
+            {route}
+        </I18nProvider>
     }
 }
 

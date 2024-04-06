@@ -1,4 +1,6 @@
-use crate::components::Logo;
+use crate::components::{Logo, SelectLanguageFlag};
+use crate::utils::translation::LANGUAGE_KEY;
+use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -9,10 +11,23 @@ pub struct HeaderProps {
 
 #[function_component(Header)]
 pub fn header(props: &HeaderProps) -> Html {
+    let lang: Option<String> = LocalStorage::get(LANGUAGE_KEY).unwrap_or(None);
+
+    let select_language = match lang {
+        Some(_lang) => {
+            html! {}
+        }
+        None => {
+            html! {
+                <SelectLanguageFlag />
+            }
+        }
+    };
     html! {
         <div class="text-center title-with-icon">
-                <Logo img_src={props.img_src.clone()}/>
+            <Logo img_src={props.img_src.clone()}/>
             <h1>{ &props.title }</h1>
+            { select_language }
         </div>
     }
 }
