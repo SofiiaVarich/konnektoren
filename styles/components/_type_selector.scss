@@ -1,0 +1,18 @@
+.typeselector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .typeselector .button-group button {
+      padding: 6px 10px;
+      font-size: 14px;
+      min-width: 60px; // Reduce min-width for smaller screens
+    }
+  }
