@@ -5,4 +5,12 @@
     justify-content: space-between;
     margin-top: 2rem;
 
+    @media (max-width: 768px) {
+        margin-top: 0.5rem;
+        button {
+            padding: 0.5rem 0rem;
+            font-size: 0.8rem;
+        }
+    }
+
 }
