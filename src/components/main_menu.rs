@@ -21,7 +21,7 @@ pub fn main_menu() -> Html {
     };
 
     html! {
-        <div class="main-menu">
+        <div class="main-menu" onclick={toggle_menu.clone()}>
             <button class="burger-menu" aria-expanded={is_menu_open.to_string()} onclick={toggle_menu}>
                 {"☰"}
             </button>
