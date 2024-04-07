@@ -8,7 +8,9 @@ use crate::model::CategorizedItems;
 use crate::model::CategorizedTest;
 use crate::model::DetailTrait;
 use crate::model::TypeTrait;
+use gloo_storage::{LocalStorage, Storage as _};
 use yew::prelude::*;
+
 #[derive(Properties, PartialEq)]
 pub struct CarouselProps<T: TypeTrait + 'static, D: DetailTrait> {
     pub konnektoren: CategorizedItems<T, D>,
@@ -36,6 +38,7 @@ pub enum Msg<T: TypeTrait> {
     Previous,
     SelectType(T),
     ToggleExampleVisibility,
+    Reset,
 }
 
 impl<T: TypeTrait + 'static, D: DetailTrait + 'static> Carousel<T, D> {
@@ -50,6 +53,10 @@ impl<T: TypeTrait + 'static, D: DetailTrait + 'static> Carousel<T, D> {
                 </div>
             }
         }
+    }
+
+    fn save_test(&self) {
+        LocalStorage::set(format!("test:{}", T::get_type()), self.test.clone()).unwrap();
     }
 }
 
@@ -69,11 +76,18 @@ where
             Msg::Next => self.test.next(),
             Msg::Previous => self.test.prev(),
             Msg::SelectType(selected_type) => {
-                self.test.answer_current(selected_type);
+                if !self.test.is_current_answered() {
+                    self.test.answer_current(selected_type);
+                    self.save_test();
+                }
                 self.test.next();
             }
             Msg::ToggleExampleVisibility => {
                 self.hide_example = !self.hide_example;
+            }
+            Msg::Reset => {
+                self.test = CategorizedTest::default();
+                self.save_test();
             }
         }
         true
@@ -100,6 +114,7 @@ where
                     <div class="action-buttons">
                         <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
+                        <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Reset" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</button>
                     </div>
                     { self.test_results() }

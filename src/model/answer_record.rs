@@ -1,8 +1,10 @@
 use super::TypeTrait;
+use serde::{Deserialize, Serialize};
+
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct AnswerRecord<T: TypeTrait>
 where
@@ -103,5 +105,18 @@ mod tests {
             !answer_record.is_correct(),
             "Unanswered questions should not be marked as correct."
         );
+    }
+
+    #[test]
+    fn test_serialize() {
+        let answer_record = AnswerRecord {
+            detail_index: 0,
+            was_answered: true,
+            correct_answer: TestType::Type1,
+            user_answer: Some(TestType::Type1),
+        };
+        let serialized = serde_json::to_string(&answer_record).unwrap();
+        let deserialized: AnswerRecord<TestType> = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(answer_record, deserialized);
     }
 }

@@ -3,10 +3,12 @@ use super::CategorizedItems;
 use super::DetailTrait;
 use super::TypeTrait;
 use rand::seq::SliceRandom;
+use serde::Deserialize;
+use serde::Serialize;
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[cfg_attr(feature = "openapi", derive(ToSchema))]
 pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
     pub items: CategorizedItems<T, D>,
@@ -96,6 +98,14 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
         if let Some(record) = self.answers.get_mut(self.current_index) {
             record.was_answered = true;
             record.user_answer = Some(user_answer);
+        }
+    }
+
+    pub fn is_current_answered(&self) -> bool {
+        if let Some(record) = self.answers.get(self.current_index) {
+            record.was_answered
+        } else {
+            false
         }
     }
 }
@@ -211,5 +221,22 @@ mod tests {
         let test = CategorizedTest::new_of_size(&konnektoren, 1);
 
         assert_eq!(test.len(), 1, "The length of the test should be 1.");
+    }
+
+    #[test]
+    fn test_is_answered() {
+        let konnektoren = mock_konnektoren();
+        let mut test = CategorizedTest::new(&konnektoren);
+
+        assert!(
+            !test.is_current_answered(),
+            "The current detail should not be answered."
+        );
+
+        test.answer_current(KonnektorType::Konjunktionen);
+        assert!(
+            test.is_current_answered(),
+            "The current detail should be answered."
+        );
     }
 }
