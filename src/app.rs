@@ -14,10 +14,7 @@ use yew_i18n::I18nProvider;
 use yew_router::prelude::*;
 
 fn switch_main(route: Route) -> Html {
-    let supported_languages = languages();
-    let translations = translations();
-
-    let route = match route {
+    match route {
         Route::About => html! {<About /> },
         Route::Home => html! {<Home />},
         Route::Konnektoren => html! {<KonnektorenPage />},
@@ -28,12 +25,6 @@ fn switch_main(route: Route) -> Html {
         Route::Profile => html! {<ProfilePage />},
         Route::History => html! {<HistoryPage />},
         Route::Leaderboard => html! {<LeaderboardPage />},
-    };
-
-    html! {
-        <I18nProvider supported_languages={supported_languages} translations={translations} >
-            {route}
-        </I18nProvider>
     }
 }
 
@@ -50,15 +41,17 @@ impl Component for App {
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
+        let supported_languages = languages();
+        let translations = translations();
         html! {
-            <div>
+        <I18nProvider supported_languages={supported_languages} translations={translations} >
             <BrowserRouter>
                     <Navigation />
                     <MainMenu />
                     <Switch<Route> render={switch_main} />
             </BrowserRouter>
             <Cursor length={20} />
-        </div>
+        </I18nProvider>
         }
     }
 }

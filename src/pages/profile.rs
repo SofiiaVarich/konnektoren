@@ -9,10 +9,13 @@ use yew_i18n::use_translation;
 
 #[function_component(ProfilePage)]
 pub fn profile_page() -> Html {
-    let mut i18n = use_translation();
-    let selected_language =
-        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
-    let _ = i18n.set_translation_language(&selected_language);
+    let i18n = {
+        let mut i18n = use_translation();
+        let selected_language =
+            use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+        let _ = i18n.set_translation_language(&selected_language);
+        i18n
+    };
 
     let player =
         use_state(|| LocalStorage::get::<Player>(PLAYER_KEY).unwrap_or_else(|_| Player::default()));

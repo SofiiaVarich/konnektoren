@@ -16,12 +16,13 @@ use yew_router::prelude::*;
 
 #[function_component(LeaderboardPage)]
 pub fn leaderboard_page() -> Html {
-    let mut i18n = use_translation();
-
-    let selected_language =
-        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
-
-    let _ = i18n.set_translation_language(&selected_language);
+    let i18n = {
+        let mut i18n = use_translation();
+        let selected_language =
+            use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+        let _ = i18n.set_translation_language(&selected_language);
+        i18n
+    };
 
     let navigator = use_navigator().expect("No navigator");
 

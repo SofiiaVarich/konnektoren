@@ -1,10 +1,21 @@
 use crate::components::Logo;
 use crate::route::Route;
+use crate::utils::translation::LANGUAGE_KEY;
+use gloo_storage::{LocalStorage, Storage as _};
 use yew::prelude::*;
+use yew_i18n::use_translation;
 use yew_router::prelude::*;
 
 #[function_component(MainMenu)]
 pub fn main_menu() -> Html {
+    let i18n = {
+        let mut i18n = use_translation();
+        let selected_language =
+            use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+        let _ = i18n.set_translation_language(&selected_language);
+        i18n
+    };
+
     let is_menu_open = use_state(|| false);
 
     let toggle_menu = {
@@ -30,11 +41,11 @@ pub fn main_menu() -> Html {
                 <div class={menu_class}>
                 <br />
                     <Link<Route> to={Route::Home}>{html!{<Logo img_src={"/favicon.png".to_string()} />}}</Link<Route>>
-                    <Link<Route> to={Route::Profile}>{ "Profile" }</Link<Route>>
-                    <Link<Route> to={Route::History}>{ "History" }</Link<Route>>
-                    <Link<Route> to={Route::Leaderboard}>{ "Leaderboard" }</Link<Route>>
-                    <Link<Route> to={Route::About}>{ "About" }</Link<Route>>
-                    <Link<Route> to={Route::Config}>{ "Config" }</Link<Route>>
+                    <Link<Route> to={Route::Profile}>{ i18n.t("Profile") }</Link<Route>>
+                    <Link<Route> to={Route::History}>{ i18n.t("History") }</Link<Route>>
+                    <Link<Route> to={Route::Leaderboard}>{ i18n.t("Leaderboard") }</Link<Route>>
+                    <Link<Route> to={Route::About}>{ i18n.t("About") }</Link<Route>>
+                    <Link<Route> to={Route::Config}>{ i18n.t("Config") }</Link<Route>>
                 </div>
             }
         </div>

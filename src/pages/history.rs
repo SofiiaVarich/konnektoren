@@ -7,12 +7,13 @@ use yew_i18n::use_translation;
 
 #[function_component(HistoryPage)]
 pub fn history_page() -> Html {
-    let mut i18n = use_translation();
-
-    let selected_language =
-        use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
-
-    let _ = i18n.set_translation_language(&selected_language);
+    let i18n = {
+        let mut i18n = use_translation();
+        let selected_language =
+            use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
+        let _ = i18n.set_translation_language(&selected_language);
+        i18n
+    };
 
     let history = use_state(|| match LocalStorage::get::<History>(HISTORY_KEY) {
         Ok(stored_history) => stored_history,
