@@ -21,6 +21,19 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     translations
 }
 
+pub fn supported_language(lang: Option<&str>) -> Option<String> {
+    match lang {
+        Some(lang) => {
+            if languages().contains(&lang) {
+                Some(lang.to_string())
+            } else {
+                None
+            }
+        }
+        None => None,
+    }
+}
+
 pub fn flag(lang: &'static str) -> &'static str {
     match lang {
         "en" => "🇺🇸",
@@ -33,3 +46,29 @@ pub fn flag(lang: &'static str) -> &'static str {
 }
 
 pub const LANGUAGE_KEY: &str = "selected_language";
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_supported_language() {
+        assert_eq!(supported_language(Some("en")), Some("en".to_string()));
+        assert_eq!(supported_language(Some("ua")), Some("ua".to_string()));
+        assert_eq!(supported_language(Some("de")), Some("de".to_string()));
+        assert_eq!(supported_language(Some("cn")), Some("cn".to_string()));
+        assert_eq!(supported_language(Some("ar")), Some("ar".to_string()));
+        assert_eq!(supported_language(Some("es")), None);
+        assert_eq!(supported_language(None), None);
+    }
+
+    #[test]
+    fn test_flag() {
+        assert_eq!(flag("en"), "🇺🇸");
+        assert_eq!(flag("de"), "🇩🇪");
+        assert_eq!(flag("ua"), "🇺🇦");
+        assert_eq!(flag("cn"), "🇨🇳");
+        assert_eq!(flag("ar"), "🇸🇦");
+        assert_eq!(flag("es"), "🌐");
+    }
+}
