@@ -87,6 +87,11 @@ pub fn cursor_component(props: &CursorProps) -> Html {
         let star_index = star_index.clone();
         move |mouse_position| {
             let (x, y) = **mouse_position;
+
+            let scroll_x = web_sys::window().unwrap().scroll_x().unwrap() as i32;
+            let scroll_y = web_sys::window().unwrap().scroll_y().unwrap() as i32;
+            let x = x + scroll_x;
+            let y = y + scroll_y;
             let index = *star_index % length;
             {
                 let mut stars = stars.borrow_mut();
