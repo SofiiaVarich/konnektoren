@@ -1,9 +1,14 @@
-/* Set background image for the whole page */
-body {
-  background-image: url('/assets/config_bg.jpg'); /* Replace 'background-image.jpg' with the path to your image */
-  background-size: cover; /* Cover the entire viewport */
-  background-position: center; /* Center the background image */
+.config-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/config_bg.jpg'); /* Replace with your background image URL */
+  background-size: cover;
+  z-index: -1; /* Send the background behind other content */
 }
+
 .fluffy-ball {
   width: 100px; /* Adjusted size */
   height: 100px; /* Adjusted size */
@@ -24,6 +29,23 @@ body {
   overflow: visible;
 }
 
+@keyframes rollEyes {
+  0% {
+    transform: translateX(-40%) translateY(-10%);
+  }
+  25% {
+    transform: translateX(-30%) translateY(-15%);
+  }
+  50% {
+    transform: translateX(-40%) translateY(-25%);
+  }
+  75% {
+    transform: translateX(-50%) translateY(-15%);
+  }
+  100% {
+    transform: translateX(-40%) translateY(-10%);
+  }
+}
 
 /* Style for the cat mouth's center downturned arc */
 .fluffy-ball::after {
@@ -66,6 +88,7 @@ body {
   top: 0; /* Adjust the pupil to the top */
   left: 50%;
   transform: translateX(-50%) translateY(-10%);
+  animation: rollEyes 5s infinite; /* Apply the animation here */
 }
 
 .eye::after {

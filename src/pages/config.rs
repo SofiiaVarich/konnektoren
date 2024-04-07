@@ -15,16 +15,19 @@ pub fn config_page() -> Html {
     };
 
     html! {
-    <div class="navigation-wrapper">
-                <div class="fluffy-ball">
-                 <div class="eye left-eye"></div>
-                 <div class="eye right-eye"></div>
-                </div>
-            <div class="config-page">
-            <h1>{ i18n.t("Config") }</h1>
-            <SelectLanguage />
-            <Footer />
+    <>
+    <div class="config-background-image"></div>
+    <div class="config-page">
+        <h1>{ i18n.t("Config") }</h1>
+        <SelectLanguage />
+
+        <div class="fluffy-ball">
+            <div class="eye left-eye"></div>
+            <div class="eye right-eye"></div>
         </div>
-        </div>
+
+        <Footer />
+    </div>
+    </>
     }
 }

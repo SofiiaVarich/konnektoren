@@ -6,7 +6,10 @@ body {
   margin: 0;
   padding: 0 0 70px;
   font-family: "Merriweather", serif;
-  color: $primary-color;
+
+  background-image: url('/assets/config_bg.jpg'); /* Replace 'background-image.jpg' with the path to your image */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
 }
 
 h1,
