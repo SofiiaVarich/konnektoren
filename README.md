@@ -1,6 +1,10 @@
 # konnektoren
 
-Konnektoren
+This is the repository for the Konnektoren project.
+
+The project is a web application that helps German learners to practice the use of Konnektoren. It can be visited at:
+
+https://konnektoren.help/
 
 ## Quickstart
 
@@ -33,6 +37,15 @@ cargo build
 ```bash
 trunk serve
 ```
+
+### Frontend
+
+Frontend code can be found in the `main` branch in the src folder.
+It is written in Rust using the Yew framework.
+
+### Styles
+
+Styles are written in SCSS and can be found in the `styles` folder.
 
 ### Run TUI on terminal
 
