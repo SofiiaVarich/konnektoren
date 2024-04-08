@@ -119,6 +119,8 @@ where
                     <Congratulations<T, D> test={self.test.clone()} />
                     <div class="action-buttons">
                         <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
+                        <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Restart Test" }</button>
+                        <div />
                     </div>
                     { self.test_results() }
                 </div>
@@ -133,7 +135,7 @@ where
                     <div class="action-buttons">
                         <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
-                        <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Reset" }</button>
+                        <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Restart Test" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</button>
                     </div>
                     { self.test_results() }
