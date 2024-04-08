@@ -33,13 +33,28 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
         0.0
     };
 
+    let certificate_part = match &props.test.example_showed {
+        true => html! {
+            <div>
+                <h3>{ i18n.t("Certificate") }</h3>
+                <p>{ i18n.t("If you can make the test without help of the examples, you can earn a certificate.") }</p>
+                <p>{ i18n.t("If you can make the test with a performance of 80% and more, you can get a nft.") }</p>
+            </div>
+        },
+        false => player_input::<T>(
+            total_answers,
+            correct_answers,
+            total_answers - correct_answers,
+        ),
+    };
+
     html! {
         <div class="congratulations-container">
             <h2>{ i18n.t("Congratulations!")}</h2>
             <SoundPlayer sound_url="/fanfare-3-rpg.ogg" />
             <p>{format!("You have completed the test with a score of {:.1}% ({}/{})", performance, correct_answers, total_answers)}</p>
             {message::<T>(performance)}
-            {player_input::<T>(total_answers, correct_answers, total_answers - correct_answers)}
+            {certificate_part}
         </div>
     }
 }

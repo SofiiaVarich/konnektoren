@@ -29,7 +29,7 @@ where
     fn default() -> Self {
         Self {
             test: CategorizedTest::default(),
-            hide_example: false,
+            hide_example: true,
         }
     }
 }
@@ -99,6 +99,10 @@ where
             }
             Msg::ToggleExampleVisibility => {
                 self.hide_example = !self.hide_example;
+                if !self.hide_example {
+                    self.test.example_showed = true;
+                    self.save_test()
+                }
             }
             Msg::Reset => {
                 self.test = CategorizedTest::default();

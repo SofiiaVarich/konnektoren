@@ -15,6 +15,7 @@ pub struct CategorizedTest<T: TypeTrait, D: DetailTrait> {
     pub random_indices: Vec<usize>,
     pub current_index: usize,
     pub answers: Vec<AnswerRecord<T>>,
+    pub example_showed: bool,
 }
 
 impl<T: TypeTrait, D: DetailTrait> Default for CategorizedTest<T, D>
@@ -56,6 +57,7 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedTest<T, D> {
             random_indices: indices,
             current_index: 0,
             answers,
+            example_showed: false,
         }
     }
 
