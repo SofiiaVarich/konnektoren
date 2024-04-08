@@ -10,6 +10,12 @@ Konnektoren
 git pull
 ```
 
+### Server
+
+Server code can be found in the `server` branch:
+
+https://github.com/SofiiaVarich/konnektoren/tree/server
+
 ### Prerequisites
 
 ```bash
