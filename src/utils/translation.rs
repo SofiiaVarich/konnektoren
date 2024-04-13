@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 pub fn languages() -> Vec<&'static str> {
-    vec!["en", "ua", "ar", "de", "cn"]
+    vec!["en", "ua", "ar", "de", "cn", "pl"]
 }
 
 pub fn translations() -> HashMap<String, serde_json::Value> {
@@ -12,12 +12,14 @@ pub fn translations() -> HashMap<String, serde_json::Value> {
     let ua = serde_json::from_str(include_str!("../assets/i18n/ua.json")).unwrap();
     let cn = serde_json::from_str(include_str!("../assets/i18n/cn.json")).unwrap();
     let ar = serde_json::from_str(include_str!("../assets/i18n/ar.json")).unwrap();
+    let pl = serde_json::from_str(include_str!("../assets/i18n/pl.json")).unwrap();
 
     translations.insert("en".to_string(), en);
     translations.insert("de".to_string(), de);
     translations.insert("ua".to_string(), ua);
     translations.insert("cn".to_string(), cn);
     translations.insert("ar".to_string(), ar);
+    translations.insert("pl".to_string(), pl);
     translations
 }
 
@@ -41,6 +43,7 @@ pub fn flag(lang: &'static str) -> &'static str {
         "ua" => "🇺🇦",
         "cn" => "🇨🇳",
         "ar" => "🇸🇦",
+        "pl" => "🇵🇱",
         _ => "🌐",
     }
 }
@@ -58,6 +61,7 @@ mod tests {
         assert_eq!(supported_language(Some("de")), Some("de".to_string()));
         assert_eq!(supported_language(Some("cn")), Some("cn".to_string()));
         assert_eq!(supported_language(Some("ar")), Some("ar".to_string()));
+        assert_eq!(supported_language(Some("pl")), Some("pl".to_string()));
         assert_eq!(supported_language(Some("es")), None);
         assert_eq!(supported_language(None), None);
     }
@@ -69,6 +73,7 @@ mod tests {
         assert_eq!(flag("ua"), "🇺🇦");
         assert_eq!(flag("cn"), "🇨🇳");
         assert_eq!(flag("ar"), "🇸🇦");
+        assert_eq!(flag("pl"), "🇵🇱");
         assert_eq!(flag("es"), "🌐");
     }
 }
