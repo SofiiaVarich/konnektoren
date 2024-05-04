@@ -1,0 +1,236 @@
+.table-container {
+  margin: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  overflow-x: auto;
+}
+@media (max-width: 600px) {
+  .table-container {
+    margin: 10px;
+  }
+}
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-container th, .table-container td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  color: #000;
+}
+@media (max-width: 600px) {
+  .table-container th, .table-container td {
+    padding: 4px;
+  }
+}
+.table-container th {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.congratulations-container {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f0f4c3;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  text-align: center;
+}
+.congratulations-container h2 {
+  color: #388e3c;
+  margin-bottom: 15px;
+}
+.congratulations-container p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.large-font {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.small-font {
+  font-size: 16px;
+  color: grey;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.title-with-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo img {
+  max-height: 3.5rem;
+}
+@media (max-width: 768px) {
+  .logo img {
+    max-height: 2.5rem;
+  }
+}
+
+.chart-container {
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/carousel_card_bg_m.jpg");
+  background-size: cover;
+  z-index: -1;
+}
+
+.test-chart svg {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .test-chart svg {
+    max-width: 90%;
+  }
+}
+@media (max-width: 480px) {
+  .test-chart svg {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-statistics-container {
+    padding: 0 5px;
+  }
+  .test-chart svg {
+    max-width: 100%;
+  }
+}
+.explanation {
+  max-width: 95%;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.explanation h2, .explanation h3 {
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.explanation p, .explanation li {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+}
+.explanation ul {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+.explanation ol {
+  margin-left: 20px;
+}
+@media (max-width: 768px) {
+  .explanation {
+    max-width: 90%;
+    padding: 10px;
+  }
+  .explanation p, .explanation li {
+    font-size: 14px;
+  }
+}
+
+/* Config Page Styles */
+.config-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mint-nft {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.mint-nft_title {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+.mint-nft_button button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.mint-nft_button button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+.mint-nft_button button:active {
+  background-color: #3e8e41;
+  transform: translateY(1px);
+}
+.mint-nft_message {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
