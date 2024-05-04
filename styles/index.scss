@@ -107,9 +107,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/assets/carousel_card_bg.jpg'); /* Replace with your background image URL */
+    background-image: url('/assets/carousel_card_bg_m.jpg');
     background-size: cover;
-    z-index: -1; /* Send the background behind other content */
+    z-index: -1;
 }
 
 .test-chart svg {
