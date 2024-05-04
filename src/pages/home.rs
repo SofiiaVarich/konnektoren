@@ -27,9 +27,9 @@ pub fn Home() -> Html {
     html! {
         <div>
             <Header title={"Konnektoren".to_string()} img_src={"/favicon.png".to_string()} />
-            <SlideShow urls={vec!["/slides/1.png".to_string(), "/slides/3.png".to_string(),
-                "/slides/6.png".to_string(), "/slides/7.png".to_string(),
-                "/slides/8.png".to_string(), "/slides/9.png".to_string()]} />
+            <SlideShow urls={vec!["/slides/1s.png".to_string(), "/slides/3s.png".to_string(),
+                "/slides/6m.png".to_string(), "/slides/7m.png".to_string(),
+                "/slides/8m.png".to_string(), "/slides/9s.png".to_string()]} />
             <TestSelector {test_type} />
             {carousel}
         </div>
