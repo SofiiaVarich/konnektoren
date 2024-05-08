@@ -7,6 +7,9 @@ on:
     tags:
       - "*"
 
+env:
+  INDEXNOW_KEY: dceb4b8e4d794940bf1bc89523514adc
+
 jobs:
   build_and_deploy_main:
     name: Rust project for main branch
@@ -42,6 +45,9 @@ jobs:
       - name: Generate DID Document
         run: mkdir -p ./dist/.well-known && cargo run --bin did_json -- konnektoren.help && cp ./did.json ./dist/.well-known/did.json
 
+      - name: Setup IndexNow
+        run: echo ${INDEXNOW_KEY} > ./dist/${INDEXNOW_KEY}.txt
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -49,3 +55,14 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./dist
           keep_files: true
+
+  check-and-submit:
+    needs: build_and_deploy_main
+    runs-on: ubuntu-latest
+    steps:
+      - name: indexnow-action
+        uses: bojieyang/indexnow-action@v2
+        with:
+          endpoint: api.indexnow.org
+          sitemap-location: "https://konnektoren.help/sitemap.xml"
+          key: ${INDEXNOW_KEY}
