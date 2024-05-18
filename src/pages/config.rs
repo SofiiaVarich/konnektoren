@@ -1,4 +1,4 @@
-use crate::components::{Footer, SelectLanguage};
+use crate::components::{Footer, ProVersion, SelectLanguage};
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
@@ -20,6 +20,8 @@ pub fn config_page() -> Html {
     <div class="config-page">
         <h1>{ i18n.t("Config") }</h1>
         <SelectLanguage />
+
+        <ProVersion />
 
         <div class="fluffy-ball">
             <div class="eye left-eye"></div>

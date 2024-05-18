@@ -1,0 +1,55 @@
+@use "../abstracts" as *;
+
+@function get-font-size($key) {
+    @return map-get($font-sizes, $key);
+}
+
+.pro-version-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+
+    .coming-soon {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Ensure responsiveness for small screens
+@media (max-width: 768px) {
+    .pro-version-container {
+        padding: 1rem;
+
+        h1 {
+            font-size: get-font-size("700");
+        }
+
+        p {
+            font-size: get-font-size("300");
+        }
+
+        button {
+            font-size: get-font-size("300");
+            padding: 0.5rem 1rem;
+        }
+
+        .coming-soon {
+            padding: 0.5rem;
+
+            h2 {
+                font-size: get-font-size("600");
+            }
+
+            p {
+                font-size: get-font-size("200");
+            }
+        }
+    }
+}
