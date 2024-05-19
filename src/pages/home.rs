@@ -1,7 +1,7 @@
 use crate::components::{Carousel, Header, SlideShow, TestSelector};
 use crate::model::{
     AdjectiveDetail, AdjectiveType, KonnektorDetail, KonnektorType, NomenDetail, NomenType,
-    TestType, VerbDetail, VerbType,
+    TestType, VerbDetail, VerbType, VorgangspassivDetail, VorgangspassivType,
 };
 use yew::prelude::*;
 
@@ -21,6 +21,9 @@ pub fn Home() -> Html {
         },
         TestType::Nomen => html! {
             <Carousel<NomenType, NomenDetail> />
+        },
+        TestType::Vorgangspassiv => html! {
+            <Carousel<VorgangspassivType, VorgangspassivDetail> />
         },
     };
 

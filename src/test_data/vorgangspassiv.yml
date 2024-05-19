@@ -1,0 +1,54 @@
+categories:
+  - category: "Präsens"
+    details:
+      - verb: "Das Katzenkaffee wird eröffnet."
+        example: "werden + Partizip Perfekt"
+      - verb: "Das Gebäude wird renoviert."
+        example: "werden + Partizip Perfekt"
+      - verb: "Die Abschlussarbeit wird geschrieben."
+        example: "werden + Partizip Perfekt"
+
+  - category: "Präteritum"
+    details:
+      - verb: "Das Katzenkaffee wurde eröffnet."
+        example: "wurden + Partizip Perfekt"
+      - verb: "Das Gebäude wurde renoviert."
+        example: "wurden + Partizip Perfekt"
+      - verb: "Die Abschlussarbeit wurde geschrieben."
+        example: "wurden + Partizip Perfekt"
+
+  - category: "Perfekt"
+    details:
+      - verb: "Das Katzenkaffee ist eröffnet worden."
+        example: "sein + Partizip Perfekt + worden"
+      - verb: "Das Gebäude ist renoviert worden."
+        example: "sein + Partizip Perfekt + worden"
+      - verb: "Die Abschlussarbeit ist geschrieben worden."
+        example: "sein + Partizip Perfekt + worden"
+
+  - category: "Plusquamperfekt"
+    details:
+      - verb: "Das Katzenkaffee war eröffnet worden."
+        example: "waren + Partizip Perfekt + worden"
+      - verb: "Das Gebäude war renoviert worden."
+        example: "waren + Partizip Perfekt + worden"
+      - verb: "Die Abschlussarbeit war geschrieben worden."
+        example: "waren + Partizip Perfekt + worden"
+
+  - category: "Futur I"
+    details:
+      - verb: "Das Katzenkaffee wird eröffnet werden."
+        example: "werden + Partizip Perfekt + werden"
+      - verb: "Das Gebäude wird renoviert werden."
+        example: "werden + Partizip Perfekt + werden"
+      - verb: "Die Abschlussarbeit wird geschrieben werden."
+        example: "werden + Partizip Perfekt + werden"
+
+  - category: "Futur II"
+    details:
+      - verb: "Das Katzenkaffee wird eröffnet worden sein."
+        example: "werden + Partizip Perfekt + worden + sein"
+      - verb: "Das Gebäude wird renoviert worden sein."
+        example: "werden + Partizip Perfekt + worden + sein"
+      - verb: "Die Abschlussarbeit wird geschrieben worden sein."
+        example: "werden + Partizip Perfekt + worden + sein"

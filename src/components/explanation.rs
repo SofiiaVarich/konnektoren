@@ -16,6 +16,7 @@ pub fn explanation(props: &ExplanationProps) -> Html {
         TestType::Adjectives => html! { <AdjectivesExplanation /> },
         TestType::Verbs => html! { <VerbsExplanation /> },
         TestType::Nomen => html! { <NomenExplanation /> },
+        TestType::Vorgangspassiv => html! {},
     }
 }
 

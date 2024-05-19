@@ -24,6 +24,7 @@ fn nft_url(test_type: &TestType) -> String {
         TestType::Adjectives => "/assets/nft-adjectives.png".to_string(),
         TestType::Verbs => "/assets/nft-verbs.png".to_string(),
         TestType::Nomen => "/assets/nft-nouns.png".to_string(),
+        TestType::Vorgangspassiv => "/assets/nft-vorganspassiv.png".to_string(),
     }
 }
 

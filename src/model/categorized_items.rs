@@ -3,7 +3,10 @@ use super::category::Category;
 use super::konnektor_detail::KonnektorDetail;
 use super::konnektor_type::KonnektorType;
 use super::{adjective_detail::AdjectiveDetail, TypeTrait};
-use super::{DetailTrait, NomenDetail, NomenType, VerbDetail, VerbType};
+use super::{
+    DetailTrait, NomenDetail, NomenType, VerbDetail, VerbType, VorgangspassivDetail,
+    VorgangspassivType,
+};
 use serde::{Deserialize, Serialize};
 #[cfg(feature = "openapi")]
 use utoipa::ToSchema;
@@ -49,7 +52,7 @@ impl<T: TypeTrait, D: DetailTrait> CategorizedItems<T, D> {
 
 impl Default for CategorizedItems<AdjectiveType, AdjectiveDetail> {
     fn default() -> Self {
-        let yaml_content = include_str!("../adjectives.yml");
+        let yaml_content = include_str!("../test_data/adjectives.yml");
 
         let prepositions: CategorizedItems<AdjectiveType, AdjectiveDetail> =
             serde_yaml::from_str(yaml_content)
@@ -61,7 +64,7 @@ impl Default for CategorizedItems<AdjectiveType, AdjectiveDetail> {
 
 impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
     fn default() -> Self {
-        let yaml_content = include_str!("../konnektoren.yml");
+        let yaml_content = include_str!("../test_data/konnektoren.yml");
 
         let konnektoren: CategorizedItems<KonnektorType, KonnektorDetail> =
             serde_yaml::from_str(yaml_content)
@@ -73,7 +76,7 @@ impl Default for CategorizedItems<KonnektorType, KonnektorDetail> {
 
 impl Default for CategorizedItems<VerbType, VerbDetail> {
     fn default() -> Self {
-        let yaml_content = include_str!("../verbs.yml");
+        let yaml_content = include_str!("../test_data/verbs.yml");
 
         let verbs: CategorizedItems<VerbType, VerbDetail> = serde_yaml::from_str(yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
@@ -83,11 +86,22 @@ impl Default for CategorizedItems<VerbType, VerbDetail> {
 
 impl Default for CategorizedItems<NomenType, NomenDetail> {
     fn default() -> Self {
-        let yaml_content = include_str!("../nomen.yml");
+        let yaml_content = include_str!("../test_data/nomen.yml");
 
         let nomen: CategorizedItems<NomenType, NomenDetail> = serde_yaml::from_str(yaml_content)
             .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
         nomen
+    }
+}
+
+impl Default for CategorizedItems<VorgangspassivType, VorgangspassivDetail> {
+    fn default() -> Self {
+        let yaml_content = include_str!("../test_data/vorgangspassiv.yml");
+
+        let vorgangspassiv: CategorizedItems<VorgangspassivType, VorgangspassivDetail> =
+            serde_yaml::from_str(yaml_content)
+                .unwrap_or_else(|err| panic!("Failed to deserialize YAML content: {}", err));
+        vorgangspassiv
     }
 }
 

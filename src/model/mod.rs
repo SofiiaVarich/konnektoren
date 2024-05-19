@@ -18,6 +18,8 @@ mod test_type;
 mod type_trait;
 mod verb_detail;
 mod verb_type;
+mod vorgangspassiv_detail;
+mod vorgangspassiv_type;
 
 pub use adjective_detail::AdjectiveDetail;
 pub use adjective_type::AdjectiveType;
@@ -39,3 +41,5 @@ pub use test_type::TestType;
 pub use type_trait::TypeTrait;
 pub use verb_detail::VerbDetail;
 pub use verb_type::VerbType;
+pub use vorgangspassiv_detail::VorgangspassivDetail;
+pub use vorgangspassiv_type::VorgangspassivType;
