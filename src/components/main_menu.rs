@@ -44,6 +44,7 @@ pub fn main_menu() -> Html {
                     <Link<Route> to={Route::Profile}>{ i18n.t("Profile") }</Link<Route>>
                     <Link<Route> to={Route::History}>{ i18n.t("History") }</Link<Route>>
                     <Link<Route> to={Route::Leaderboard}>{ i18n.t("Leaderboard") }</Link<Route>>
+                    <Link<Route> to={Route::Survey}>{ i18n.t("Survey") }</Link<Route>>
                     <Link<Route> to={Route::About}>{ i18n.t("About") }</Link<Route>>
                     <Link<Route> to={Route::Config}>{ i18n.t("Config") }</Link<Route>>
                 </div>

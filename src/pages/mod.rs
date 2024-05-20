@@ -8,6 +8,7 @@ mod language_page;
 mod leaderboard;
 mod profile;
 mod results;
+mod survey;
 mod verbs;
 
 pub use about::About;
@@ -20,4 +21,5 @@ pub use language_page::LanguagePage;
 pub use leaderboard::LeaderboardPage;
 pub use profile::ProfilePage;
 pub use results::Results;
+pub use survey::Survey;
 pub use verbs::VerbsPage;

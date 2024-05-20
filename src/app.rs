@@ -2,7 +2,7 @@ use crate::{
     components::{MainMenu, Navigation},
     pages::{
         About, AdjectivesPage, ConfigPage, HistoryPage, Home, KonnektorenPage, LeaderboardPage,
-        ProfilePage, Results, VerbsPage,
+        ProfilePage, Results, Survey, VerbsPage,
     },
     route::Route,
     utils::translation::{languages, supported_language, translations, LANGUAGE_KEY},
@@ -24,6 +24,7 @@ fn switch_main(route: Route) -> Html {
         Route::Config => html! {<ConfigPage />},
         Route::Profile => html! {<ProfilePage />},
         Route::History => html! {<HistoryPage />},
+        Route::Survey => html! {<Survey />},
         Route::Leaderboard => html! {<LeaderboardPage />},
     }
 }

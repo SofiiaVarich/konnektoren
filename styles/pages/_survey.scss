@@ -1,0 +1,18 @@
+/* Survey Page Styles */
+.survey-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fafafa;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    box-shadow:
+            0 0 40px rgba(0, 0, 0, 0.2),
+            0 0 80px rgba(0, 0, 0, 0.1),
+            0 0 120px rgba(0, 0, 0, 0.05);
+    position: relative;
+
+
+    background-clip: padding-box;
+    border-image: linear-gradient(to right, #8a2be2, #9932cc, #9400d3, #800080) 1; /* Gradient border */
+}
