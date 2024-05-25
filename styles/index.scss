@@ -16,7 +16,8 @@
         border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
         text-align: left;
         padding: 8px;
         border-bottom: 1px solid #ddd;
@@ -42,27 +43,6 @@
     text-align: center;
 }
 
-.congratulations-container {
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f0f4c3;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    text-align: center;
-
-    h2 {
-        color: #388e3c;
-        margin-bottom: 15px;
-    }
-
-    p {
-        color: #666;
-        line-height: 1.6;
-    }
-}
-
-
 .large-font {
     font-size: 24px;
     font-weight: bold;
@@ -72,8 +52,6 @@
     font-size: 16px;
     color: grey;
 }
-
-
 
 .text-center {
     text-align: center;
@@ -107,7 +85,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/assets/carousel_card_bg_m.jpg');
+    background-image: url("/assets/carousel_card_bg_m.jpg");
     background-size: cover;
     z-index: -1;
 }
@@ -143,13 +121,15 @@
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    h2, h3 {
+    h2,
+    h3 {
         color: #007bff;
         text-align: center;
         margin-bottom: 20px;
     }
 
-    p, li {
+    p,
+    li {
         font-size: 16px;
         line-height: 1.6;
         text-align: justify;
@@ -168,7 +148,8 @@
         max-width: 90%;
         padding: 10px;
 
-        p, li {
+        p,
+        li {
             font-size: 14px;
         }
     }
@@ -210,7 +191,9 @@
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 4px;
-        transition: background-color 0.3s, transform 0.2s;
+        transition:
+            background-color 0.3s,
+            transform 0.2s;
 
         &:hover {
             background-color: #45a049;
@@ -242,7 +225,11 @@
     animation: spin 2s linear infinite;
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 }

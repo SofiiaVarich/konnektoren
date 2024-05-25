@@ -122,7 +122,6 @@ where
                         <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Restart Test" }</button>
                         <div />
                     </div>
-                    { self.test_results() }
                 </div>
             }
         } else if let Some(detail) = self.test.current() {

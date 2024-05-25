@@ -3,17 +3,18 @@ use crate::model::{
 };
 use crate::route::Route;
 use gloo_storage::{LocalStorage, Storage};
-use serde::{Deserialize, Serialize};
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Properties)]
+#[derive(Debug, Clone, PartialEq, Properties)]
 pub struct PlayerInputProps {
     pub test_type: TestType,
     pub total_questions: usize,
     pub correct_answers: usize,
     pub incorrect_answers: usize,
+    #[prop_or_default]
+    pub on_generate: Option<Callback<TestResult>>,
 }
 
 #[function_component(PlayerInput)]
@@ -25,6 +26,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
     let navigator = use_navigator().expect("No navigator");
 
     let on_generate_click = {
+        let on_generate = props.on_generate.clone();
         let player_name = player_name.clone();
         let test_type = props.test_type;
         let total_questions = props.total_questions;
@@ -33,6 +35,7 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
         let date = chrono::Utc::now();
 
         Callback::from(move |_| {
+            let on_generate = on_generate.clone();
             let mut test_result = TestResult::new(
                 test_type,
                 total_questions,
@@ -49,8 +52,13 @@ pub fn player_input(props: &PlayerInputProps) -> Html {
 
             LocalStorage::set("history", &history).expect("Failed to save history");
 
-            let encoded = test_result.to_base64();
-            navigator.push(&Route::Results { code: encoded });
+            match on_generate {
+                Some(callback) => callback.emit(test_result),
+                None => {
+                    let encoded = test_result.to_base64();
+                    navigator.push(&Route::Results { code: encoded });
+                }
+            }
         })
     };
 
