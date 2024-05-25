@@ -1,19 +1,26 @@
+use crate::route::Route;
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
 use yew_i18n::use_translation;
+use yew_router::prelude::*;
 
+use crate::components::TestResults;
 use crate::components::{PlayerInput, SoundPlayer};
-use crate::model::{CategorizedTest, DetailTrait, TypeTrait};
-
+use crate::model::{CategorizedTest, DetailTrait, TestResult, TypeTrait};
 #[derive(Properties, PartialEq)]
 pub struct CongratulationsProps<T: TypeTrait, D: DetailTrait> {
     pub test: CategorizedTest<T, D>,
 }
 
 #[function_component(Congratulations)]
-pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProps<T, D>) -> Html {
+pub fn congratulations<T: TypeTrait + 'static, D: DetailTrait + 'static>(
+    props: &CongratulationsProps<T, D>,
+) -> Html {
     let mut i18n = use_translation();
+    let navigator = use_navigator().expect("No navigator");
+
+    let test_result: UseStateHandle<Option<TestResult>> = use_state(|| None);
 
     let selected_language =
         use_state(|| LocalStorage::get(LANGUAGE_KEY).unwrap_or_else(|_| "en".to_string()));
@@ -33,19 +40,46 @@ pub fn congratulations<T: TypeTrait, D: DetailTrait>(props: &CongratulationsProp
         0.0
     };
 
+    let on_generate = {
+        let result = test_result.clone();
+        Callback::from(move |test_result| {
+            result.set(Some(test_result));
+        })
+    };
+
     let certificate_part = match &props.test.example_showed {
         true => html! {
             <div>
                 <h3>{ i18n.t("Certificate") }</h3>
                 <p>{ i18n.t("If you can make the test without help of the examples, you can earn a certificate.") }</p>
                 <p>{ i18n.t("If you can make the test with a performance of 80% and more, you can get a nft.") }</p>
+                <TestResults<T,D> test={props.test.clone()} />
             </div>
         },
-        false => player_input::<T>(
-            total_answers,
-            correct_answers,
-            total_answers - correct_answers,
-        ),
+        false => match (*test_result).clone() {
+            Some(result) => {
+                let navigator = navigator.clone();
+                let test_result = result.clone();
+                let on_navigate_test_result = Callback::from(move |_| {
+                    let navigator = navigator.clone();
+                    let encoded = test_result.to_base64();
+                    navigator.push(&Route::Results { code: encoded });
+                });
+
+                html! {
+                    <div>
+                    <button onclick={on_navigate_test_result}>{"View Certificate"}</button>
+                    <TestResults<T,D> test={props.test.clone()} />
+                    </div>
+                }
+            }
+            None => player_input::<T>(
+                total_answers,
+                correct_answers,
+                total_answers - correct_answers,
+                Some(on_generate),
+            ),
+        },
     };
 
     html! {
@@ -63,11 +97,16 @@ fn player_input<T: TypeTrait>(
     total_questions: usize,
     correct_answers: usize,
     incorrect_answers: usize,
+    on_generate: Option<Callback<TestResult>>,
 ) -> Html {
     let test_type = T::get_t();
 
     html! {
-        <PlayerInput test_type={test_type} total_questions={total_questions} correct_answers={correct_answers} incorrect_answers={incorrect_answers} />
+        <PlayerInput test_type={test_type}
+            total_questions={total_questions}
+            correct_answers={correct_answers}
+            incorrect_answers={incorrect_answers}
+           on_generate={on_generate} />
     }
 }
 
