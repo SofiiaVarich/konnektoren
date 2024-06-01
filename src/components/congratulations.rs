@@ -6,7 +6,7 @@ use yew_i18n::use_translation;
 use yew_router::prelude::*;
 
 use crate::components::TestResults;
-use crate::components::{PlayerInput, SoundPlayer};
+use crate::components::{PlayerInput, SoundPlayer, Zupass};
 use crate::model::{CategorizedTest, DetailTrait, TestResult, TypeTrait};
 #[derive(Properties, PartialEq)]
 pub struct CongratulationsProps<T: TypeTrait, D: DetailTrait> {
@@ -69,6 +69,7 @@ pub fn congratulations<T: TypeTrait + 'static, D: DetailTrait + 'static>(
                 html! {
                     <div>
                     <button onclick={on_navigate_test_result}>{"View Certificate"}</button>
+                    <Zupass test_result={result} />
                     <TestResults<T,D> test={props.test.clone()} />
                     </div>
                 }

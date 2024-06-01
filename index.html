@@ -151,13 +151,16 @@
         />
 
         <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+        <script type="module">
+            import pcdpassportInterface from 'https://unpkg.com/@pcd/passport-interface@0.11.1/dist/esm/src/index.js'
+        </script>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
 
         <link data-trunk rel="copy-file" href="src/js/index.js" />
-        <script src="index.js"></script>
+        <script type="module" src="index.js"></script>
 
         <!-- WOT badge -->
         <script

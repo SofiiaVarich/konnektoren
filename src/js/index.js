@@ -1,3 +1,5 @@
+import pcdpassportInterface from 'https://unpkg.com/@pcd/passport-interface@0.11.1/dist/esm/src/index.js'
+
 async function connectSolanaWallet() {
   try {
     const solana = window.solana;

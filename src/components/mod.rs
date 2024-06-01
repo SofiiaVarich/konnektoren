@@ -24,6 +24,7 @@ mod test_selector;
 mod test_statistics;
 mod type_selector;
 mod wallet;
+mod zupass;
 
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
@@ -54,6 +55,7 @@ pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use type_selector::TypeSelector;
 pub use wallet::Wallet;
+pub use zupass::Zupass;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;
