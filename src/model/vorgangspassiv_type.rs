@@ -58,7 +58,7 @@ mod tests {
 
     #[test]
     fn test_an() {
-        let json = r#"{"category": "an"}"#;
+        let json = r#"{"category": "Präsens"}"#;
         let category: CategoryWrapper = serde_json::from_str(json).unwrap();
         assert_eq!(category.category, VorgangspassivType::Praesens);
     }

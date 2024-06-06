@@ -1,3 +1,4 @@
+use crate::components::TelegramLink;
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
@@ -15,15 +16,16 @@ pub fn footer() -> Html {
     html! {
         <footer class="footer">
             <div class="container text-center">
-            <a id="wot-badge0" class="wot-badge" href="https://www.mywot.com/scorecard/konnektoren.help?wot_badge=0_white" target="_blank" >
-                <div class="wot-logo"></div>
-                <div class="wot-shield"></div>
-                <p class="wot-secured">{"Verified Website"}</p>
-                <div class="wot-vertical"></div>
-                <p class="wot-report">{"See Report"}</p>
-            </a>
+                <a id="wot-badge0" class="wot-badge" href="https://www.mywot.com/scorecard/konnektoren.help?wot_badge=0_white" target="_blank" >
+                    <div class="wot-logo"></div>
+                    <div class="wot-shield"></div>
+                    <p class="wot-secured">{"Verified Website"}</p>
+                    <div class="wot-vertical"></div>
+                    <p class="wot-report">{"See Report"}</p>
+                </a>
                 <p>{ i18n.t("The Konnektoren examples featured here are derived from the German DTB C1 Course.")}</p>
                 <p>{ i18n.t("Special thanks to the educators and learners at the IFS Academy for their contributions to the course materials.")}</p>
+                <TelegramLink username="KonnektorenHelpBot" url="https://t.me/KonnektorenHelpBot" />
             </div>
         </footer>
     }

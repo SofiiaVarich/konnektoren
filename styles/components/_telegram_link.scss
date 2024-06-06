@@ -1,0 +1,27 @@
+.telegram-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0088cc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s;
+    z-index: 1000;
+
+    &:hover {
+        background-color: #0077b5;
+    }
+
+    &::before {
+        content: "\f2c6";
+        font-family: "Font Awesome 5 Brands";
+        margin-right: 10px;
+    }
+}
+
+.telegram-link a {
+    color: white;
+    text-decoration: none;
+}

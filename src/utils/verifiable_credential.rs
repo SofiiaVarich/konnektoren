@@ -41,7 +41,7 @@ pub fn create_test_result_vc(
         credential_type: vec!["VerifiableCredential".into(), "TestResultCredential".into()],
         credential_subject: TestResultCredential {
             name: test_result.player_name.clone(),
-            performance: test_result.performance_percentage,
+            performance: test_result.performance_percentage.into(),
         },
         issuer: format!("did:web:{}", issuer).into(),
         issuance_date: Utc::now().to_rfc3339(),
