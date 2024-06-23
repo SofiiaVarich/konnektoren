@@ -1,0 +1,13 @@
+steps:
+  - selector: ".tour-welcome"
+    content: "Welcome to Konnektoren!"
+  - selector: ".tour-language"
+    content: "You can change the language here."
+  - selector: ".tour-test"
+    content: "You can select the test you want to learn."
+  - selector: ".tour-connectors"
+    content: "You can learn more about the connectors here."
+  - selector: ".tour-show-example"
+    content: "You can enable the examples here."
+  - selector: ".tour-leaderboard"
+    content: "You can see the leaderboard here."
