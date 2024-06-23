@@ -27,7 +27,7 @@ pub fn select_language_flag() -> Html {
     };
 
     html! {
-        <div class="select-language">
+        <div class="select-language tour-language">
             <p>
                 { i18n.t("Please select a language:") }
                 <div class="language-flags">

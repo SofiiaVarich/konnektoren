@@ -23,7 +23,7 @@ required-features = ["tui"]
 
 [features]
 default = ["web", "verifiable-credentials"]
-web = ["yew", "yew-router", "yew-hooks"]
+web = ["yew", "yew-router", "yew-hooks", "yew-tou-rs"]
 openapi = ["utoipa"]
 tui = ["crossterm", "ratatui"]
 verifiable-credentials = ["uuid"]
@@ -60,6 +60,7 @@ web-sys = { version = "0.3.*", features = [
 yew = { version = "0.21.0", features = ["csr"], optional = true }
 yew-router = { version = "0.18.0", optional = true }
 yew-hooks = { version = "0.3.1", optional = true }
+yew-tou-rs = { git = "https://github.com/chriamue/yew-tou-rs/", branch = "main", optional = true }
 crossterm = { version = "0.27.0", optional = true }
 ratatui = { version = "0.26.0", optional = true, features = ["all-widgets"] }
 rmp-serde = "1.1.2"

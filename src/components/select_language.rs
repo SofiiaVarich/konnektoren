@@ -28,7 +28,7 @@ pub fn select_language() -> Html {
     };
 
     html! {
-        <div class="select-language">
+        <div class="select-language tour-language">
             <p>
                 { i18n.t("Please select a language from the dropdown.") }
                 <select onchange={on_select_change} value={(*selected_language).clone()}>

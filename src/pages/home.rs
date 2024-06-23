@@ -1,4 +1,4 @@
-use crate::components::{Carousel, Header, SlideShow, TestSelector};
+use crate::components::{Carousel, Header, SlideShow, TestSelector, Tour};
 use crate::model::{
     AdjectiveDetail, AdjectiveType, KonnektorDetail, KonnektorType, NomenDetail, NomenType,
     TestType, VerbDetail, VerbType, VorgangspassivDetail, VorgangspassivType,
@@ -30,6 +30,7 @@ pub fn Home() -> Html {
     html! {
         <div>
             <Header title={"Konnektoren".to_string()} img_src={"/favicon.png".to_string()} />
+            <Tour />
             <SlideShow urls={vec!["/slides/1s.png".to_string(), "/slides/3s.png".to_string(),
                 "/slides/6m.png".to_string(), "/slides/7m.png".to_string(),
                 "/slides/8m.png".to_string(), "/slides/9s.png".to_string()]} />

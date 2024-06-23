@@ -17,7 +17,7 @@ pub fn test_selector(props: &TestSelectorProps) -> Html {
     };
 
     html! {
-        <div class="test-selector text-center">
+        <div class="test-selector text-center tour-test">
             { for TestType::iter().map(|type_| {
                 let is_active = *props.test_type == type_;
                 let onclick = {

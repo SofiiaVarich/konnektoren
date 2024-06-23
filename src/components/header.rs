@@ -24,7 +24,7 @@ pub fn header(props: &HeaderProps) -> Html {
         }
     };
     html! {
-        <div class="header text-center title-with-icon">
+        <div class="header text-center title-with-icon tour-welcome">
             <Logo img_src={props.img_src.clone()}/>
             <h1>{ &props.title }</h1>
             { select_language }

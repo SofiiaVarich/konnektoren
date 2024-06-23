@@ -19,11 +19,15 @@ pub fn Navigation() -> Html {
         <div class="navigation-wrapper">
             <div class="navigation">
                 <nav>
+                    <div class="tour-connectors">
                     <Link<Route> to={Route::Konnektoren}>{ i18n.t("Konnektoren") }</Link<Route>>
+                    </div>
                     <Link<Route> to={Route::Adjectives}>{ i18n.t("Adjektive") }</Link<Route>>
                     <Link<Route> to={Route::Home}><Logo img_src={"/favicon.png".to_string()} /></Link<Route>>
                     <Link<Route> to={Route::Verbs}>{ i18n.t("Verben") }</Link<Route>>
+                    <div class="tour-leaderboard">
                     <Link<Route> to={Route::Leaderboard}>{ i18n.t("Leaderboard") }</Link<Route>>
+                    </div>
                 </nav>
             </div>
         </div>

@@ -23,6 +23,7 @@ mod test_progress_bar;
 mod test_results;
 mod test_selector;
 mod test_statistics;
+mod tour;
 mod type_selector;
 mod wallet;
 
@@ -54,6 +55,7 @@ pub use test_progress_bar::TestProgressBar;
 pub use test_results::TestResults;
 pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
+pub use tour::Tour;
 pub use type_selector::TypeSelector;
 pub use wallet::Wallet;
 

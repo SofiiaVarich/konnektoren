@@ -133,7 +133,7 @@ where
                         <TypeSelector<T> on_select={ctx.link().callback(Msg::SelectType::<T>)} />
                     <div class="action-buttons">
                         <button onclick={ctx.link().callback(|_| Msg::Previous)}>{ "Previous" }</button>
-                        <button onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
+                        <button class="tour-show-example" onclick={ctx.link().callback(|_| Msg::ToggleExampleVisibility)}>{ if self.hide_example { "Show Example" } else { "Hide Example" } }</button>
                         <button onclick={ctx.link().callback(|_| Msg::Reset)}>{ "Restart Test" }</button>
                         <button onclick={ctx.link().callback(|_| Msg::Next)}>{ "Next" }</button>
                     </div>
