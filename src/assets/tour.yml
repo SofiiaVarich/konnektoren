@@ -1,6 +1,6 @@
 steps:
   - selector: ".tour-welcome"
-    content: "Welcome to Konnektoren!"
+    content: "## Welcome to Konnektoren!"
   - selector: ".tour-language"
     content: "You can change the language here."
   - selector: ".tour-test"
@@ -10,4 +10,4 @@ steps:
   - selector: ".tour-show-example"
     content: "You can enable the examples here."
   - selector: ".tour-leaderboard"
-    content: "You can see the leaderboard here."
+    content: "You can see the [leaderboard](/leaderboard) here."
