@@ -47,3 +47,16 @@
         border-radius: 15px 15px 0 0;
     }
 }
+
+.card-title .translate-button,
+.card-text .translate-button {
+    padding: 1rem;
+    font-size: 1rem;
+    color: #b30000;
+    cursor: pointer;
+    text-decoration: none;
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    transform: translateY(-50%);
+}

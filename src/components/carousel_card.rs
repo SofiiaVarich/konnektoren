@@ -1,5 +1,6 @@
 use crate::model::DetailTrait;
 use yew::prelude::*;
+use crate::components::Translate;
 
 #[derive(Properties, PartialEq)]
 pub struct ModelProps<D: DetailTrait> {
@@ -40,14 +41,14 @@ impl<D: DetailTrait + 'static> Component for CarouselCard<D> {
             html! {}
         } else {
             html! {
-                <div class="card-text">{ &*self.detail.get_example() }</div>
+                <div class="card-text">{ &*self.detail.get_example() } <Translate text={ (&*self.detail.get_example()).to_string() } /></div>
             }
         };
 
         html! {
             <div class="card text-center">
                 <div class="card-body">
-                    <div class="card-title">{ &*self.detail.get_detail() }</div>
+                    <div class="card-title">{ &*self.detail.get_detail() } <Translate text={ (&*self.detail.get_detail()).to_string() } /></div>
                     {
                         example
                     }

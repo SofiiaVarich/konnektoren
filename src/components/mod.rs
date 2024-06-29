@@ -29,6 +29,7 @@ mod wallet;
 
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
+mod translate;
 
 pub use carousel::Carousel;
 pub use carousel_card::CarouselCard;
@@ -58,6 +59,7 @@ pub use test_statistics::TestStatistics;
 pub use tour::Tour;
 pub use type_selector::TypeSelector;
 pub use wallet::Wallet;
+pub use translate::Translate;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;
