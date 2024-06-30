@@ -9,5 +9,7 @@ steps:
     content: "You can learn more about the connectors here."
   - selector: ".tour-show-example"
     content: "You can enable the examples here."
+  - selector: ".tour-translate"
+    content: "You can can click here to see the translation."
   - selector: ".tour-leaderboard"
     content: "You can see the [leaderboard](/leaderboard) here."
