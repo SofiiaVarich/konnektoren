@@ -20,7 +20,7 @@ pub fn translate(props: &TranslateProps) -> Html {
 
     let google_translate_url = format!("https://translate.google.com/?sl=auto&tl=en&text={}", props.text);
     html! {
-        <div class="translate-button">
+        <div class="translate-button tour-translate">
             <a href={google_translate_url} target="_blank" rel="noopener noreferrer">
                 { i18n.t("Translate") }
             </a>
