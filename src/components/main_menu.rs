@@ -1,4 +1,4 @@
-use crate::components::Logo;
+use crate::components::{Logo, SocialLinks};
 use crate::route::Route;
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage as _};
@@ -47,6 +47,7 @@ pub fn main_menu() -> Html {
                     <Link<Route> to={Route::Survey}>{ i18n.t("Survey") }</Link<Route>>
                     <Link<Route> to={Route::About}>{ i18n.t("About") }</Link<Route>>
                     <Link<Route> to={Route::Config}>{ i18n.t("Config") }</Link<Route>>
+                    <SocialLinks telegram="https://t.me/KonnektorenHelpBot" web="https://info.konnektoren.help" github="https://github.com/konnektoren" />
                 </div>
             }
         </div>

@@ -1,7 +1,7 @@
+use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use yew::prelude::*;
 use yew_i18n::use_translation;
-use crate::utils::translation::LANGUAGE_KEY;
 
 #[derive(Properties, PartialEq)]
 pub struct TranslateProps {
@@ -18,7 +18,10 @@ pub fn translate(props: &TranslateProps) -> Html {
         i18n
     };
 
-    let google_translate_url = format!("https://translate.google.com/?sl=auto&tl=en&text={}", props.text);
+    let google_translate_url = format!(
+        "https://translate.google.com/?sl=auto&tl=en&text={}",
+        props.text
+    );
     html! {
         <div class="translate-button tour-translate">
             <a href={google_translate_url} target="_blank" rel="noopener noreferrer">

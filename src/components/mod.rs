@@ -27,9 +27,10 @@ mod tour;
 mod type_selector;
 mod wallet;
 
+mod social_links;
+mod translate;
 #[cfg(feature = "verifiable-credentials")]
 mod verifiable_credential;
-mod translate;
 
 pub use carousel::Carousel;
 pub use carousel_card::CarouselCard;
@@ -49,6 +50,7 @@ pub use progress_bar::ProgressBar;
 pub use select_language::SelectLanguage;
 pub use select_language_flag::SelectLanguageFlag;
 pub use slide_show::SlideShow;
+pub use social_links::SocialLinks;
 pub use sound_player::SoundPlayer;
 pub use telegram_link::TelegramLink;
 pub use test_chart::TestChart;
@@ -57,9 +59,9 @@ pub use test_results::TestResults;
 pub use test_selector::TestSelector;
 pub use test_statistics::TestStatistics;
 pub use tour::Tour;
+pub use translate::Translate;
 pub use type_selector::TypeSelector;
 pub use wallet::Wallet;
-pub use translate::Translate;
 
 #[cfg(feature = "verifiable-credentials")]
 pub use verifiable_credential::VerifiableCredential;
