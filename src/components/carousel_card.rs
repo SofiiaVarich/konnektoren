@@ -1,6 +1,6 @@
+use crate::components::Translate;
 use crate::model::DetailTrait;
 use yew::prelude::*;
-use crate::components::Translate;
 
 #[derive(Properties, PartialEq)]
 pub struct ModelProps<D: DetailTrait> {
