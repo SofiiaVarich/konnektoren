@@ -10,6 +10,7 @@ pub fn NomenPage() -> Html {
 
     html! {
         <div>
+            <MusicComponent url="/assets/background_main.wav" />
             <Header title={"Nomen-Verb-Verbindungen".to_string()} img_src={"favicon.png".to_string()} />
             <Explanation test_type={TestType::Nomen} />
             {carousel}

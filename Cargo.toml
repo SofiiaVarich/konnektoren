@@ -39,6 +39,7 @@ ed25519-dalek = { version = "2.1", default-features = false }
 gloo-timers = "0.3"
 image = { version = "0.24", optional = true }
 imageproc = { version = "0.23", optional = true }
+konnektoren-yew = { git = "https://github.com/konnektoren/konnektoren-rs.git", default-features = false, features = ["music", "storage"] }
 rand = "0.8"
 sha2 = "0.9"
 qrcode = "0.13.0"

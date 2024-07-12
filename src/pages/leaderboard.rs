@@ -3,6 +3,7 @@ use crate::route::Route;
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use gloo_utils::format::JsValueSerdeExt;
+use konnektoren_yew::components::MusicComponent;
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 use wasm_bindgen_futures::JsFuture;
@@ -85,7 +86,7 @@ pub fn leaderboard_page() -> Html {
     <>
     <div class="leaderboard-background-image"></div>
         <div class="leaderboard-page">
-           <div class="pages/leaderboard_bg.jpg"></div>
+            <MusicComponent url="/assets/background_main.wav" />
             <h1>{ i18n.t("Leaderboard")}</h1>
             { empty_message }
             <ul>

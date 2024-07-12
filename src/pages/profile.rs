@@ -3,6 +3,7 @@ use crate::model::{player::PLAYER_KEY, Player};
 use crate::utils::translation::LANGUAGE_KEY;
 use gloo_storage::{LocalStorage, Storage};
 use gloo_timers::callback::Timeout;
+use konnektoren_yew::components::MusicComponent;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_i18n::use_translation;
@@ -69,6 +70,7 @@ pub fn profile_page() -> Html {
 
     html! {
         <div class="profile-page">
+            <MusicComponent url="/assets/background_main.wav" />
             <h2>{ i18n.t("Player Profile") }</h2>
                 <p>{ i18n.t("Use a nickname as your name. It will be used for certificates and displayed on the leaderboard.") }</p>
             <p>{ i18n.t("Connect your Solana account to receive NFTs as rewards for top players.") }</p>

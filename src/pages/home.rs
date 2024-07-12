@@ -3,6 +3,7 @@ use crate::model::{
     AdjectiveDetail, AdjectiveType, KonnektorDetail, KonnektorType, NomenDetail, NomenType,
     TestType, VerbDetail, VerbType, VorgangspassivDetail, VorgangspassivType,
 };
+use konnektoren_yew::components::MusicComponent;
 use yew::prelude::*;
 
 #[function_component]
@@ -29,6 +30,7 @@ pub fn Home() -> Html {
 
     html! {
         <div>
+            <MusicComponent url="/assets/background_main.wav" />
             <Header title={"Konnektoren".to_string()} img_src={"/favicon.png".to_string()} />
             <Tour />
             <SlideShow urls={vec!["/slides/1s.png".to_string(), "/slides/3s.png".to_string(),

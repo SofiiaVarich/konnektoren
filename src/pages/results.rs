@@ -4,6 +4,7 @@ use crate::{components::Certificate, model::TestResult};
 #[cfg(feature = "verifiable-credentials")]
 use crate::components::VerifiableCredential;
 use gloo_timers::callback::Timeout;
+use konnektoren_yew::components::MusicComponent;
 use urlencoding::encode;
 use web_sys::window;
 use yew::prelude::*;
@@ -61,6 +62,7 @@ pub fn results(props: &ResultsProps) -> Html {
 
             html! {
                 <div class="results-page">
+                    <MusicComponent url="/assets/background_main.wav" />
                     <h1>{ "Test Results" }</h1>
                     <p>{ format!("{} did a fantastic job in the {} test, achieving a performance of {:.2}% by answering correctly {} out of {} questions.",
                         test_result.player_name, test_result.test_type, test_result.performance_percentage, test_result.correct_answers, test_result.total_questions) }</p>
